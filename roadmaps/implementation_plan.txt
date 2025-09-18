@@ -52,10 +52,12 @@ A comprehensive Python-based application for managing table tennis team rosters,
 - [x] Add match editing capabilities with conflict detection (basic same-day team conflict tooltip)
 - [x] Create match result entry interface with score tracking (basic scores + completed flag)
 - [x] Implement match history browser with filtering and search (All Dates toggle + search box)
-- [ ] Add match reminder system with notification support
+// Basic reminder scheduling, polling timer, popup notifications implemented (in-memory only)
+- [x] Add match reminder system with notification support
 - [x] Create match export functionality (JSON import/export implemented; PDF/CSV pending)
 - [x] Implement match conflict resolution interface (initial detection + highlighting; resolution UI pending)
-- [x] Add match statistics and analytics dashboard (basic aggregate stats helpers; UI integration pending)
+// Aggregate stats + reminder count displayed in MatchesTab status panel (charts pending)
+- [x] Add match statistics and analytics dashboard (basic aggregate stats helpers + UI panel)
 
 ## GUI Development - Team Optimization Tab
 

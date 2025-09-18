@@ -13,3 +13,14 @@ feat(matches): lineup editing & aggregate stats
 - Add test_match_stats for aggregate metrics and result formatting
 - Roadmap updated (match statistics task marked) & README adjusted
 
+feat(matches): reminders system & stats panel integration
+
+- Introduce Reminder & ReminderStore (in-memory scheduling)
+- Extend MatchesTab with Add Reminder button and QTimer polling (2s interval)
+- Popup notifications for due reminders; mark as triggered
+- Aggregate stats panel now shows totals + win/draw breakdown + active reminder count
+- Flexible schedule() API (accepts Reminder or (when, message, match_id))
+- New tests: test_reminders (schedule, due, ordering, mark_triggered)
+- Roadmap updated (reminder system marked complete; stats UI clarified)
+- README updated with lineup, stats panel, and reminders features
+

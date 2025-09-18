@@ -21,8 +21,11 @@ from PyQt6.QtWidgets import (
     QDialogButtonBox,
     QCheckBox,
 )
+from PyQt6.QtCore import QTimer
 
-from data.match import Match, detect_conflicts
+from data.match import Match, detect_conflicts, aggregate_stats
+from data.reminders import Reminder, ReminderStore
+from datetime import datetime, timedelta
 import json
 
 
@@ -92,6 +95,7 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
     def __init__(self, parent=None):
         super().__init__(parent)
         self._matches: List[Match] = []
+        self._reminders = ReminderStore()
         layout = QVBoxLayout(self)
         toolbar = QHBoxLayout()
         filter_bar = QHBoxLayout()
@@ -106,11 +110,13 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
         btn_delete = QPushButton("Delete")
         btn_export = QPushButton("Export JSON")
         btn_import = QPushButton("Import JSON")
+        btn_reminder = QPushButton("Add Reminder")
         toolbar.addWidget(btn_add)
         toolbar.addWidget(btn_edit)
         toolbar.addWidget(btn_delete)
         toolbar.addWidget(btn_export)
         toolbar.addWidget(btn_import)
+        toolbar.addWidget(btn_reminder)
         layout.addLayout(toolbar)
         body = QHBoxLayout()
         self._calendar = QCalendarWidget()
@@ -123,14 +129,25 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
         self._table.itemDoubleClicked.connect(self._on_edit)
         body.addWidget(self._table, 2)
         layout.addLayout(body)
+        # stats panel
+        self._stats_label = QLineEdit()
+        self._stats_label.setReadOnly(True)
+        layout.addWidget(self._stats_label)
         # wiring
         btn_add.clicked.connect(self._on_add)
         btn_edit.clicked.connect(self._on_edit)
         btn_delete.clicked.connect(self._on_delete)
         btn_export.clicked.connect(self._on_export)
         btn_import.clicked.connect(self._on_import)
+        btn_reminder.clicked.connect(self._on_add_reminder)
         self._search.textChanged.connect(self._refresh)
         self._all_dates.stateChanged.connect(self._refresh)
+
+    # periodic reminder check (every 2 seconds)
+    self._reminder_timer = QTimer(self)
+    self._reminder_timer.setInterval(2000)
+    self._reminder_timer.timeout.connect(self._check_reminders)
+    self._reminder_timer.start()
 
     # Data helpers
     def _refresh(self):
@@ -189,6 +206,11 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
                 ):
                     notes_item = self._table.item(row, 4)
                     notes_item.setText((notes_item.text() or "") + " *conflict*")
+        # update stats panel
+        stats = aggregate_stats(self._matches)
+        self._stats_label.setText(
+            f"Matches: {stats['total']} | Completed: {stats['completed']} | Home W: {stats['home_wins']} | Away W: {stats['away_wins']} | Draws: {stats['draws']} | Reminders: {len([r for r in self._reminders.all() if not r.triggered])}"
+        )
 
     def _selected_match(self) -> Match | None:
         rows = self._table.selectionModel().selectedRows()
@@ -235,6 +257,25 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
         if not m:
             return
         self._matches = [mm for mm in self._matches if mm.id != m.id]
+        self._refresh()
+
+    def _on_add_reminder(self):  # pragma: no cover - GUI interaction
+        m = self._selected_match()
+        if not m:
+            return
+        # schedule reminder 5 seconds from now (placeholder)
+        when = datetime.utcnow() + timedelta(seconds=5)
+        r = Reminder(match_id=m.id, when=when, message=f"Reminder: {m.home_team} vs {m.away_team}")
+        self._reminders.schedule(r)
+        self._refresh()
+
+    def _check_reminders(self):  # pragma: no cover - GUI interaction
+        due = self._reminders.due()
+        if not due:
+            return
+        for r in due:
+            QMessageBox.information(self, "Reminder", r.message)
+            self._reminders.mark_triggered(r.id)
         self._refresh()
 
     def _on_export(self):

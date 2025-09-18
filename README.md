@@ -104,12 +104,15 @@ Recent Enhancements:
 - Score tracking (home/away scores) and completion flag
 - Result entry fields added to match dialog
 - History browser capabilities: All Dates toggle + free-text search filter
+- Lineup editing (comma-separated list in dialog) with serialization
+- Aggregate statistics panel (totals, win/draw breakdown) + live reminder count
+- Basic reminder system: schedule near-term popups for selected match (in-memory)
 
 Planned next for Matches:
 
-- Advanced lineup integration with player selection dialogs
-- Reminder/notification system
-- Enhanced statistics panel (trend charts, per-team records)
+- Enhanced lineup selection integrating Players tab metadata
+- Persistent reminder storage & snooze/postpone actions
+- Extended statistics visualization (charts, per-team head-to-head)
 
 ### Setup Steps (Legacy Template Instructions)
 
