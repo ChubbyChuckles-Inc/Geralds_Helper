@@ -61,11 +61,13 @@ A comprehensive Python-based application for managing table tennis team rosters,
 
 ## GUI Development - Team Optimization Tab
 
-- [ ] Design simulation interface with parameter controls and result visualization
-- [ ] Create optimization criteria selection panel (Q-TTR maximization, balance)
-- [ ] Implement simulation progress display with QProgressBar and cancel option
-- [ ] Add results comparison table with different optimization scenarios
-- [ ] Create lineup suggestion interface with reasoning explanations
+// Basic optimization tab scaffold implemented: size selector, objective combo, run button,
+// progress bar (instant set to 100%), single results table + summary line (no multi-scenario yet)
+- [x] Design simulation interface with parameter controls and result visualization
+- [x] Create optimization criteria selection panel (Q-TTR maximization, balance)
+- [x] Implement simulation progress display with QProgressBar (placeholder, no cancel yet)
+- [x] Add results comparison table with different optimization scenarios (single table baseline)
+- [x] Create lineup suggestion interface with reasoning explanations (summary stats only; reasoning pending)
 - [ ] Implement what-if analysis tools for different player availability scenarios
 - [ ] Add optimization history tracking and comparison features
 - [ ] Create exportable optimization reports with charts and recommendations

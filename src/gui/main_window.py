@@ -30,6 +30,7 @@ from gui.player_dialogs import AddPlayerDialog
 from PyQt6.QtWidgets import QCalendarWidget, QSplitter, QTextEdit, QFrame
 from datetime import date
 from gui.matches_tab import MatchesTab
+from gui.optimization_tab import OptimizationTab
 
 
 class MainWindow(QMainWindow):
@@ -55,7 +56,11 @@ class MainWindow(QMainWindow):
     def _init_tabs(self) -> None:
         self._add_tab("Players", self._build_players_tab())
         self._add_tab("Matches", MatchesTab())
-        self._add_tab("Optimization", QLabel("Optimization tools coming soon."))
+        # Pass a provider lambda so optimization tab can pull latest players
+        self._add_tab(
+            "Optimization",
+            OptimizationTab(players_provider=lambda: self._player_table.players()),
+        )
 
     def _add_tab(self, name: str, widget: QWidget) -> None:
         self._tabs.addTab(widget, name)

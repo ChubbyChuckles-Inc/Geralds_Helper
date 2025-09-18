@@ -8,7 +8,7 @@ This project is an evolving Table Tennis Team Management Tool featuring:
 - Modern PyQt6 GUI (in development)
 - Player & team roster management with Q-TTR ratings
 - Match scheduling + opponent roster scraping (planned)
-- Optimization engine for lineup strength and availability (planned)
+- Optimization engine for lineup strength and availability (foundational version implemented)
 - Deterministic test suite and modular architecture adhering to repository "Copilot Instructions"
 
 ## Setup Instructions
@@ -113,6 +113,23 @@ Planned next for Matches:
 - Enhanced lineup selection integrating Players tab metadata
 - Persistent reminder storage & snooze/postpone actions
 - Extended statistics visualization (charts, per-team head-to-head)
+
+### Current Optimization Tab Features (Foundational)
+
+- Lineup size selector and objective dropdown ("qttr_max", "balance")
+- Instant brute-force optimization for small rosters (sum of Q-TTR or spread minimization)
+- Progress bar placeholder (sets to 100% after run)
+- Results table listing chosen lineup (Name, Team, Q-TTR)
+- Summary line with total, average, and spread metrics
+- Deterministic test coverage of core `optimize_lineup` behaviors
+
+Planned next for Optimization:
+
+- Multi-scenario comparison table (retain multiple runs)
+- Reasoning / rationale text for lineup choice
+- Availability-aware optimization (skip unavailable players by date)
+- Genetic / heuristic algorithms for larger pools
+- What-if analysis tools and persistent scenario history
 
 ### Setup Steps (Legacy Template Instructions)
 

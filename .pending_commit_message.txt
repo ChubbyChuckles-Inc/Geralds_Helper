@@ -24,3 +24,13 @@ feat(matches): reminders system & stats panel integration
 - Roadmap updated (reminder system marked complete; stats UI clarified)
 - README updated with lineup, stats panel, and reminders features
 
+feat(optimization): foundational optimization tab & algorithms
+
+- Add optimization.optimizer module with optimize_lineup (qttr_max, balance)
+- Implement OptimizationTab: size selector, objective combo, run button, progress bar, results table, summary
+- Integrate tab into MainWindow with live player provider
+- Brute-force combinatorial search (sufficient for small rosters) with balance spread heuristic
+- New tests: test_optimizer (qttr_max selection, balance spread preference, error handling)
+- Roadmap updated marking initial optimization interface tasks complete
+- README updated with Optimization section (current + planned next)
+
