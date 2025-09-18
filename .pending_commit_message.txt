@@ -6,4 +6,10 @@ feat(matches): scores & history filtering
 - Implement filtering across teams/location/notes, multi-day view
 - Add tests for result serialization
 - Update roadmap (result entry + history browser) and README (enhancements section)
+feat(matches): lineup editing & aggregate stats
+
+- Add lineup editing (comma-separated field) to MatchDialog
+- Introduce aggregate_stats & match_result helpers
+- Add test_match_stats for aggregate metrics and result formatting
+- Roadmap updated (match statistics task marked) & README adjusted
 

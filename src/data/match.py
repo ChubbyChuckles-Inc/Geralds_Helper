@@ -75,4 +75,32 @@ def detect_conflicts(matches: List[Match]) -> List[tuple[str, str]]:
     return conflicts
 
 
-__all__ = ["Match", "detect_conflicts"]
+def match_result(m: Match) -> str:
+    """Return a compact result string or empty if incomplete."""
+    if not m.completed or m.home_score is None or m.away_score is None:
+        return ""
+    return f"{m.home_score}-{m.away_score}"
+
+
+def aggregate_stats(matches: List[Match]) -> Dict[str, Any]:
+    """Compute simple aggregate stats across completed matches.
+
+    Returns dict with keys: total, completed, home_wins, away_wins, draws.
+    """
+    total = len(matches)
+    completed = [
+        m for m in matches if m.completed and m.home_score is not None and m.away_score is not None
+    ]
+    home_wins = sum(1 for m in completed if m.home_score > m.away_score)
+    away_wins = sum(1 for m in completed if m.away_score > m.home_score)
+    draws = sum(1 for m in completed if m.home_score == m.away_score)
+    return {
+        "total": total,
+        "completed": len(completed),
+        "home_wins": home_wins,
+        "away_wins": away_wins,
+        "draws": draws,
+    }
+
+
+__all__ = ["Match", "detect_conflicts", "match_result", "aggregate_stats"]

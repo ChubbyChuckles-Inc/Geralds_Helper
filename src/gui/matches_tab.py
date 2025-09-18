@@ -36,6 +36,8 @@ class MatchDialog(QDialog):  # pragma: no cover - GUI interaction
         self._away = QLineEdit(self._match.away_team)
         self._location = QLineEdit(self._match.location)
         self._notes = QLineEdit(self._match.notes)
+        # lineup as comma-separated names for now
+        self._lineup = QLineEdit(", ".join(self._match.lineup) if self._match.lineup else "")
         self._home_score = QLineEdit(
             "" if self._match.home_score is None else str(self._match.home_score)
         )
@@ -48,6 +50,7 @@ class MatchDialog(QDialog):  # pragma: no cover - GUI interaction
         layout.addRow("Away Team", self._away)
         layout.addRow("Location", self._location)
         layout.addRow("Notes", self._notes)
+        layout.addRow("Lineup", self._lineup)
         layout.addRow("Home Score", self._home_score)
         layout.addRow("Away Score", self._away_score)
         layout.addRow("Completed", self._completed)
@@ -63,6 +66,11 @@ class MatchDialog(QDialog):  # pragma: no cover - GUI interaction
         self._match.away_team = self._away.text().strip()
         self._match.location = self._location.text().strip()
         self._match.notes = self._notes.text().strip()
+        # parse lineup
+        raw_lineup = self._lineup.text().strip()
+        self._match.lineup = (
+            [p.strip() for p in raw_lineup.split(",") if p.strip()] if raw_lineup else []
+        )
         # parse scores
         try:
             self._match.home_score = (

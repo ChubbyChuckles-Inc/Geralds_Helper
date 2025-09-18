@@ -107,10 +107,9 @@ Recent Enhancements:
 
 Planned next for Matches:
 
-- Result entry (scores, outcomes)
-- Lineup editing (player assignment integration)
-- History browser & filtering (multi-day list)
+- Advanced lineup integration with player selection dialogs
 - Reminder/notification system
+- Enhanced statistics panel (trend charts, per-team records)
 
 ### Setup Steps (Legacy Template Instructions)
 
