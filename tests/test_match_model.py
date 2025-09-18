@@ -14,7 +14,7 @@ def test_match_serialization_and_conflict():
 
 
 def test_match_result_serialization():
-    m = Match(match_date=date(2025,2,2), home_team="Alpha", away_team="Beta")
+    m = Match(match_date=date(2025, 2, 2), home_team="Alpha", away_team="Beta")
     m.home_score = 9
     m.away_score = 7
     m.completed = True

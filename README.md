@@ -100,6 +100,7 @@ Note: In environments without PyQt6 (e.g. minimal CI runners), GUI tests are gra
 - Skips GUI tests gracefully when PyQt6 unavailable (mirrors Players tab strategy)
 
 Recent Enhancements:
+
 - Score tracking (home/away scores) and completion flag
 - Result entry fields added to match dialog
 - History browser capabilities: All Dates toggle + free-text search filter

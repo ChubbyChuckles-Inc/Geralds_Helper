@@ -65,11 +65,15 @@ class MatchDialog(QDialog):  # pragma: no cover - GUI interaction
         self._match.notes = self._notes.text().strip()
         # parse scores
         try:
-            self._match.home_score = int(self._home_score.text().strip()) if self._home_score.text().strip() else None
+            self._match.home_score = (
+                int(self._home_score.text().strip()) if self._home_score.text().strip() else None
+            )
         except ValueError:
             self._match.home_score = None
         try:
-            self._match.away_score = int(self._away_score.text().strip()) if self._away_score.text().strip() else None
+            self._match.away_score = (
+                int(self._away_score.text().strip()) if self._away_score.text().strip() else None
+            )
         except ValueError:
             self._match.away_score = None
         self._match.completed = self._completed.isChecked()
@@ -131,6 +135,7 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
             day_matches = [m for m in self._matches if m.match_date.isoformat() == sel]
         q = self._search.text().lower().strip()
         if q:
+
             def match_filter(m: Match) -> bool:
                 return (
                     q in m.home_team.lower()
@@ -138,6 +143,7 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
                     or q in m.location.lower()
                     or q in m.notes.lower()
                 )
+
             day_matches = [m for m in day_matches if match_filter(m)]
         for m in day_matches:
             row = self._table.rowCount()
@@ -147,8 +153,12 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
             self._table.setItem(row, 2, QTableWidgetItem(m.away_team))
             self._table.setItem(row, 3, QTableWidgetItem(m.location))
             self._table.setItem(row, 4, QTableWidgetItem(m.notes))
-            self._table.setItem(row, 5, QTableWidgetItem("" if m.home_score is None else str(m.home_score)))
-            self._table.setItem(row, 6, QTableWidgetItem("" if m.away_score is None else str(m.away_score)))
+            self._table.setItem(
+                row, 5, QTableWidgetItem("" if m.home_score is None else str(m.home_score))
+            )
+            self._table.setItem(
+                row, 6, QTableWidgetItem("" if m.away_score is None else str(m.away_score))
+            )
             self._table.setItem(row, 7, QTableWidgetItem("Y" if m.completed else ""))
         # highlight conflicts (simple: duplicate team on same date)
         conflicts = detect_conflicts(self._matches)
