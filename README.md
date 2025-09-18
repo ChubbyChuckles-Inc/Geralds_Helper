@@ -90,6 +90,22 @@ GUI preview features:
 
 Note: In environments without PyQt6 (e.g. minimal CI runners), GUI tests are gracefully skipped; non-GUI serialization and model tests still run.
 
+### Current Matches Tab Features (Initial Increment)
+
+- Integrated `Matches` tab with calendar + per-day match list
+- Add/Edit/Delete matches via simple dialog (home, away, location, notes)
+- JSON import/export for matches (round-trip serialization)
+- Basic same-day team conflict detection with tooltip + row note annotation (_conflict_)
+- Internal `Match` dataclass + conflict detection helper with unit tests
+- Skips GUI tests gracefully when PyQt6 unavailable (mirrors Players tab strategy)
+
+Planned next for Matches:
+
+- Result entry (scores, outcomes)
+- Lineup editing (player assignment integration)
+- History browser & filtering (multi-day list)
+- Reminder/notification system
+
 ### Setup Steps (Legacy Template Instructions)
 
 1. **Clone the Repository or Create a New Project**:

@@ -29,6 +29,7 @@ from gui.player_table import PlayerTable
 from gui.player_dialogs import AddPlayerDialog
 from PyQt6.QtWidgets import QCalendarWidget, QSplitter, QTextEdit, QFrame
 from datetime import date
+from gui.matches_tab import MatchesTab
 
 
 class MainWindow(QMainWindow):
@@ -53,7 +54,7 @@ class MainWindow(QMainWindow):
     # ----- UI Composition -------------------------------------------------
     def _init_tabs(self) -> None:
         self._add_tab("Players", self._build_players_tab())
-        self._add_tab("Matches", QLabel("Match scheduling coming soon."))
+        self._add_tab("Matches", MatchesTab())
         self._add_tab("Optimization", QLabel("Optimization tools coming soon."))
 
     def _add_tab(self, name: str, widget: QWidget) -> None:

@@ -11,3 +11,14 @@ feat(players): availability calendar, profile dialog, drag-drop, bulk ops, seria
 - Introduce GUI test skip strategy when PyQt6 unavailable; move PyQt imports inside tests
 - Update roadmap checkboxes and README with new Player features
 - Minor: enable ExtendedSelection behavior in PlayerTable
+
+feat(matches): initial Matches tab with calendar, CRUD, conflict detection
+
+- Add Match dataclass (id, date, teams, location, notes, lineup placeholder)
+- Implement detect_conflicts for same-day team participation clashes
+- Create MatchesTab UI: calendar + day-filtered match table
+- Add MatchDialog for add/edit operations (simplified creation flow)
+- Support JSON import/export for matches
+- Integrate MatchesTab into MainWindow (replacing placeholder)
+- Add tests: match model serialization & conflict, matches tab conflict tooltip (GUI skipped if no PyQt6)
+- Update roadmap (Match Management partial items marked) & README (Matches section)
