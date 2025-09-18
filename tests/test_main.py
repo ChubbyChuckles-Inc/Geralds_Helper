@@ -6,8 +6,8 @@ from src.main import main
 
 
 def test_main(capsys: "pytest.CaptureFixture[str]") -> None:
-    """Ensure the entry point prints the bootstrap confirmation."""
-    exit_code = main()
+    """Ensure the entry point prints the bootstrap confirmation (CLI mode)."""
+    exit_code = main([])
     captured = capsys.readouterr()
     assert exit_code == 0
     assert "Table Tennis Team Manager bootstrap successful." in captured.out

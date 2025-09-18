@@ -8,13 +8,18 @@ while allowing logging + configuration to be validated.
 from __future__ import annotations
 
 import logging
-from pathlib import Path
+import argparse
 
 from config.logging_config import configure_logging
 from config.app_settings import load_settings
 
+try:  # Optional import so non-GUI environments still function
+    from gui.launcher import run_gui  # type: ignore
+except Exception:  # pragma: no cover
+    run_gui = None  # type: ignore
 
-def main() -> int:
+
+def main(argv: list[str] | None = None) -> int:
     """Run the application entry logic.
 
     Returns
@@ -22,6 +27,10 @@ def main() -> int:
     int
         Process exit code (0 for success).
     """
+    parser = argparse.ArgumentParser(description="Table Tennis Team Manager")
+    parser.add_argument("--gui", action="store_true", help="Launch the graphical interface")
+    args = parser.parse_args(argv)
+
     configure_logging()
     log = logging.getLogger(__name__)
     settings = load_settings()
@@ -31,9 +40,11 @@ def main() -> int:
         settings.window_width,
         settings.window_height,
     )
-    # Placeholder until GUI implemented
+    if args.gui and run_gui:
+        print("Launching GUI…")
+        return run_gui()
     print("Table Tennis Team Manager bootstrap successful.")
-    return 0
+    return 0  # CLI mode
 
 
 if __name__ == "__main__":  # pragma: no cover

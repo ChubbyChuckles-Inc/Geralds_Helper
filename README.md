@@ -62,10 +62,18 @@ cd Geralds_Helper
 py -3.13 -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
-python -m src.main
+python -m src.main            # CLI bootstrap
+python -m src.main --gui      # Launch GUI (early framework)
 ```
 
 Logs are written to `logs/app.log`. Configuration file is created at `config/app_settings.json` on first run.
+
+GUI preview features:
+
+- QMainWindow base with tabbed placeholders (Players, Matches, Optimization)
+- Theme switching (light/dark) via `config/app_settings.json`
+- Splash screen + window size persistence
+- Offscreen-friendly tests (`QT_QPA_PLATFORM=offscreen`)
 
 ### Setup Steps (Legacy Template Instructions)
 

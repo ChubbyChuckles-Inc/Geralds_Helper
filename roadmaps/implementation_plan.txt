@@ -14,22 +14,22 @@ A comprehensive Python-based application for managing table tennis team rosters,
 - [x] Create main application entry point (src/main.py)
 - [x] Initialize logging configuration with rotating file handler
 - [x] Set up configuration management (config.json/yaml) for application settings
-- [ ] Create application icon and resource files (icons/, resources/)
+- [x] Create application icon and resource files (icons/, resources/)
 - [x] Set up package structure with proper __init__.py files
 - [x] Configure pytest with fixtures and test configuration
 
 ## GUI Development - Core Framework
 
-- [ ] Design main application architecture with QMainWindow as base
-- [ ] Implement main_window.py with central widget and menu bar
-- [ ] Create tabbed interface using QTabWidget for different modules
-- [ ] Implement dark/light theme switching with QStyleSheet and QStyle
-- [ ] Set up responsive layout system using QGridLayout and QVBoxLayout
-- [ ] Create custom application stylesheet for modern UI appearance
-- [ ] Implement window state persistence (size, position, theme preference)
-- [ ] Add application splash screen with loading progress
-- [ ] Create status bar with connection indicators and progress updates
-- [ ] Implement keyboard shortcuts and accessibility features
+- [x] Design main application architecture with QMainWindow as base
+- [x] Implement main_window.py with central widget and menu bar
+- [x] Create tabbed interface using QTabWidget for different modules
+- [x] Implement dark/light theme switching with QStyleSheet and QStyle
+- [x] Set up responsive layout system using QGridLayout and QVBoxLayout
+- [x] Create custom application stylesheet for modern UI appearance
+- [x] Implement window state persistence (size, position, theme preference)
+- [x] Add application splash screen with loading progress
+- [x] Create status bar with connection indicators and progress updates
+- [x] Implement keyboard shortcuts and accessibility features
 
 ## GUI Development - Player Management Tab
 

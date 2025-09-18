@@ -1,0 +1,8 @@
+QWidget { background-color: #fbfbfc; color: #202124; }
+QMenuBar { background-color: #e9eaed; }
+QStatusBar { background-color: #e9eaed; }
+QTabWidget::pane { border: 1px solid #c7c9cc; }
+QTabBar::tab { background: #e9eaed; padding: 6px 12px; }
+QTabBar::tab:selected { background: #ffffff; }
+QPushButton { background-color: #ffffff; border: 1px solid #c7c9cc; padding: 6px 10px; }
+QPushButton:hover { background-color: #eef0f2; }
