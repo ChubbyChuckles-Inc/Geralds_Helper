@@ -1,0 +1,14 @@
+feat(setup): implement initial project foundation for Table Tennis Team Manager
+
+Added core setup tasks from roadmap:
+- requirements.txt normalized (PyQt6, requests, beautifulsoup4, pandas, pytest, typing stubs)
+- Updated pyproject.toml (metadata, Python 3.13, dependency sets, tool configs)
+- Entry point revamped with logging + config bootstrap
+- Logging configuration (rotating file handler) & application settings loader
+- Package skeletons: gui, scraping, data, simulation
+- Config + logs directories with defaults generated on demand
+- Pytest configuration + fixtures; test updated for new entry behavior
+- Roadmap progress checkboxes updated
+- README re-authored for new project direction
+
+All tests pass and sources compile. Ready for further GUI development tasks.

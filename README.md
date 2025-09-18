@@ -1,9 +1,15 @@
-# Project Template
+# Table Tennis Team Manager
 
 [![CI](https://github.com/ChubbyChuckles/project-template/actions/workflows/ci.yml/badge.svg)](https://github.com/ChubbyChuckles/project-template/actions/workflows/ci.yml)
 [![Docs](https://readthedocs.org/projects/project-template/badge/?version=latest)](https://project-template.readthedocs.io)
 
-This is a Python project template with automated setup for creating new projects, including a virtual environment, dependency installation, Sphinx documentation, and Git workflow with pre-commit checks.
+This project is an evolving Table Tennis Team Management Tool featuring:
+
+- Modern PyQt6 GUI (in development)
+- Player & team roster management with Q-TTR ratings
+- Match scheduling + opponent roster scraping (planned)
+- Optimization engine for lineup strength and availability (planned)
+- Deterministic test suite and modular architecture adhering to repository "Copilot Instructions"
 
 ## Setup Instructions
 
@@ -48,7 +54,20 @@ Before starting, ensure the following are set up on your Windows 10 system:
    - Install the Python extension for VS Code (by Microsoft) for better Python support:
      - Open VS Code, go to the Extensions view (`Ctrl+Shift+X`), search for "Python," and install the Microsoft Python extension.
 
-### Setup Steps
+### Quick Start
+
+```powershell
+git clone https://github.com/ChubbyChuckles-Inc/Geralds_Helper.git
+cd Geralds_Helper
+py -3.13 -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+python -m src.main
+```
+
+Logs are written to `logs/app.log`. Configuration file is created at `config/app_settings.json` on first run.
+
+### Setup Steps (Legacy Template Instructions)
 
 1. **Clone the Repository or Create a New Project**:
 
