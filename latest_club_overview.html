@@ -1,0 +1,866 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+<title>Henke Software</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="-1">
+<link rel="shortcut icon" href="/favicon.ico">
+<link type="text/css" href="/Resource/css/default.css" rel="stylesheet" media="screen">
+<link type="text/css" href="/Resource/css/jquery.css" rel="stylesheet" media="screen">
+	<noscript><style type="text/css">
+			#dock { top: -32px; }
+			a.dock-item { position: relative; float: left; margin-right: 10px; }
+			.dock-item span { display: block; }
+	</style></noscript>
+<script type="text/javascript" src="/Resource/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="/Resource/js/jquery-ui-1.8.17.custom.min.js"></script>
+<script type="text/javascript" src="/Resource/js/fisheye-iutil.min.js"></script>
+<script type="text/javascript" src="/Resource/js/dock-Navi.js"></script>
+</head>
+<body class="CONTENTTEXT">
+    <img src="Resource/img/Background.jpg" class="bg">
+    <div id="page-wrap2" style="background-image: url(/Resource/img/DividerLine.gif); height:28px; position: absolute; left:0px; top:85px; width: 100%; margin: auto;"></div>
+        <div id="page-wrap" style="position: relative; top:-10px; width: 980px; margin: auto;">
+            <br> <br>
+            <img src="Resource/img/HenkeSoftware.gif">
+		    <div id="dock" style="margin-left:300px;">
+			    <div style="margin-left: 0px; left: 21px; width: 638px;" class="dock-container">
+				    <a class="dock-item" href="Default.aspx?Page=Start" style="width: 58px; left: 0px;"><span>Startseite</span><img src="Resource/img/dock/home.png" alt="Startseite"></a> 
+				    <a class="dock-item" href="Default.aspx?Page=News" style="width: 58px; left: 58px;"><span>News</span><img src="Resource/img/dock/News.png" alt="News"></a> 
+				    <a class="dock-item" style="width: 58px; left: 116px;"></a>
+				    <a class="dock-item" href="Default.aspx?Page=Ergebnisse" style="width: 58px; left: 174px;"><span>Sport-Ergebnisse</span><img src="Resource/img/dock/Ergebnisse.png" alt="Ergebnisse"></a> 
+				    <a class="dock-item" href="Default.aspx?Page=Web4Sport" style="width: 58px; left: 232px;"><span>Web4Sport</span><img src="Resource/img/dock/W4S.png" alt="Web4Sport"></a> 
+				    <a class="dock-item" href="Default.aspx?Page=TTTurnier" style="width: 58px; left: 290px;"><span>TT-Turnier</span><img src="Resource/img/dock/TTTurnier.png" alt="TT-Turnier"></a> 
+				    <a class="dock-item" href="Default.aspx?Page=TTLV" style="width: 58px; left: 348px;"><span>TT-Liga</span><img src="Resource/img/dock/TTLV.png" alt="TT-Liga"></a> 
+                 <a class="dock-item" style="width: 58px; left: 406px;"></a>
+				    <a class="dock-item" href="Default.aspx?Page=Bestellung" style="width: 58px; left: 464px;"><span>Bestellung</span><img src="Resource/img/dock/Bestellung.png" alt="Bestellung"></a> 
+				    <a class="dock-item" href="Default.aspx?Page=Team" style="width: 58px; left: 522px;"><span>Team</span><img src="Resource/img/dock/Team.png" alt="Team"></a> 
+				    <a class="dock-item" href="Default.aspx?Page=Kontakt" style="width: 58px; left: 580px;"><span>Kontakt</span><img src="Resource/img/dock/Kontakt.png" alt="Kontakt"></a> 
+			    </div><!-- end div .dock-container -->
+		    </div><!-- end div .dock #dock -->
+	        <br>
+
+
+<div style="min-height:400px; margin-bottom:60px; padding:20px; background-image:url(/Resource/img/Trans.png); border-radius: 15px; -moz-box-shadow: 0 0 20px black; -webkit-box-shadow: 0 0 20px black; box-shadow: 0 0 20px black;">
+    
+    
+
+<link href="/Resource/css/PiroBox.css" class="piro_style" media="screen" title="white" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="/Resource/js/jquery/pirobox.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	$().piroBox({
+
+			my_speed: 400, //animation speed
+
+			bg_alpha: 0.3, //background opacity
+
+			slideShow : true, // true == slideshow on, false == slideshow off
+
+			slideSpeed : 4, //slideshow duration in seconds(3 to 6 Recommended)
+
+			close_all : '.piro_close,.piro_overlay'// add class .piro_overlay(with comma)if you want overlay click close piroBox
+
+	})
+
+;});
+
+</script>
+
+
+    
+    <script type="text/javascript" src="/Resource/js/jcarousellite_1.0.1.pack.js"></script>
+    <script type="text/javascript" src="/Resource/js/pirobox.min.js"></script>
+    <link type="text/css" href="/Resource/css/PiroBox.css" rel="stylesheet" media="screen">
+    
+    <img src="/Resource/img/dock/W4S.png" height="50px" style="float:left; margin-right:10px;">
+    <h2 style="margin:10px; margin-bottom:20px">Web4Sport - Online Verwaltung und Ergebnisdienst</h2>
+
+    <div id="tabs" style="min-height:200px; float:left; width:600px" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+            <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-overview">Übersicht</a></li>
+            <li class="ui-state-default ui-corner-top"><a href="#tabs-Funk">Funktionen</a></li>
+            <li class="ui-state-default ui-corner-top"><a href="#tabs-cloud">Cloud</a></li>
+            <li class="ui-state-default ui-corner-top"><a href="#tabs-Update">Updates</a></li>
+            <li class="ui-state-default ui-corner-top"><a href="#tabs-Handbuch">Handbücher</a></li>
+            <li class="ui-state-default ui-corner-top"><a href="#tabs-Zusatz">Zusatzmodule</a></li>
+            <li class="ui-state-default ui-corner-top"><a href="#tabs-Preis">Bestellung</a></li>
+        </ul>
+
+		<div id="tabs-overview" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+    		Web4Sport ist eine Kombination aus Online Verbands/Vereinsverwaltung mit detailliertem Ergebnisdienst. Mit dieser Kombination kann die komplette Datenverwaltung eines Verbandes mit dem System abgebildet werden.<br>
+    		<br>
+    		Das System bietet einen zentralen Bereich, der unabhängig von den Besonderheiten einer Sportart zur Verfügung steht (z.B. Vereinsdaten, Mitgliederverwaltung, Funktionäre, Berechtigungssystem, Kommunikationsmittel), und weitere Elemente, die sich jeweils nach der entsprechenden Sportart unterscheiden (Mannschaftsmeldung, Spielberichte, Statistiken).<br>
+    		<br>
+    		
+    		<div class="CONTENTTEXTTOP">Verschiedene Sportart</div>
+    		<div style="margin-left:20px">
+    		Jede Sportart wird im System individuell dargestellt und hat einen eigenes Produkt:<br>
+    		<br>
+    		<strong>Web4Sport</strong> - Allgemeiner Sportverband<br>
+    		<strong>TischtennisLive</strong> - Tischtennis<br>
+    		<strong>Web4Fussball</strong> - Fussball<br>
+    		<strong>Web4Kegeln</strong> - Kegeln<br>
+    		<strong>Web4Tennis</strong> - Tennis<br>
+    		<strong>Web4Bowling</strong> - Bowling<br>
+    		<strong>Web4Schiessen</strong> - Schießen<br>
+    		<strong>Web4Volleyball</strong> - Volleyball<br>
+    		<img src="/Resource/img/Web4Sport/SupportedSportarten.png">
+    		<br>
+    		.. weitere Sportarten folgen bald
+    		</div>
+    		<br>
+    		
+    		<div class="CONTENTTEXTTOP">Allgemeine Elemente des Systems</div>
+    		<div style="margin-left:20px">
+    		- Verwaltung von allgemeinen Verbandsdaten<br>
+    		- Verwaltung von allgemeinen Vereinsdaten<br>
+    		- Verwaltung von Mitgliedern, inkl. Anmeldung, Abmeldung und Wechsel<br>
+    		- Verwaltung von Funktionsträgern (Verband und Verein)<br>
+    		- Vielschichtiges Berechtigungssystem (für Verband und Verein)<br>
+    		- Flexible Konfiguration von Prozessen und Funktionen<br>
+    		- Diverse Kommunikationsmedien (News, Termine, Dokumente, Email-Newsletter, etc.)<br>
+    		- Erstellung von Rechnungen (Zusatzmodul)<br>
+    		- Seiten-Layout und Design individuell auswählbar aus verschiedenen Kombinationsmöglichkeiten<br>
+    		</div>
+    		<br>
+    		<div class="CONTENTTEXTTOP">Elemente der jeweiligen Sportart</div>
+    		<div style="margin-left:20px">
+    		- Einfache Erstellung und Verwaltung von Wettbewerben<br>
+    		- Verschiedene Alterseinteilungen und Wettbewerbstypen (z.B. Pokalspiele)<br>
+    		- Schnelle Erstellung eines kompletten Spielplanes<br>
+    		- Komfortable Erstellung von Teams und Aufstellung von Spielern<br>
+    		- Automatische Kontrolle von Spielberichten nach diversen Kriterien<br>
+    		- Sehr detaillierte Statistiken<br>
+    		</div>
+    		<br><br>
+    		
+        </div>
+
+		<div id="tabs-Funk" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+		
+    		<div class="CONTENTTEXTTOP">Allgemeine Darstellung im öffentlichen Bereich</div>
+    		<div style="margin-left:20px">
+    		    <div style="float:right; margin-left:20px;" align="center">
+                        <a class="pirobox_pub first" href="/Resource/img/Web4Sport/Startseite.jpg" title="Startseite eines Verbandes" rel="1&amp;nbsp;of&amp;nbsp;5" rev="0"><img src="/Resource/img/Web4Sport/Startseite.jpg" alt="" width="110px" border="0" style=" -moz-border-radius: 10px; border-radius: 10px; -moz-box-shadow: 0 0 20px black; -webkit-box-shadow: 0 0 20px black; box-shadow: 0 0 20px black;"></a>
+                        <a class="pirobox_pub" href="/Resource/img/Web4Sport/News.jpg" title="Anzeige von News" rel="2&amp;nbsp;of&amp;nbsp;5" rev="1"></a>
+                        <a class="pirobox_pub" href="/Resource/img/Web4Sport/Links.jpg" title="Veröffentlichte Links zu anderen Seiten" rel="3&amp;nbsp;of&amp;nbsp;5" rev="2"></a>
+                        <a class="pirobox_pub" href="/Resource/img/Web4Sport/Spieluebersicht.jpg" title="Übersicht über Spiele" rel="4&amp;nbsp;of&amp;nbsp;5" rev="3"></a>
+                        <a class="pirobox_pub last" href="/Resource/img/Web4Sport/Wettbewerb.jpg" title="Wettbewerb-Startseite" rel="5&amp;nbsp;of&amp;nbsp;5" rev="4"></a>
+    		        <br><br>(5 Bilder in der Galerie)
+    		    </div>
+    		    Der öffentliche Bereich ist für den Besucher, der informationen über den Verband erhält und die Wettbewerbe und Ergebnisse sehen möchte. Der Verband kann diverse Informationen hinterlegen, um den Benutzer zu informieren (z.B. News).<br>
+    		    - Informative Startseite des Verbandes<br>
+    		    - Anzeuge von News und Terminen<br>
+    		    - Dokumente, Links und Forum<br>
+    		    - Veriene, Spieler und Events suchen<br>
+    		    - Funktionäre und Ansprechpartner<br>
+    		    - Anzeige der Sportart-Wettbewerbe<br>
+    		    
+    		</div>
+    		<br>
+   		
+    		<div class="CONTENTTEXTTOP">Verwaltung für den Verband</div>
+    		<div style="margin-left:20px; min-height:60px">
+    		    <div style="float:right; margin-left:20px;" align="center">
+                    <a class="pirobox_Verband first" rel="1&amp;nbsp;of&amp;nbsp;12" href="/Resource/img/Web4Sport/Verband_Start.jpg" title="Statistikübersicht zum Verband" rev="5"><img src="/Resource/img/Web4Sport/Verband_Start_Pre.jpg" alt="" width="110px" border="0" style=" -moz-border-radius: 10px; border-radius: 10px; -moz-box-shadow: 0 0 20px black; -webkit-box-shadow: 0 0 20px black; box-shadow: 0 0 20px black;"></a>
+                    <a class="pirobox_Verband" rel="2&amp;nbsp;of&amp;nbsp;12" href="/Resource/img/Web4Sport/Verband_Berechtigung.jpg" title="Berechtigungsverwaltung" rev="6"></a>
+                    <a class="pirobox_Verband" rel="3&amp;nbsp;of&amp;nbsp;12" href="/Resource/img/Web4Sport/Verband_Benachrichtigung.jpg" title="Konfiguraiton von Benachrichtigungen" rev="7"></a>
+                    <a class="pirobox_Verband" rel="4&amp;nbsp;of&amp;nbsp;12" href="/Resource/img/Web4Sport/Verband_Konfiguration.jpg" title="Konfiguraitonsbereich des Verbandes" rev="8"></a>
+                    <a class="pirobox_Verband" rel="5&amp;nbsp;of&amp;nbsp;12" href="/Resource/img/Web4Sport/Verband_Zeitplanung.jpg" title="Zeitplanung" rev="9"></a>
+                    <a class="pirobox_Verband" rel="6&amp;nbsp;of&amp;nbsp;12" href="/Resource/img/Web4Sport/Verband_Vereine.jpg" title="Verein im  Verband" rev="10"></a>
+                    <a class="pirobox_Verband" rel="7&amp;nbsp;of&amp;nbsp;12" href="/Resource/img/Web4Sport/Verband_Mitglied.jpg" title="Mitgliederverwaltung" rev="11"></a>
+                    <a class="pirobox_Verband" rel="8&amp;nbsp;of&amp;nbsp;12" href="/Resource/img/Web4Sport/Verband_Antraege.jpg" title="Anträge zu  Spielern" rev="12"></a>
+                    <a class="pirobox_Verband" rel="9&amp;nbsp;of&amp;nbsp;12" href="/Resource/img/Web4Sport/Verband_Funktion.jpg" title="Funktionäre" rev="13"></a>
+                    <a class="pirobox_Verband" rel="10&amp;nbsp;of&amp;nbsp;12" href="/Resource/img/Web4Sport/Verband_News.jpg" title="Bearbeitung News" rev="14"></a>
+                    <a class="pirobox_Verband" rel="11&amp;nbsp;of&amp;nbsp;12" href="/Resource/img/Web4Sport/Verband_Newsletter.jpg" title="Newsletter" rev="15"></a>
+                    <a class="pirobox_Verband last" rel="12&amp;nbsp;of&amp;nbsp;12" href="/Resource/img/Web4Sport/Verband_Rechnung.jpg" title="Rechnungen" rev="16"></a>
+    		        <br><br>(12 Bilder in der Galerie)
+    		    </div>
+    		    Der Verband hat einen sehr großen Bereich für die Verwaltung von diversen Daten. Die Verwaltung beginnt bei der allgemeinen Konfiguration des Systems (wie soll sich das System in besitmmten Situaitonen verhalten) bis hin zu der Verwaltung der allgemeinen Daten (Vereine, Mitglieder,..) <br>
+    		    - Verband-Stammdaten, Kontaktdaten und Impressum<br>
+    		    - Verbandswappen, Logo und Seiten-Design<br>
+    		    - Konfiguration von Funktionen und Prozessen<br>
+    		    - Einstellung von Berechtigungen und Benachrichtigungen (Email)<br>
+    		    - Zeitplanung für Aktionen der Vereine<br>
+    		    - Verwaltung der Vereinsdaten<br>
+    		    - Verwaltung von Mitgliedern und Anträgen<br>
+    		    - Diverse Kommunikaitonselemente<br>
+    		    - Verwaltung von Funktionsträgern, Trainern und Schiedsrichtern<br>
+    		    - Erstellung von Rechnungen und Strafen<br>
+    		    - Diverse Kontrollfunktionen zur Überwachung des Systems<br>
+    		    - Diverse Exporte nach Excel/XML und PDF/RTF<br>
+    		</div>
+    		<br>
+    		
+    		<div class="CONTENTTEXTTOP">Verwaltung für den Verein</div>
+    		<div style="margin-left:20px; min-height:60px">
+    		    <div style="float:right; margin-left:20px;" align="center">
+                    <a class="pirobox_Verein first" rel="1&amp;nbsp;of&amp;nbsp;5" href="/Resource/img/Web4Sport/Verein_Start.jpg" title="Statistikübersicht zum Verein" rev="17"><img src="/Resource/img/Web4Sport/Verein_Start_Pre.jpg" alt="" width="110px" border="0" style=" -moz-border-radius: 10px; border-radius: 10px; -moz-box-shadow: 0 0 20px black; -webkit-box-shadow: 0 0 20px black; box-shadow: 0 0 20px black;"></a>
+                    <a class="pirobox_Verein" rel="2&amp;nbsp;of&amp;nbsp;5" href="/Resource/img/Web4Sport/Verein_Daten.jpg" title="Stammdaten des Vereins" rev="18"></a>
+                    <a class="pirobox_Verein" rel="3&amp;nbsp;of&amp;nbsp;5" href="/Resource/img/Web4Sport/Verein_Mitglieder.jpg" title="Mitglieder verwalten" rev="19"></a>
+                    <a class="pirobox_Verein" rel="4&amp;nbsp;of&amp;nbsp;5" href="/Resource/img/Web4Sport/Verein_Mannschaften.jpg" title="Mannschaften erstellen und bearbeiten" rev="20"></a>
+                    <a class="pirobox_Verein last" rel="5&amp;nbsp;of&amp;nbsp;5" href="/Resource/img/Web4Sport/Verein_Berechtigungen.jpg" title="Berechtigungen für Nutzer" rev="21"></a>
+    		        <br><br>(5 Bilder in der Galerie)
+    		    </div>
+    		    Für jeden Verein gibt es eine eigene Verwaltung, in der Vereinsfunktoinäre die Verwaltung der Vereinsdaten vornehmen können. Vereinsdaten sind hierbei Stammdaten, Mitgliedschaften, Sportstätten und auch Mannschaften.<br>
+    		    - Stammdaten und Vereinswappen<br>
+    		    - Sportstätten, mit Bildern der Sportstätte<br>
+    		    - Mitgliedschaften und Anträöge auf Anmeldung, Abmeldung und Wechsel <br>
+    		    - Mannschaftsverwaltung der jeweiligen Sportart<br>
+    		    - Eigene Berechtigungsverwaltung auf mehreren Ebenen<br>
+    		    - Verwaltung der Funktionäre<br>
+    		    - Statistiken und Exporte<br>
+    		    - Übersicht über Rechnungen und Strafen<br>
+    		</div>
+    		<br>
+    		
+    		<div class="CONTENTTEXTTOP">Persönlicher Nutzerbereich (Mein Bereich)</div>
+    		<div style="margin-left:20px; min-height:60px">
+    		    <div style="float:right; margin-left:20px;" align="center">
+                    <a class="pirobox_Mein first" rel="1&amp;nbsp;of&amp;nbsp;4" href="/Resource/img/Web4Sport/Mein_Start.jpg" title="Startseite des persönlichen Nutzerbereiches" rev="22"><img src="/Resource/img/Web4Sport/Mein_Start_Pre.jpg" alt="" width="110px" border="0" style=" -moz-border-radius: 10px; border-radius: 10px; -moz-box-shadow: 0 0 20px black; -webkit-box-shadow: 0 0 20px black; box-shadow: 0 0 20px black;"></a>
+                    <a class="pirobox_Mein" rel="2&amp;nbsp;of&amp;nbsp;4" href="/Resource/img/Web4Sport/Mein_Daten.jpg" title="Stammdaten des Nutzers" rev="23"></a>
+                    <a class="pirobox_Mein" rel="3&amp;nbsp;of&amp;nbsp;4" href="/Resource/img/Web4Sport/Mein_Berechtigung.jpg" title="Übersicht über die Berechtigungen" rev="24"></a>
+                    <a class="pirobox_Mein last" rel="4&amp;nbsp;of&amp;nbsp;4" href="/Resource/img/Web4Sport/Mein_Mailbox.jpg" title="Online Mailbox" rev="25"></a>
+    		        <br><br>(4 Bilder in der Galerie)
+    		    </div>
+    		    Der 'Mein Bereich' richtet sich an den Nutzer vor dem Bildschirm. In diesem Bereich findet er alle Informationen und Einstellungen zu seinem Bereich, angefangen bei den Account-Daten und Berechtigungen, bis hin zu der Online-Mailbox, in der alle EMails aufbewahrt werden, die vom System an den Nutzer geschickt werden.<br>
+    		    - Accountdaten und Kontaktdaten<br>
+    		    - Portraitbild<br>
+    		    - Berechtigungen und Funktionen<br>
+    		    - Online Mailbox, Newsletter und Favoriten<br>
+    		</div>
+    		<br>
+    		
+    		<div class="CONTENTTEXTTOP">Darstellung und Design</div>
+    		<div style="margin-left:20px; min-height:60px">
+    		    <div style="float:right; margin-left:20px;" align="center">
+                    <a class="pirobox_Design first" rel="1&amp;nbsp;of&amp;nbsp;7" href="/Resource/img/Web4Sport/Design_1.jpg" title="Beispieldesign" rev="26"><img src="/Resource/img/Web4Sport/Design_1_Pre.jpg" alt="" width="110px" border="0" style=" -moz-border-radius: 10px; border-radius: 10px; -moz-box-shadow: 0 0 20px black; -webkit-box-shadow: 0 0 20px black; box-shadow: 0 0 20px black;"></a>
+                    <a class="pirobox_Design" rel="2&amp;nbsp;of&amp;nbsp;7" href="/Resource/img/Web4Sport/Design_2.jpg" title="Beispieldesign" rev="27"></a>
+                    <a class="pirobox_Design" rel="3&amp;nbsp;of&amp;nbsp;7" href="/Resource/img/Web4Sport/Design_3.jpg" title="Beispieldesign" rev="28"></a>
+                    <a class="pirobox_Design" rel="4&amp;nbsp;of&amp;nbsp;7" href="/Resource/img/Web4Sport/Design_4.jpg" title="Beispieldesign" rev="29"></a>
+                    <a class="pirobox_Design" rel="5&amp;nbsp;of&amp;nbsp;7" href="/Resource/img/Web4Sport/Design_5.jpg" title="Beispieldesign" rev="30"></a>
+                    <a class="pirobox_Design" rel="6&amp;nbsp;of&amp;nbsp;7" href="/Resource/img/Web4Sport/Design_6.jpg" title="Beispieldesign" rev="31"></a>
+                    <a class="pirobox_Design last" rel="7&amp;nbsp;of&amp;nbsp;7" href="/Resource/img/Web4Sport/Design_7.jpg" title="Beispieldesign" rev="32"></a>
+    		        <br><br>(7 Bilder in der Galerie)
+    		    </div>
+    		    Das System bieten Ihnen die flexible Möglichkeit, das Erscheinungsbild mit verschiedenen Parametern auf ihre eigenen Wünsche anzupassen. Sollten diese Kriterien Ihnen nicht ausreichen, kann auch ein individuelles Design in Auftrag gegeben werden<br>
+    		    - 9 verschiedene Basis-Seitenlayouts<br>
+    		    - 4 verschiedene Farbschemata<br>
+    		    - 7 verschiedene Inhaltsbox-Layouts<br>
+    		    - Werbeeinblendungen (Zusatzmodul)<br>
+    		</div>
+    		<br>
+    		
+    		<div class="CONTENTTEXTTOP">Kommunikationselemente</div>
+    		<div style="margin-left:20px; min-height:60px">
+    		    <div style="float:right; margin-left:20px;" align="center">
+                    <a class="pirobox_Kom first" rel="1&amp;nbsp;of&amp;nbsp;4" href="/Resource/img/Web4Sport/News.jpg" title="News" rev="33"><img src="/Resource/img/Web4Sport/News_Pre.jpg" alt="" width="110px" border="0" style=" -moz-border-radius: 10px; border-radius: 10px; -moz-box-shadow: 0 0 20px black; -webkit-box-shadow: 0 0 20px black; box-shadow: 0 0 20px black;"></a>
+                    <a class="pirobox_Kom" rel="2&amp;nbsp;of&amp;nbsp;4" href="/Resource/img/Web4Sport/Verband_News.jpg" title="Bearbeitung einer News" rev="34"></a>
+                    <a class="pirobox_Kom" rel="3&amp;nbsp;of&amp;nbsp;4" href="/Resource/img/Web4Sport/Verband_Newsletter.jpg" title="Versand eines Newsletters" rev="35"></a>
+                    <a class="pirobox_Kom last" rel="4&amp;nbsp;of&amp;nbsp;4" href="/Resource/img/Web4Sport/Links.jpg" title="Links" rev="36"></a>
+    		        <br><br>(4 Bilder in der Galerie)
+    		    </div>
+    		    Dem Verband stehen verschiedene Instrumente für den Bereich der Kommunikation mit Mitgliedern, Vereinen und Nutzern zur Verfügung. Zum Beispiel können News und Termeine veröffentliucht werden, aber auch Newsletter an spezielle Zoelgruppen verschickt werden.<br>
+    		    - News und Termine<br>
+    		    - Links und Dokumente<br>
+    		    - Forum, Newsletter<br>
+    		    - Strafen und Rechnungen<br>
+    		    - Social Media Buttons (Facebook, Google+, Twitter)<br>
+    		</div>
+    		<br>
+    		
+    		<div class="CONTENTTEXTTOP">Sportart Tischtennis - TischtennisLive</div>
+    		<div style="margin-left:20px; min-height:60px">
+    		    Für die Sportart Tischtennis stehen sehr detailierte Statistiken und Auswertungen zur Verfügung. Angefangen bei einer profesisonellen Darstellung des Wettbewerbes, über den Spielplan und die Tabelle, bis hin zu diversen Auswertung von Spielern und Mannschaften<br>
+    		    - Darstellung eines Wettbewerbes mit informativer Startseite<br>
+    		    - Tabelle und Spielplan<br>
+    		    - Mannschaftsseiten und spezielle Übersichten<br>
+    		    - Spielersaisonergebnisse und Ergebnisanalysen<br>
+    		    - Professioneller Spielbericht und Ergebnismeldung<br>
+    		    - Ranglisten und Exporte<br>
+    		    - Online Spielverlegungen<br>
+    		</div>
+    		<br>
+    		
+    		<div class="CONTENTTEXTTOP">Sportart Fußball - Web4Fussball</div>
+    		<div style="margin-left:20px; min-height:60px">
+    		    Der Fussball bereits wurde sowohl für den Profi- als auch Amateurbereich ausgelegt. Dieses zeigt sich dabei, dass zum Beispiel Spielernummern und Aufstellungen (Feldpositionen) vorbelegt werede können, dieses jedoch asuch optional pro Spiel festgelegt werden kann. Das System bietet auch eine optische Auswertung der Aufstellungen eines Spieles.<br>
+    		    - Darstellung eines Wettbewerbes mit informativer Startseite<br>
+    		    - Tabelle und Spielplan<br>
+    		    - Detaillierter Spielbericht, inkl. taktischer Aufstellung<br>
+    		    - Torschützen, Vorlagen und Verwarnungen (gelbe/rote Karten)<br>
+    		    - Teamübersicht und Spielersaisonergebnisse<br>
+    		    - Torschützenliste (auch Vorlagen/Scrorer) und Exporte<br>
+    		    - Online Spielverlegungen<br>
+    		</div>
+    		<br>
+    		
+    		<div class="CONTENTTEXTTOP">Sportart Kegeln - Web4Kegeln</div>
+    		<div style="margin-left:20px; min-height:60px">
+    		    Für die Sportart Kegeln wurde die Möglichkeit integriert, Gruppenspieltage zu veranstalten, bei denen merhere Teams (nicht nur 2) gegeneinander spielen. Dazu gibt es die Möglichkeit, eine komplexe Aufnahme der Spielergebnisse durchzuführen (auf Wurf-Ebene), oder eine Punktespeicherung auf "Bahn"-Ebene<br>
+    		    - Darstellung eines Wettbewerbes mit informativer Startseite<br>
+    		    - Tabelle und Spielplan<br>
+    		    - Detaillierter Spielbericht, inkl. taktischer Aufstellung<br>
+    		    - Teamübersicht und Spielersaisonergebnisse<br>
+    		    - Ranglisten (Beste Bahn, bester Schnitt) und Exporte<br>
+    		    - Online Spielverlegungen<br>
+    		</div>
+    		<br>
+    		
+    		<div class="CONTENTTEXTTOP">Sportart Schießen - Web4Schiessen</div>
+    		<div style="margin-left:20px; min-height:60px">
+    		    Für die Sportart Schießen wurde die Möglichkeit von Fernwettkämpfen integriert. Das bedeutet, dass jedes Team an der eigenen Schießanlage den Wettkampf durchführt und die Ergebnisse von jedem Team online eingetragen werden. Zusätzlich sind natürlich auch die herkömmlichen Möglichkeiten der Meldung möglich.<br>
+    		    - Darstellung eines Wettbewerbes mit informativer Startseite<br>
+    		    - Tabelle und Spielplan mit Fernwettkämpfen<br>
+    		    - Detaillierter Spielbericht, inkl. Ergebnisse jedes Sportlers<br>
+    		    - Teamübersicht und Sportlersaisonergebnisse<br>
+    		    - Ranglisten (Bester Schütze, bester Schnitt) und Exporte<br>
+    		    - Online Spielverlegungen<br>
+    		</div>
+    		<br>
+    		
+    		<div class="CONTENTTEXTTOP">Sportart Tennis - Web4Tennis</div>
+    		<div style="margin-left:20px; min-height:60px">
+    		    Für die Sportart Tennis stehen sehr detailierte Statistiken und Auswertungen zur Verfügung. Angefangen bei einer profesisonellen Darstellung des Wettbewerbes, über den Spielplan und die Tabelle, bis hin zu diversen Auswertung von Spielern und Mannschaften<br>
+    		    - Darstellung eines Wettbewerbes mit informativer Startseite<br>
+    		    - Tabelle und Spielplan<br>
+    		    - Einzel, Doppel, Mixed und Damenwertung<br>
+    		    - Mannschaftsseiten und spezielle Übersichten<br>
+    		    - Spielersaisonergebnisse und Ergebnisanalysen<br>
+    		    - Professioneller Spielbericht und Ergebnismeldung<br>
+    		    - Ranglisten und Exporte<br>
+    		    - Online Spielverlegungen<br>
+    		</div>
+    		<br>
+    		
+    		<div class="CONTENTTEXTTOP">Sportart Bowling - Web4Bowling</div>
+    		<div style="margin-left:20px; min-height:60px">
+    		    Für die Sportart Bowling wurde die Möglichkeit integriert, Gruppenspieltage zu veranstalten, bei denen merhere Teams (nicht nur 2) gegeneinander spielen. Dazu gibt es die Möglichkeit, eine komplexe Aufnahme der Spielergebnisse durchzuführen (auf Pin-Ebene).<br>
+    		    - Darstellung eines Wettbewerbes mit informativer Startseite<br>
+    		    - Tabelle und Spielplan<br>
+    		    - Detaillierter Spielbericht, inkl. Aufstellung<br>
+    		    - Teamübersicht und Spielersaisonergebnisse<br>
+    		    - Ranglisten (Beste Bahn, bester Schnitt) und Exporte<br>
+    		    - Online Spielverlegungen<br>
+    		</div>
+    		<br>
+    		
+    		<div class="CONTENTTEXTTOP">Sportart Volleyball - Web4Volleyball</div>
+    		<div style="margin-left:20px; min-height:60px">
+                Die  Umsetzung für Volleyball ermögloicht eine einfache Erfassung der Teams und der Spiele. Hierbei kann optional nur ein Spielergebnis gemeldet werden, oder einzelne Satzergebnisse und Aufstellungen. Eine Erweiterung für weitere Detailstatistiken ist mittelfristig geplant.<br>
+    		    - Darstellung eines Wettbewerbes mit informativer Startseite<br>
+    		    - Tabelle und Spielplan<br>
+    		    - Detaillierter Spielbericht, inkl. Aufstellung<br>
+    		    - Teamübersicht und Spielersaisonergebnisse<br>
+    		    - Online Spielverlegungen<br>
+    		</div>
+    		<br>
+
+        </div>
+
+		<div id="tabs-cloud" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+            <div style="float:right;"><img src="/Resource/img/cloud.png" height="130px" style="margin-left:20px; margin-bottom:0px"></div>
+
+            <div class="CONTENTTEXTTOP">Web4Sport ist Ihre Sportverwaltung in der Cloud.</div>
+            <blockquote>
+            Aber, was bedeutet das eigentlich?<br>
+            Was bedeutet "Software as a service"?<br>
+            </blockquote>
+            Im Gegensatz zu einer Verwaltungssoftware, welche sie auf ihrem eigenen PC installieren, ist das Web4Sport System ein Service in der Cloud. Das System wird von uns zentral bereit gestellt. Sie erhalten einen eigenen Nutzerzugang, um ihre Daten zu verwalten. Sie müssen jedoch weder eine zusätzliche Software auf Ihrem PC installieren, noch müssen sie sich um die Technik, Installation oder Updates kümmern. <strong>Das wird alles komplett von uns übernommen</strong>.<br>
+            <br>
+            Darüber hinaus gibt es noch den wichtigen Vorteil, dass sie das System <strong>von überall aus</strong> bedienen können. Von Ihrem Büro-PC oder von Ihrem Smartphone oder Tablet, ohne zusätzliche Installationen.<br>
+            <br>
+            Das System und die Daten werden zentral erfasst, wodurch eine <strong>Zusammenarbeit von mehreren Personen</strong> gleichzeitig problemlos möglich ist. Beispielsweise kann ein Staffelleiter eine Staffel überprüfen und bearbeiten, während gleichzeitig ein Spielbericht gemeldet und vom Kassenwart eine Rechnung gestellt wird.
+            <br><br>
+            <img src="/Resource/img/Right.png" height="12px"> <a href="https://de.wikipedia.org/wiki/Software_as_a_Service" target="_blank">Hier finden sie weitere Informationen zu "Software as a Service" (SaaS)</a>
+            <br><br><br>
+            <div style="float:right;"><img src="/Resource/img/SSL.png" height="150px" style="margin-left:20px; margin-bottom:10px"></div>
+            <div class="CONTENTTEXTTOP">Das Thema <u>Sicherheit</u> wird bei uns groß geschrieben und betrifft sogleich mehrere Bereiche.<br></div>
+            <br>
+            1.) <strong>Server-Standort</strong>. Das Web4Sport-System läuft auf einem Server in Deutschland und nicht in einem Land außerhalb von Europa. Dadurch gelten hier auch die europäischen Gesetze für den Provider.<br>
+            <br>
+            2.) <strong>Programm-Code</strong>. Der Programm-Code wurde so gestaltet, dass gängige Wege für Häcker nicht möglich sind und keine Sicherheitslücken für unberechtigten Zugriff ermöglicht werden.<br>
+            <br>
+            3.) <strong>Daten-Backup</strong>. Ihre Daten werden von uns in verschiedenen Zyklen und an verschiedenen Orten gesichert. Dadurch stellen wir sicher, dass im Fall der Fälle immer eine Sicherung zur Verfügung steht.<br>
+            <br>
+            4.) <strong>Datenschutz</strong>. Um Ihnen einen Datenschutz komform mit den rechtlichen Grundlagen anbieten zu können, haben wir auch für diesen Bereich einen professionellen Partner, über den regelmäßige Audits stattfinden.<br>
+            <br>
+
+        </div>
+
+		<div id="tabs-Update" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+
+		    <div id="accordion_Update" class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" role="tablist">
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-state-active ui-corner-top" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><span class="ui-icon ui-icon-minus"></span><a href="#">Update - August 2025 (System Version 4.71)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom ui-accordion-content-active" role="tabpanel"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2025_August.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Dokumentenverwaltung erweitert<br> TT-TurnierCenter –Ausländerstatus (Tischtennis)<br>Neuer CSV-Export für click-tt (Tischtennis)<br>Funktionen-Export &amp; Begrenzte Funktionärsliste<br>Turnierlizenz, Auswahl bei 2 Spielb. (Tischtennis)<br>TT-TurnierCenter &amp; Schiedsrichter (Tischtennis)<br>Filterung LivePZ Listen (Tischtennis)</div>
+            
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - März 2025 (System Version 4.70)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2025_März.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Textliche Änderungen in Web4Sport Verwaltung<br>Offener Spielbetrieb (Tischtennis)<br>Turnierlizenz - Vereinszuweisung (Tischtennis)<br>Nationalität im Export der - Anträge</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - November 2024 (System Version 4.69)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2024_November.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            TurnierLizenz (Tischtennis)<br>RES-Anpassung 2024 (Tischtennis)<br>Teamänderungen der Rückrunde (Tischtennis)<br>LivePZ von Turnieren (Tischtennis)<br>Einschränkung der flexiblen Spielsysteme (Tischtennis)<br>Erweiterungen TT-TurnierCenter (Tischtennis)<br>SBSM Anpassungen (Tischtennis)<br> Ärztliche Unbedenklichkeitsbescheinigung (Tischtennis)<br>Ausländerstatus<br>Kein Aufstiegsrecht (Tischtennis)<br>LivePZ-Listen mit Turnierlizenz (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Januar 2024 (System Version 4.68)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2024_Januar.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Neue Icons in Themenüberschriften (Spielbetrieb)<br>Funktion ‚Favoriten‘ entfernt<br>TTVSH Homepage Design und Farbgebung<br>Erweiterung TT-TurnierCenter (Tischtennis)<br>Rechnungsversand mit Link<br>Saison per Kalenderjahr (Fußball)<br>Fehlerkorrektur bei Link zu Datenbericht <br>Verbandsspielplan mit geplanten Spielen<br> Dokumente als Anleitungen</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Oktober 2023 (System Version 4.67)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2023_Oktober.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Sofortiger Spielerwechsel<br>Geschlecht &amp; Diversität<br>Rechnung Mahnung/Erinnerung und Speicherung<br>LiveSpielbericht Erweiterungen (Tischtennis)<br>PDF-Spielbericht mit Unterschriften (Tischtennis)<br>Turnierplaner &amp; TT-TurnierCenter XML (Tischtennis)<br>Click-tt Export Anpassung (Tischtennis)<br>SBEM Streichung neuer Stichtag (Tischtennis)<br>LivePZ - Inaktivität erweiterte Regelung (Tischtennis)<br>Doppel-Aufstellung automatisch angepasst (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Mai 2023 (System Version 4.66)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2023_Mai.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            SBEM-Überprüfung im Spielbericht (Tischtennis)<br>LivePZ Anzeige im TT-TurnierCenter (Tischtennis)<br>Filterung Export Turnierliste (Tischtennis)<br>4 Individuelle Turnieranmeldung (Tischtennis)<br>Erweiterung Rechnungswesen (Teil 1)<br>Sportstätten – Kommentarfeld<br>Vorgabe für Zeit+Ort der Teamwünsche (Tennis)<br>Saison per Kalenderjahr (Tennis)<br>Umstellung von E-Mail-Links auf HTTPS</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Februar 2023 (System Version 4.65)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2023_Februar.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Umzug auf neues Serversystem<br>Anpassungen bei E-Mail-Zustellung<br>Berechtigung für Spielbericht (Tischtennis)<br>Überprüfung der Aufstellung bei 3er Mannschaften (Tischtennis)<br>Turnieranmeldung und mehrere Zugehörigkeiten (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - November 2022 (System Version 4.64)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2022_November.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            LivePZ Berechnung (Tischtennis)<br>LiveBericht Erweiterung<br>SBEM-Genehmigung (Tischtennis)<br>M/W Autokorrektur (Tischtennis)<br>DSGVO Nutzerabfrage<br>STARTTER Trainer Zertifikat<br>Kaderspieler (Tischtennis)<br>Überprüfung der Aufstellung im Export ‚Meldeliste‘ (Tischtennis)<br>Turniereinteilung mit SBEM</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - August 2022 (System Version 4.63)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2022_August.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Online Mailbox - Antwortfunktion<br>LivePZ – Startwerte über Turniere (Tischtennis) <br>Analyse der Stärkereihenfolge in der Aufstellung (Tischtennis)<br>Digitale Unterschrift im Live-Spielbericht (Tischtennis)<br> Maximale Spielerzahl für Turnieranmeldung (Tischtennis) <br>Click-tt Datenfelder (Tischtennis)<br>Spiel an 3 Tischen (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Mai 2022 (System Version 4.62)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2022_Mai.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Datenschutz – Online Mailbox<br>Jugend19 (Tischtennis)<br>Aufstellungen in Pokal und MMS (Tischtennis)<br>SBSM Antrag vor dem relevanten Alter<br>LivePZ Rangliste mit Stichtagsauswahl (Tischtennis) </div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Februar 2022 (System Version 4.61)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2022_Februar.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Datenschutz - Emailzustellung<br>Mobile-Darstellung und Dark Mode<br>Anbieter Partner-Datei – ads.txt<br>Übersicht über Doppel und Historie (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - September 2021 (System Version 4.60)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2021_September.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Sportstätten Hygienekonzept<br>LivePZ Inaktivität (Tischtennis)<br>Mehrere Anhänge bei Staffel-News<br>Vor- und Rückrunde im Hallenplan<br>Filterung in der LivePZ Rangliste<br>Kollision von 2 Anträgen<br>Pokalteilnahme deaktivierbar</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - April 2021 (System Version 4.59)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2021_April.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            LivePZ – Anpassung bei Nichtteilnahme<br>Trainerverwaltung - Bestätigungen<br>Berechtigung für Trainerdaten<br>Trainerverwaltung - Anbindung DOSB<br>Hinweistext für Saisonabbruch<br>6 Korrektur für „Bezahlt“ Markierung</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - November 2020 (System Version 4.58)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2020_November.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            CMP - Consent Management Platform<br>Datenschutzerklärung - Anpassungen<br>LivePZ Anpassungen (Tischtennis)<br>Schiedsrichter-Lizenz<br>Wechselnde Werbepartner auf Startseite-Box<br>Teillöschung des Spielplanes (Tischtennis)<br>RES Markierung bei weniger als 3 Einsätzen (Tischtennis)<br>Gatsby Plugin (Tischtennis)<br> Export nach CSV (Tischtennis)<br>Saisonübernahme und Staffeln in der Navigation (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Juli 2020 (System Version 4.57)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2020_Juli.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Deaktivierung der Stärkeklassen<br>Keine Rechnungsstellung bei SBEM-Streichung<br>Auswahl der Matrixgröße bei Spielplangenerator (Tischtennis)<br>Korrektur der Saisonauswahl bei Teamübersicht (Tischtennis)<br>SBEM zeitgeplante Wechsel (Tischtennis)<br>Korrektur LivePZ (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - April 2020 (System Version 4.56)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2020_April.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Wettbewerbtyp „Mannschaftsmeisterschaft“ (Tischtennis)<br>Erweiterung der Alterseinteilung-Basistypen<br>Kopie der Konfiguration bei großen Verbänden<br>LivePZ Anpassungen (Tischtennis)<br>Erkennung doppelte Aufstellung in Übersicht (Tischtennis)<br>SMS-Ergebnismeldung (Tischtennis)<br>Fehlerkorrektur bei SPV Anzeige (Tischtennis)<br>Automatismus für RES Vermerk (Tischtennis)<br>Export von Pokalergebnisses nach click-tt (Tischtennis)<br>SBEM Streichung mit Automatik (Tischtennis)<br>Datenschutzerklärung - Version 1.5</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Dezember 2019 (System Version 4.55)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2019_Dezember.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Mobile Nutzung - Automatisch Designanpassung<br>Mobile Nutzung - Verlinkung „Andere Verbände“ in der App<br>Training Check - Einbindung in Mein Bereich<br>Training Check - Leistungscheck<br>Anträge - Zeitgesteuert und Email Information<br>Anträge - Teilspielberechtigung<br>Werbeanzeigen - „Inline“ Werbeplätze<br>Werbeanzeigen - Mobile Werbung klar trennen<br>Werbeanzeigen - Verbesserte Größendarstellung<br>Balldifferenz bei Umwertung (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - November 2019 (System Version 4.54)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2019_November.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Mobile Nutzung<br>Erweiterung der Alterseinteilungen<br>Newsletter<br>Kennzeichnung Anwartschaft<br>Darstellung des „Balltyp“ (Tischtennis)<br>HTTPS Weiterleitung für Downloads<br>Spielklassenbezeichnung – Übermittlung zu click-tt<br>Live Spielbericht (Tischtennis)<br>Rechnungsmodul – Anzeige der Stichtag</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - September 2019 (System Version 4.53)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2019_September.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Mobile Nutzung - Vereinsverwaltung<br>Anträge – Spielerwechsel per An- und Abmeldung <br>Anträge – Zeitgesteuerte Durchführung<br>Anträge – Verbesserung der Erkennung von Spielern<br>Rechnungsverwaltung - Sammel-Strafenabrechnung<br>Rechnungsverwaltung - Sammel-Rechnungsstellung<br>Turniere - Darstellung Kampflos Spiele (Tischtennis)<br>Turniere - Darstellung Ersatzspieler (Tischtennis)<br>Tabellenberechnung Braunschweiger System</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Juli 2019 (System Version 4.52)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2019_Juli.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            LivePZ - Zeitpunkt des Stichtages (0h statt 24h)<br>LivePZ - Rangliste ohne doppelte Namen<br>Allgemein - Email-Angabe als Pflichtfeld bei Anmeldung/Wechsel <br>Allgemein - Berechtigung für Bearbeitung von Wettbewerben<br>Allgemein - Datumsfeld bei Geburtsdatum während Erstellung eines Nutzer-Account <br>Allgemein - Hinweis bei Datenübernahme in eine neue Saison<br>Allgemein - Löschung von Teams bei Zuordnung zu Wettspielgemeinschaft<br>Allgemein - Korrektur Genehmigung von SBEM Anträgen<br>Rechnungsverwaltung - Nummerierung von Rechnungen<br>Rechnungsverwaltung - Sammeldruck im Firefox <br>Rechnungsverwaltung - Rechnungen nur an aktive Vereine<br>Tischtennis - Anpassung der Meldeliste (TTVSH)<br>Tischtennis - Verbesserung des Export zu click-tt<br>Tischtennis - Spielleiter statt Ansprechpartner</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - April 2019 (System Version 4.51)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2019_April.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Einführung eines Responsive Designs für mobile Geräte</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Februar 2019 (System Version 4.50)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2019_Februar.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Training-Check 2.0<br>Kartenansicht für Sportstätten<br>Live Spielbericht – Erweiterung der Eingabeoptionen<br>Werbeeinblendungen getrennt für mobile Geräte<br>Erweiterung des Exportes der Vereins- und Mitgliederdaten<br>Interne Wechsel verbessert<br>Verbesserung des Termin-Planer (Tischtennis)<br>SSL Zertifikat für Web4Fussball<br>Weitere Werbeflächen<br>Erweiterung der Mannschaftsmeldung</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Dezember 2018 (System Version 4.49)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2018_Dezember.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Anbindung an DOSB LiMS<br>Datenschutz – Bericht über gespeicherte Daten<br>Hinweis zu Cookies<br>Verband-Speicherung bei App<br>Erweiterungen der Sonderberechtigung<br>BEB Anpassung<br>Karteneinbindung</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Oktober 2018 (System Version 4.48)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2018_Oktober.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            API Key für automatisierten Export von Verbandsdaten<br>Sammeldruck von Rechnungen<br>Anonymisierung von Mitgliedern<br>Finale Umsetzung - Newsletter und Emailzustellung<br>Erinnerung – Personenzuweisung für Funktionsträger<br>Live-Spielbericht Erweiterungen (Tischtennis)<br> Vorbericht für flexibles Spielsystem (Tischtennis)<br>LivePZ Verbesserungen (Tischtennis)<br>Überprüfung für Kampflosmeldung (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - August 2018 (System Version 4.47)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2018_August.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            LivePZ - Fixer Stichtag (Tischtennis)<br>Ankündigung: Personenzuweisung für Funktionsträger<br>Umbenennung: Staffelleiter und Staffel<br>Konfiguration für Teammeldung an Staffel-Verband binden<br>Email bei Abmeldung von Passiv<br>Bericht-Bestätigung (Tischtennis)<br>TT-Turnier Ansetzung in TurnierCenter (Tischtennis)<br>Auswahlfeld für Ballmarke (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Juni 2018 (System Version 4.46)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2018_Juni.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Update der Datenschutzerklärung<br>Datenschutzbestätigung bei Spieler-Anträgen<br>SSL Zertifikat – Automatische Weiterleitung<br>Sicherheit bei Export<br>Wussten sie schon ...<br>CMS – „Neu“ Kennzeichnung<br>Online Mailbox – 'Gesendet'<br>Newslettereinstellung – Info für Verband</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - April 2018 (System Version 4.45)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2018_April.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Newsletter und Emailzustellung<br>Änderung der Kontakt-Emailadresse und Account<br>LivePZ Stichtage (Tischtennis)<br>Live-Spielbericht - Schritt 2 (Tischtennis)<br>Automatische Endezeit im Bericht (Tischtennis)<br>PDF Spielbericht Vordruck (Tischtennis)<br>Hauptverein und Mitglieder<br>Einspielen von Backups (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Februar 2018 (System Version 4.44)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2018_Februar.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            SSL Zertifikat <br>Live-Spielbericht (Tischtennis)<br>Automatische Endezeit im Bericht (Tischtennis)<br>4 Überprüfung 2 Spiele gleichzeitig (Tischtennis)<br>Zeitplanung für Jugendanträge (Tischtennis)<br>IBAN und BIC in Bankdatenübersicht</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Dezember 2017 (System Version 4.43)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2017_Dezember.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            LivePZ Erweiterung (Tischtennis)<br>Live-Spielbericht – Stufe 1 (Tischtennis)<br>Presse-Spielbericht (Tischtennis)<br>Tabellen-Rechner (Tischtennis)<br>TT-TurnierCenter Doppel-Teilnehmer (Tischtennis)<br>RES bei Datenübernahme (Tischtennis)<br> Kennzeichnung für Werbe-Anzeigen</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Oktober 2017 (System Version 4.42)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2017_Oktober.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Separate Rechnungsanschrift<br>BEB – Erweiterung<br>Rechnungsmodul - Erweiterung<br>FVTT Spielbericht-Überprüfung<br>Newsletter - persönliche Anrede<br>Tischtennis - Tabellensortierung inkl. Bälle<br>Tischtennis - Telefonnummer vom Vertreter<br>Spielerwechsel und passiv im alten Verein<br>Sammelgenehmigung bei Abmeldungen</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - August 2017 (System Version 4.41)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2017_August.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Löschung von Dummy Nutzer-Accounts <br>Trainerverwaltung erweitert <br>Datenübernahme erweitert (Tischtennis)<br> LivePZ Statistik erweitert (Tischtennis)<br>Überprüfung 2 Spiele gleichzeitig (Tischtennis)<br>NES (Nachwuchsergänzungsspieler, Tischtennis)<br>Spieler-Vermerke nach Alterseinteilung (Tischtennis)<br>Fristen für Spielpläne (Tischtennis)<br>Export der Meldeliste (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Juni 2017 (System Version 4.40)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2017_Juni.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            BEB - Bestanderhebungsbogen (Zusatzmodul)<br>Diverse Tischtennis Anpassungen (9 verschiedene)<br>Erweiterung für Sportstätten<br>Spielerpass Anpassung<br>Erweiterung bei News und Terminen<br>Anpassungen für Turniere (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - März 2017 (System Version 4.39)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2017_März.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            LivePZ - Erweiterung der Verwaltung (Tischtennis)<br>Turnieranmeldung erweitert (Tischtennis)<br>Status der Teammeldung verbessert<br>Schiedsrichteransetzung (Fußball)<br>Vereinswechsel von passiven Mitgliedern<br>Punkterechnung erweitert (Schießen)<br>Erweiterung Dateianhänge für News und Termine<br>Erweiterung für Meldeliste-Export (Tischtennis)<br>Verfeinerung Anzeige von SPV (Tischtennis)<br>Live-Spielbericht</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Dezember 2016 (System Version 4.38)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2016_Dezember.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Anzeige von Bällen in der Tabelle und Bericht (Tischtennis)<br>Import von TTR-Werten<br>Sportstättenbelegung (Teil 2)<br>Trennung von Nutzern und Mitgliedern<br>Verbesserung der Funktion von Eingabefeldern<br>Aufsichtsperson bei SBEM Anträgen<br>Datenübernahme mit variablem Teamstatus<br>Ankündigung – Live Spielbericht</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Oktober 2016 (System Version 4.37)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2016_Oktober.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Verbesserung der Email bei Spielverlegung<br>Spieltag Kennzeichnung Erweiterung (Tischtennis)<br>Erweiterung der iCal Kalender-Datei / Kalenderabo<br>Staffel-Newsletter auch an Jugendwarte<br>Verfügbarkeit der PDF-Genehmigung für Aufstellungen<br>Platzhalter für Pokalauslosung<br>Vereinsübergreifende Sportstättenzuweisung<br>Kapazität für Sportstätten angeben<br>Überprüfung für Sportstätten-Überbelegung<br>Sortierung bei Übersicht über Spiele</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Juli 2016 (System Version 4.36)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2016_Juli.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            System Handbücher<br>Sportart Volleyball<br>Verbesserung TT-TurnierCenter (Tischtennis)<br>Aufgegeben/Kampflos im Spielbericht (Tischtennis)<br>Erweiterung Turnierplaner (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Mai 2016 (System Version 4.35)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2016_Mai.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Mobile Apps<br>Teil-Spielberechtigungen<br>Einführung von regionalen Bereichen<br>Erweiterung der Sportstätten-Verwaltung<br>Erweiterung der Schiedsrichter-Verwaltung<br>Erweiterung der Spielgemeinschaften<br>Diverse Erweiterungen für Fussball<br>Zeitliche Freigabe von Spielen des Verbandes<br>Verbesserung von Robot-Kennzeichnungen<br>Suchfunktion für News und Termine</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Februar 2016 (System Version 4.34)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2016_Februar.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Neue Navigation für Touch (alle Bereiche)<br>SSL Zugriff erweitert<br>Schiedsrichteransetzung (Fußball)<br>TT-Turnier ErgebnisCenter Erweiterung (Tischtennis)<br>LivePZ Änderung der Initialisierung (Tischtennis)<br>Rechnungen an Personen<br>Cross-Origin Resource Sharing</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Dezember 2015 (System Version 4.33)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2015_Dezember.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Erweiterung TT-Turnier Ergebniscenter (Tischtennis)<br>Löschen von Teams durch Vereine<br>Newsletter-Versand mit 2 Anhängen<br>„Blaue Zettel“ bei Spielen mit Kommentaren<br>SPV bei Spielgemeinschaften (Tischtennis)<br>Zeitauswahl mit neuer Tool-Unterstützung<br>PDF Vordruck für Spielbericht erweitert (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Oktober 2015 (System Version 4.32)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2015_Oktober.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            TT-Turnier Ergebniscenter (Tischtennis)<br>Neue Navigation für Touch-Geräte<br>Tooltip für Touch-Geräte<br>LivePZ Anpassung (Tischtennis)<br>H2H Vergleich inkl. Turnierspiele (Tischtennis)<br>Vereins-Spielplan Excel-Export inkl. Pokalspiele<br>Einfache Bearbeitung des Mannschaftsführer-Vertreters</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Juli 2015 (System Version 4.31)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2015_Juli.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Sammelgenehmigung Antrag - 'Startberechtigt ab' setzen<br>LivePZ - Vereins Excel-Export erweitern um neue Stichtag<br>Turnierergebnisse mit Gruppen-Tabellen</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Mai 2015 (System Version 4.30)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2015_Mai.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Getrennte Berechtigung für Vereins- und Abteilungsdaten<br>Doppelte Aufnahme von Sparten gleicher Sportart<br>Live Webstatistiken über Zugriffe<br>LivePZ Anpassung April 2015 (Tischtennis)<br>Doppelanmeldung beim Turnierplaner (Tischtennis)<br>Turnierklassen-Wertung und Anzeige (Tischtennis)<br>Erweiterung des Spielbericht Vordruckes (Tischtennis)</div>
+		    
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - März 2015 (System Version 4.29)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2015_März.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Neue Mailserver - STARTTLS<br>Änderung der LivePZ Stichtage (Tischtennis)<br>Flexible der Übernahme/Anzeige von LivePZ Werten (Tischtennis)<br>Check für Teams (Vorrunde/Rückrunde im Tischtennis)<br>Erweiterung der Webstatistiken<br>Erweiterung der Online Turnieranmeldung (Tischtennis)<br>Sperrvermerk-Anzeige auf Teamseite (Tischtennis)<br>Speichern-Abfrage beim Verlassen der Seite<br>Teamwünsche bei Datenübernahme</div>
+		    
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Januar 2015 (System Version 4.28)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2015_Januar.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Neue Webstatistiken über Seitenzugriffe<br>Neue Sportart: Tennis<br>Neue Sportart: Bowling<br>Neue Sportart: Schießen<br>Kopierfunktion für Konfigurations-Berechtigung<br>Verbandsberechtigung auf Tabs aufteilen</div>
+		    
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Dezember 2014 (System Version 4.27)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2014_Dezember.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Neue Email-Adresse für Emails vom System<br>Passwort-Schutz<br>Passwort-Schutz<br>Newsletter an Trainer und Schiedsrichter<br>Erweiterung der Verbands-Berechtigung<br>Mahngebühren optional bei Zahlungserinnerung<br>Vereins- und Heimspielplan verbessert<br>Neue Team-Matrix Analyse (Tischtennis)<br>LivePZ Anpassung (Tischtennis)<br>Unterscheidung „Spielplan“ und „Wettkampfplan“<br>Neue Art der Speicherung von Webstatistiken</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - August 2014 (System Version 4.26)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2014_August.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Nutzererreichbarkeit auf Sportart beschränkt<br>Spiele in Ferien (Tischtennis)<br>LivePZ Anpassung (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Juli 2014 (System Version 4.25)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2014_Juli.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Turnier-KO Phase als Bild darstellen (Tischtennis)<br>LivePZ bei XML-Export der Team-Bilanz mit anzeigen (Tischtennis)<br>Newsletter an Trainer und Schiedsrichter<br>Eingrenzung der TT-Turnier Spielerliste nach Altersbereichen (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Juni 2014 (System Version 4.24)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2014_Juni.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Zusätzliche Angaben für Jugendfreigabe (Tischtennis)<br>Erweiterung des Turnierplaners (Tischtennis)<br>Korrektur des Spielberichtes (Tischtennis)<br>Infomail bei 5-maliger Nichtteilnahme (Tischtennis)<br>LivePZ Abwertung bei Inaktivität (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Mai 2014 (System Version 4.23)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2014_Mai.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Schnittstelle zu click-tt (Tischtennis Vereinssport)<br>Auswahl des Balltypes (Tischtennis)<br>Erweiterungen für Spielbericht (Tischtennis)<br>Paging für Suchergebnisse<br>Neue Kalenderansicht für Termine<br>Regelung für Anzeige von News und Terminen<br>Export der Spielerliste nach TT-Turnier 5 für Vereine (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - März 2014 (System Version 4.22)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2014_März.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Datenschutzerklärung<br>Datenschutz - Information an Nutzer<br>Datenschutz - Ältere Historie ausblendbar<br>Datenschutz - SSL gesicherter Zugang zur Verwaltung<br>Datenschutz - Social Media Buttons umgestaltet<br>Neuer Rich-Text-Editor<br>Termin-Planer Update<br>Turnierplaner Update</div>
+		    
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Januar 2014 (System Version 4.21)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2014_Januar.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Tippspiel<br>Erweiterung LivePZ (Tischtennis)<br>Erweiterung Terminplaner (Tischtennis)<br>Erweiterung Turnieranmeldung (Tischtennis)</div>
+		    
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Oktober 2013 (System Version 4.20)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2013_Oktober.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Web4Sport WebApp - Version 2<br>Hinweis zur Passwortänderung<br>Hallenplan erweitern<br>Nutzer 'Zuordnung' zu einem Verband</div>
+		    
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Juli 2013 (System Version 4.19)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2013_Juli.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Erweiterung Turnierplaner (Tischtennis)<br>Link auf andere Ergebnisseiten<br>CMS – Bewertungsskala bei Umfrage erweitert</div>
+		    
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Juni 2013 (System Version 4.18)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2013_Juni.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Windows Store App (für Windows 8 und Windows RT)<br>Team Terminplanung (Tischtennis)<br>Farbcode-Anpassung bei Anträgen<br>LivePZ Funktionsanpassungen (Tischtennis)<br>Umwertung und Kampfloswertung (Tischtennis)<br>Turnieranmeldungen löschen (Tischtennis)<br>Bessere Darstellung für Alterseinteilungen<br>Erweiterung der Schiedsrichter-Ansicht<br>LivePZ Export für Bezirke etc. erweitert</div>
+		    
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Mai 2013 (System Version 4.17)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2013_Mai.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            LivePZ - Turnierergebnisse online eintragen (Tischtennis)<br>LivePZ - Tageswertung anpassen (Tischtennis)<br>Spielerkennzeichnung in Aufstellung für Von-Bis Werte<br>Tischtennis Training check<br>ESB-Antrag-Anpassung (TTVSH)</div>
+		    
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - April 2013 (System Version 4.16)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2013_April.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            LivePZ Erweiterung (Tischtennis)<br>Team Übersicht in Verbandsverwaltung<br>Turnieranmeldung - Mail an Veranstalter auf Wunsch<br>Neue Startseite-Box - Funktionäre<br>Bearbeitung der Spieler-Mitgliedernummer für den Verein<br>Start-Status für Teams vom Verband festlegbar<br>Turniere-LivePZ auch auf 4 Gewinnsätze (Tischtennis)<br>BKV Köln Bilanz Berechnung (Tischtennis)<br>Teamstatistik Export auf LivePZ umgestellt (Tischtennis)</div>
+		    
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Februar 2013 (System Version 4.15)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2013_Februar.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Web4Sport-Mobil<br>Neues Design für Spielerbild<br>Anmeldeprozedur für geschützte Dokumente<br>Spielerdubletten zusammenführen<br>Erweiterung Spieleranmeldung / Spielerwechsel<br>LivePZ Update (Tischtennis)<br>Unterschiedliche Anfangszeiten (Kegeln)<br>Kampfloswertung variabel (Fußball)</div>
+		    
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Januar 2013 (System Version 4.14)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2013_Januar.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            LivePZ Berechnung (Tischtennis)<br>Ehrungsmodul (Zusatzmodul)<br>Spielbericht-Analyse erweitert (Tischtennis)<br>Turnierplaner erweitert (Tischtennis)<br>Login bei Kontaktdaten-Ansicht</div>
+		    
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - November 2012 (System Version 4.13)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2012_November.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            LivePZ Berechnung (Tischtennis)<br>WordPress Plugin (Tischtennis)<br>Android App (Tischtennis)<br>Übersicht über Mannschaftsphotos (Tischtennis)<br>Spielberechtigung-Text (Tischtennis)<br>Rechnungszusatztext<br>PDF-Querformat für Spielematrix (Kegeln)</div>
+		    
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Oktober 2012 (System Version 4.12)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2012_Oktober.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Verwaltung von Personen / doppelte Personen<br>Doppelpartner bei Turnieren (Tischtennis)<br>Begriff für die Sortierung von Vereinen<br>Mitgliederexport in das CSV Format<br>Modernisierung von News und Terminen<br>Spieler-Bilanzen in Team-XML-Export (Tischtennis)</div>
+		    
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - September 2012 (System Version 4.11)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2012_September.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Team-Analyse (Tischtennis)<br>Spiel-Analyse (Tischtennis)<br>Drag&amp;Drop mit Touch-Geräten<br>Zeitspanne beim Spielplangenerator<br>Benachrichtigung bei Team-Meldung<br>Informationsemail bei Berichtsmeldung (Tischtennis)<br>Google-Maps Integration angepasst<br>Handbuch-Update</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Juli 2012 (System Version 4.10)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2012_Juli_Neu.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            News und Termine in Verbänden einbinden<br>Joomla - Module (Tischtennis)<br>Alternative Karte für Sporthallen<br>Alle Teams des Verbandes bei 'Neues Spiel' wählbar<br>Anträge als 'bezahlt' kennzeichnen<br>Doppel-Aufstellung vorschlagen (Tischtennis)<br>Alterskontrolle in Aufstellungen (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Mai 2012 (System Version 4.9)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2012_Mai.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Berichtsüberprüfung deaktivieren (Tischtennis)<br>Spielbezeichnung für Pokalwettbewerbe (Tischtennis)<br>Turnieranmeldung-Emailbestätigung (Tischtennis)<br>Neues Handbuch (Fußball)<br>Backup und Kopiefunktion (Fußball)<br>Hauptverein zuweisen zu Verband (Gesamtsport)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - April 2012 (System Version 4.8)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2012_April.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Interne Aufgaben (Bestandteil von CMS Premium)<br>Neues modernes System-Design<br>Newsletter-Funktion erweitert<br>Alternativer Turnier-Genehmigungsprozess (Tischtennis)<br>Anzahl Zuschauer bei einem Spiel (Tischtennis)<br>Links bei „Spielberechtigung verloren“ Emails (Tischtennis)<br>Rangliste-Update und Spiele-Matrix  (Kegeln)<br>News und Termine auf der Startseite<br>Standardfilter für Vereine in der Verbandsverwaltung<br>Information über Saisonende</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - März 2012 (System Version 4.7)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2012_März.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            CMS – Content Management System (Premium Version)<br>Spielerpass<br>Kennzeichnung als Vereinsspieler<br>Neues Seitendesign hinzugefügt<br>Überprüfung für neue Spielernummer<br>Wettbewerb als „Saisonende“ kennzeichnen<br>Revidierte Strafen löschen<br>Überprüfung doppelte Aufstellung (Tischtennis)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Februar 2012 (System Version 4.6)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2012_Februar.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            CMS – Content Management System (Advanced Version)<br>Verschlüsselte Anzeige von Email-Adressen<br>Berechtigung für Bearbeitung von Wettbewerben<br>Sonderberechtigung - Person direkt aufnehmen<br>Erweiterung der Überprüfung des Tischtennis-Spielberichtes<br>Turniere – Filterung von eigenen Turnieren<br>Email Information bei Spielkommentaren<br>Tischtennis - Änderung bei der Staffel-Startseite<br>Tischtennis - Export für Gesamtrangliste einer Staffel<br>Tischtennis – Spieler Analyse, Statistik Nr. 9<br>Sortiermöglichkeit bei Spielübersicht<br>Bessere Anzeige der Icons in der öffentlichen Navigation</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Januar 2012 (System Version 4.5)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2012_Januar.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            CMS – Content Management System<br>Soziale Netzwerke (Facebook, Google+, Twitter)<br>Tischtennis Paarkreuztabelle<br>Mannschaftsphoto<br>Entwickler-Community<br>Spielerkennzeichnung / Sperren<br>Icons in der Kopfzeile von öffentlichen Seiten<br>Erweiterte Einstellung für Sonderberechtigung<br>Sortiermöglichkeit für Tischtennis Ranglisten</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Dezember 2011 (System Version 4.4)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2011_Dezember.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Erweiterte Tischtennis Spielerstatistiken<br>RSS Feeds<br>Neue Icons in der Navigationsleiste<br>Turniere kopieren<br>Übersicht über Updates</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - November 2011 (System Version 4.3)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2011_November.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Überprüfung von Meldefristen (Zusatzmodul)<br>Übersicht über Zusatzmodule<br>Exporte für Trainer und Schiedsrichter<br>Spielbericht (Vergleich und Vordruck)<br>Verlinkungen<br>Handbücher<br>Neue Darstellung der Fieberkurven-Tabelle</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - September 2011 (System Version 4.2)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2011_September.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            "Personen vereinen" für Vereine<br>Korrektur von Spielberichten<br>Sonderkennzeichnung für Teams in anderen Alterseinteilungen<br>Sperrvermerke durch den Verein<br>Anzeige von Sperrvermerken<br>Turnierveröffentlichungen</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - August 2011 (System Version 4.1)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2011_August.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Sonderzugang zu Vereinen<br>Berechtigung für Konfiguration</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Juli 2011 (System Version 4.01)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2011_Juli.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            Bearbeitung von HES und M/W<br>Nachträgliche Anpassung der Aufstellung<br>Bilder bei News und Terminen<br>Vereinswappen<br>Bilder für Sporthallen<br>Portraitbild für Personen (Spieler und Nutzer)</div>
+
+            <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-plus"></span><a href="#">Update - Mai 2011 (System Version 4.0)</a></h3>
+            <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none;"><div style="float:right"><a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Updates_2011_Mai.pdf"><img src="/Resource/img/icon_pdf.png"></a></div>
+            System Upgrade von Version 3 auf Version 4<br>Komplettes Redesign<br>Erweiterte Spielerhistorie<br>Eine Oberfläche für Verwaltung und Ergebnisdienst<br>Flexible Konfiguration und Benachrichtigungen<br>... und vieles anderes</div>
+            
+            </div>
+            
+        </div>
+
+		<div id="tabs-Handbuch" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+            <div class="CONTENTTEXTTOP">Für Anwender</div>
+            <br>
+		    <div style="padding-left:20px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Benutzerleitfaden_V1_3.pdf">Web4Sport Benutzerleitfaden (Version 1.3)</a></div>
+		    <div style="padding-left:20px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Web4Sport_Vereinsverwaltung_V1_3.pdf">Web4Sport Vereinsverwaltung (Version 1.3)</a></div>
+		    <br>
+		    <div style="padding-left:20px" class="CONTENTTEXT">Nur für Tischtennis:</div>
+		    <div style="padding-left:40px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Tischtennis_Meldung_eines_Spielberichtes_V1_1.pdf">Anleitung zur Meldung des Spielberichtes (Version 1.1)</a></div>
+		    <div style="padding-left:40px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Tischtennis_Vereinsverwaltung_V1_3.pdf">TischtennisLive Vereinsverwaltung (Version 1.3)</a></div>
+		    <br>
+		    <div style="padding-left:20px" class="CONTENTTEXT">Nur für Fußball:</div>
+		    <div style="padding-left:40px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Fussball_Vereinsverwaltung_V1_3.pdf">Web4Fußball Vereinsverwaltung (Version 1.3)</a></div>
+		    <br>
+		    <div style="padding-left:20px" class="CONTENTTEXT">Nur für Kegeln:</div>
+		    <div style="padding-left:40px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Kegeln_Vereinsverwaltung_V1_3.pdf">Web4Kegeln Vereinsverwaltung (Version 1.3)</a></div>
+		    <br>
+		    <div style="padding-left:20px" class="CONTENTTEXT">Nur für Bowling:</div>
+		    <div style="padding-left:40px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Bowling_Vereinsverwaltung_V1_3.pdf">Web4Bowling Vereinsverwaltung (Version 1.3)</a></div>
+            <br>
+		    <div style="padding-left:20px" class="CONTENTTEXT">Nur für Schiessen:</div>
+		    <div style="padding-left:40px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Schiessen_Vereinsverwaltung_V1_3.pdf">Web4Schiessen Vereinsverwaltung (Version 1.3)</a></div>
+		    <br>
+		    <div style="padding-left:20px" class="CONTENTTEXT">Nur für Tennis:</div>
+		    <div style="padding-left:40px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Tennis_Vereinsverwaltung_V1_3.pdf">Web4Tennis Vereinsverwaltung (Version 1.3)</a></div>
+		    <br>
+		    <div style="padding-left:20px" class="CONTENTTEXT">Nur für Volleyball:</div>
+		    <div style="padding-left:40px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Volleyball_Vereinsverwaltung_V1_3.pdf">Web4Volleyball Vereinsverwaltung (Version 1.3)</a></div>
+            
+            
+            <br>
+            <br>
+            
+            <div class="CONTENTTEXTTOP">Für den Verband</div>
+            <br>
+		    <div style="padding-left:20px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Web4Sport_Verbandsverwaltung_V1_3.pdf">Web4Sport - Verbandsverwaltung (Version 1.3)</a></div>
+		    <div style="padding-left:20px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Web4Sport_TechnischeDokumentation_V1_3.pdf">Web4Sport - Technische Dokumentation (Version 1.3)</a></div>
+            <div style="padding-left:20px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Zusatzmodule.pdf">Web4Sport - Zusatzmodule</a></div>
+		    <br>
+		    <div style="padding-left:20px" class="CONTENTTEXT">Nur für Tischtennis:</div>
+		    <div style="padding-left:40px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Tischtennis_Verbandsverwaltung_V1_3.pdf">TischtennisLive - Verbandsverwaltung (Version 1.3)</a></div>
+		    <br>
+		    <div style="padding-left:20px" class="CONTENTTEXT">Nur für Fußball:</div>
+		    <div style="padding-left:40px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Fussball_Verbandsverwaltung_V1_3.pdf">Web4Fußball - Verbandsverwaltung (Version 1.3)</a></div>
+		    <br>
+		    <div style="padding-left:20px" class="CONTENTTEXT">Nur für Kegeln:</div>
+		    <div style="padding-left:40px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Kegeln_Verbandsverwaltung_V1_3.pdf">Web4Kegeln - Verbandsverwaltung (Version 1.3)</a></div>
+		    <br>
+		    <div style="padding-left:20px" class="CONTENTTEXT">Nur für Bowling:</div>
+		    <div style="padding-left:40px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Bowling_Verbandsverwaltung_V1_3.pdf">Web4Bowling - Verbandsverwaltung (Version 1.3)</a></div>
+		    <br>
+		    <div style="padding-left:20px" class="CONTENTTEXT">Nur für Schiessen:</div>
+		    <div style="padding-left:40px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Schiessen_Verbandsverwaltung_V1_3.pdf">Web4Schiessen - Verbandsverwaltung (Version 1.3)</a></div>
+		    <br>
+		    <div style="padding-left:20px" class="CONTENTTEXT">Nur für Tennis:</div>
+		    <div style="padding-left:40px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Tennis_Verbandsverwaltung_V1_3.pdf">Web4Tennis - Verbandsverwaltung (Version 1.3)</a></div>
+		    <br>
+		    <div style="padding-left:20px" class="CONTENTTEXT">Nur für Volleyball:</div>
+		    <div style="padding-left:40px"><img src="/Resource/img/Right.png" height="12px"> <a href="http://www.HenkeSoftware.com/downloads/Web4Sport/Volleyball_Verbandsverwaltung_V1_3.pdf">Web4Volleyball - Verbandsverwaltung (Version 1.3)</a></div>
+		    <br>
+		    <br>
+        </div>
+
+		<div id="tabs-Zusatz" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+		
+            Zusatzmodule bieten eine erweitere Funktionalität für das System, die über die Basisfunktionen hinausgehen. Diese Funktionen wurden bewußt nicht in das System-Basispaket aufgenommen, um das System zu einem günstigen Preis anbieten zu können. Warum sollten sie für eine Zusatzfunktion zahlen, die sie vielleicht gar nicht benötigen?<br><br>Nachfolgend finden sie eine Auflistung der verschiedenen Zusatzmodule. Wir entwickeln das System ständig weiter und es werden weitere Module hinzu kommen. Wenn sie Interesse an einem Modul haben, wenden sie sich bitte an Henke Software.
+            <br><br>
+            
+            <div align="center">
+                <img src="/Resource/img/Right.png" height="12px"> <a href="http://www.htts.de/downloads/Web4Sport/Web4Sport_Zusatzmodule.pdf">Detailierte Beschreibung zu allen Zusatzmodulen (PDF)</a>
+            </div>
+            <br>
+            <br>
+
+            <div class="ui-widget-header" style="padding:3px">Rechnungsmodul</div>
+            <div style="padding:3px">Mit dem Rechnungsmodul erhalten sie die Möglichkeit, Verbandsrechnungen zu erstellen und an die Vereine zu schicken. Für diese Rechnungen können sie Vorlagen definieren und das System automatisch entsprechende Werte berechnen lassen. (beispielsweise Anzahl der Mannschaften, Anzahl von Spieleranmeldungen, etc.). Die Rechnung wird im System angelegt und als PDF-Dokument an den Verein per Email geschickt. Ein erweitertes Mahnverfahren rundet diesen Bereich ab.</div>
+            <br>
+            
+            <div class="ui-widget-header" style="padding:3px">Werbemodul</div>
+            <div style="padding:3px">Mit dem Werbemodul haben sie die Möglichkeit, Werbeeinblendungen auf den System-Seiten zu schalten, und auf diesem Wege Einnahmen zu generieren. Es sind 4 Plätze für Einblendungen vorgesehen, die sie individuell mit Einblendungen belegen können (Top-Banner, Sky-Scrapper, Inline-Banner, Navigations-Banner). Für jeden dieser Plätze können sie entweder ein Script hinterlegen, oder sie können ein Bild/Objekt auf den Server laden und dieses mit einem Weiterleitungslink versehen.</div>
+            <br>
+
+            <div class="ui-widget-header" style="padding:3px">Meldefristen</div>
+            <div style="padding:3px">Über Meldefristen können sie Deadlines festlegen, bis wann Spiele gemeldet werden müssen. Das System unterscheidet hierbei nach Meldung des Endergebnisses, Meldung des Berichtes und Bestätung des Berichtes. Das System ermittelt automatisch, wenn eine Frist nicht eingehalten wurde und bereitet eine Strafe vor. Die Fristen können stundenbasiert (relativ zum Spielbeginn) oder tagesbasiert (24 Uhr) festgelegt werden.</div>
+            <br>
+
+            <div class="ui-widget-header" style="padding:3px">CMS - Content Management System</div>
+            <div style="padding:3px">Das Content-Management-System (CMS) gibt Ihnen die Möglichkeit, den öffentlichen Bereich des System nach eigenen Wünschen zu erweitern. Somit gibt es die Möglichkeit, Informationsseiten zu veröffentlichen, Berichte und Bilder-Galerien anzulegen, Umfragen zu starten und vieles mehr. Das CMS wird in 3 Stufen angeboten:<br>1. Standard<br>2. Advanced (inkl. 100MB Speicherplatz)<br>3. Premium (inkl. 150MB Speicherplatz)</div>
+            <br>
+
+            <div class="ui-widget-header" style="padding:3px">LivePZ - Leistungsberechnung (Tischtennis)</div>
+            <div style="padding:3px">Mit LivePZ stellen wir eine fortlaufende Berechnung der Spielstärke bereit. Die LivePZ-Berechnung orientiert sich an dem ELO Prinzip und folgt den gleichen Berechnungsgrundlagen wie die TTR-Berechnung von myTischtennis. Die Integraiton erfolgt in 4 Schritten:<br>Schritt 1: Keine Aktivierung<br>Schritt 2: Ansicht nur durch versteckte Links<br>Schritt 3: Ansicht in der Verbandsverwaltung<br>Schritt 4: Öffentliche Ansicht</div>
+            <br>
+
+            <div class="ui-widget-header" style="padding:3px">Ehrungsmodul</div>
+            <div style="padding:3px">Über das Ehrungsmodul können sie Ehrungen für Mitglieder und andere Personen vornehmen und diese auch über die Seite veröffentlichen. Zusätzlich können Anträge über die Vereinsverwaltung auch von Vereinsfunktionären beantragt werden. Die Art der verfügbaren Ehrungen können sie individuell festlegen und nach Ihren Anforderungen definieren.</div>
+            <br>
+
+            <div class="ui-widget-header" style="padding:3px">Click-TT Schnittstelle</div>
+            <div style="padding:3px">Über dieses Modul bieten wir den Schittstellen-Export an, mit dem die Staffeldaten und Spielergebnisse nach click-tt exportiert werden können, um die Daten in die TTR-Rangliste einfließen zu lassen.</div>
+            <br>
+
+            <div class="ui-widget-header" style="padding:3px">BEB - Bestandserhebungsbogen</div>
+            <div style="padding:3px">Mit dem BEB kann der Verband mit den Vereinen in Kontakt treten, um eine Erfassung des Bestandes zu bekommen. Hierbei erhält der Verein ein Formular zur Erfassung der Mitglieder (und anderer Daten), wobei der Verband verschiedene Werkzeuge zur Auswertung erhält.</div>
+            <br>
+
+        </div>
+
+		<div id="tabs-Preis" class="CONTENTTEXT ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+    		Web4Sport ist ein Produkt, dass sich an Verbände von verschiedenen Sportarten richtet. Jeder Verband hat hierbei seine Besonderheiten, so dass eine pauschale Preisinformation nicht gegeben werden kann. Der Preis richtet sich  generell nach der Größe des jeweiligen Verbandes, die i.d.R. nach der Anzahl der Wettbewerbe ermittelt wird, alternativ auch nach der Anzahl der Mitglieder.<br><br>
+    		Bitte kontaktieren sie uns mit einer Information zu Ihrem Verband und Ihren Wünschen für eine Umsetzung, so dass wir mit Ihnen die Umsetzung planen und ein finanzielles Angebot erstellen können.<br><br>
+    		Lassen sie sich überraschen, wie gering der Preis für Sie am Ende ausfällt.<br><br>
+    		
+            <div align="center">
+    			<img src="/Resource/img/Right.png" height="14px"> <a href="?Page=Bestellung&amp;Typ=Web4Sport" class="CONTENTTEXTTOP">Hier können sie mit uns Kontakt aufnehmen</a>
+    		</div><br>
+			<br>
+			
+			Gerne richten wir Ihnen auch ein <strong>kostenfreies Testsystem</strong> ein, mit dem sie den Umfang und die Funktionen des Systems in Ruhe ausprobieren können.
+    		
+        </div>
+
+
+    </div>
+
+    <!-- Bilder Galerie ---------------- -->
+    <div id="GalDiv" style="display: block; margin-left: 50px;" align="center">
+        <div class="BildGal" style="width: 250px; max-height: 190px; background-color: white; border-radius: 5px; box-shadow: black 0px 0px 20px; visibility: visible; overflow: hidden; position: relative; z-index: 2; left: 0px;">
+        <ul style="margin: 0px; padding: 0px; position: relative; list-style-type: none; z-index: 1; width: 1750px; left: -250px;"><li style="overflow: hidden; float: left; width: 250px; height: 14px;"><a class="pirobox_gall last" href="/Resource/img/Web4Sport/Wettbewerb.jpg" title="Wettbewerb-Startseite" rel="5&amp;nbsp;of&amp;nbsp;5" rev="41"><img src="/Resource/img/Web4Sport/Wettbewerb.jpg" alt="" width="250"></a></li>
+            <li style="overflow: hidden; float: left; width: 250px; height: 14px;"><a class="pirobox_gall first" href="/Resource/img/Web4Sport/Startseite.jpg" title="Startseite eines Verbandes" rel="1&amp;nbsp;of&amp;nbsp;5" rev="37"><img src="/Resource/img/Web4Sport/Startseite.jpg" alt="" width="250" border="0"></a></li>
+            <li style="overflow: hidden; float: left; width: 250px; height: 14px;"><a class="pirobox_gall" href="/Resource/img/Web4Sport/News.jpg" title="Anzeige von News" rel="2&amp;nbsp;of&amp;nbsp;5" rev="38"><img src="/Resource/img/Web4Sport/News.jpg" alt="" width="250"></a></li>
+            <li style="overflow: hidden; float: left; width: 250px; height: 14px;"><a class="pirobox_gall" href="/Resource/img/Web4Sport/Links.jpg" title="Veröffentlichte Links zu anderen Seiten" rel="3&amp;nbsp;of&amp;nbsp;5" rev="39"><img src="/Resource/img/Web4Sport/Links.jpg" alt="" width="250"></a></li>
+            <li style="overflow: hidden; float: left; width: 250px; height: 14px;"><a class="pirobox_gall" href="/Resource/img/Web4Sport/Spieluebersicht.jpg" title="Übersicht über Spiele" rel="4&amp;nbsp;of&amp;nbsp;5" rev="40"><img src="/Resource/img/Web4Sport/Spieluebersicht.jpg" alt="" width="250"></a></li>
+            <li style="overflow: hidden; float: left; width: 250px; height: 14px;"><a class="pirobox_gall last" href="/Resource/img/Web4Sport/Wettbewerb.jpg" title="Wettbewerb-Startseite" rel="5&amp;nbsp;of&amp;nbsp;5" rev="41"><img src="/Resource/img/Web4Sport/Wettbewerb.jpg" alt="" width="250"></a></li>
+        <li style="overflow: hidden; float: left; width: 250px; height: 14px;"><a class="pirobox_gall first" href="/Resource/img/Web4Sport/Startseite.jpg" title="Startseite eines Verbandes" rel="1&amp;nbsp;of&amp;nbsp;5" rev="37"><img src="/Resource/img/Web4Sport/Startseite.jpg" alt="" width="250" border="0"></a></li></ul>
+        </div>
+        <img src="/Resource/img/pixel.gif" width="1px" height="8px"><br>
+        <a href="#" class="prev"><img src="/Resource/img/left.png"></a>
+        <a href="#" class="next"><img src="/Resource/img/Right.png"></a>
+    </div>
+    
+    <div style="clear:both" ;=""></div>
+
+    <script type="text/javascript">
+        $(function() {
+            $("#GalDiv").css({ display: "block" })
+            $("#accordion_Update").accordion({ autoHeight: false, icons: { 'header': 'ui-icon-plus', 'headerSelected': 'ui-icon-minus'} });
+            $("#tabs").tabs();
+            $(".BildGal").jCarouselLite({
+                btnNext: ".next",
+                btnPrev: ".prev",
+                visible: 1,
+                auto: 8000
+            });
+        });
+    </script>
+
+
+
+</div>
+
+
+
+        <div id="footer" class="CONTENTTEXT" style="width:280px; margin-bottom:15px; right:0px; height:28px; padding:5px; background-image:url(/Resource/img/Trans.png); border-left-radius:15px; -moz-box-shadow: 0 0 20px black; -webkit-box-shadow: 0 0 20px black; box-shadow: 0 0 20px black;" align="right">
+        <div style="float:right; padding-right:10px;"><img src="/resource/img/comodo_secure_seal_76x26_transp.png" title="Comodo SSL Zertifikat"></div>
+        <div style="float:right; vertical-align: top; padding:5px; padding-right:15px;" class="CONTENTTEXT"><a href="?Page=Impressum">Impressum</a></div>
+        <div style="float:right; vertical-align: top; padding:5px; padding-right:20px;" class="CONTENTTEXT"><a href="?Page=Datenschutz">Datenschutz.</a></div>
+    </div>
+</div>
+
+
+<div class="piro_overlay" style="display: none; opacity: 0.3; height: 16418px;"></div><table class="pirobox_content" cellpadding="0" cellspacing="0" style="display: none;"><tbody><tr><td colspan="3" class="pirobox_up"><a href="#close" class="piro_close" title="close"></a></td></tr><tr><td class="t_l"></td><td class="t_c"></td><td class="t_r"></td></tr><tr><td class="c_l"></td><td class="c_c"><span><span></span></span><div></div></td><td class="c_r"></td></tr><tr><td class="b_l"></td><td class="b_c"></td><td class="b_r"></td></tr><tr><td colspan="3" class="pirobox_down"><div class="piro_nav"><div class="caption"></div></div><a href="#play" class="play" title="play slideshow" style="display: none;"></a><a href="#prev" class="piro_prev" title="previous image"></a><a href="#next" class="piro_next" title="next image"></a></td></tr></tbody></table><div id="imgCache" style="display:none"><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Startseite.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/News.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Links.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Spieluebersicht.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Wettbewerb.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verband_Start.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verband_Berechtigung.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verband_Benachrichtigung.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verband_Konfiguration.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verband_Zeitplanung.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verband_Vereine.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verband_Mitglied.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verband_Antraege.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verband_Funktion.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verband_News.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verband_Newsletter.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verband_Rechnung.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verein_Start.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verein_Daten.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verein_Mitglieder.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verein_Mannschaften.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verein_Berechtigungen.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Mein_Start.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Mein_Daten.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Mein_Berechtigung.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Mein_Mailbox.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Design_1.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Design_2.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Design_3.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Design_4.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Design_5.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Design_6.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Design_7.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/News.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verband_News.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Verband_Newsletter.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Links.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Startseite.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/News.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Links.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Spieluebersicht.jpg&quot;);"></div><div style="background: url(&quot;https://www.tischtennislive.de/Resource/img/Web4Sport/Wettbewerb.jpg&quot;);"></div></div></body></html>

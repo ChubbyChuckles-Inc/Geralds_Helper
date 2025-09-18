@@ -142,12 +142,11 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
         btn_reminder.clicked.connect(self._on_add_reminder)
         self._search.textChanged.connect(self._refresh)
         self._all_dates.stateChanged.connect(self._refresh)
-
-    # periodic reminder check (every 2 seconds)
-    self._reminder_timer = QTimer(self)
-    self._reminder_timer.setInterval(2000)
-    self._reminder_timer.timeout.connect(self._check_reminders)
-    self._reminder_timer.start()
+        # periodic reminder check (every 2 seconds)
+        self._reminder_timer = QTimer(self)
+        self._reminder_timer.setInterval(2000)
+        self._reminder_timer.timeout.connect(self._check_reminders)
+        self._reminder_timer.start()
 
     # Data helpers
     def _refresh(self):

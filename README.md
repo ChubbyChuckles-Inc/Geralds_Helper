@@ -11,6 +11,37 @@ This project is an evolving Table Tennis Team Management Tool featuring:
 - Optimization engine for lineup strength and availability (foundational version implemented)
 - Deterministic test suite and modular architecture adhering to repository "Copilot Instructions"
 
+Recent notable additions:
+
+- Match reminders with timer-driven popup notifications (in-memory)
+- Aggregate match statistics panel (wins / draws / losses + goals)
+- Scenario history for optimization runs with markdown export & preset save/load
+- Defensive GUI launcher with clearer diagnostics for PyQt6/platform plugin issues
+- Initial league scraping framework (club teams, divisions, match schedules)
+  - Extended: score parsing, player roster extraction (LivePZ), caching, Match model conversion (`scripts/scrape_club.py`).
+
+### NEW: GUI Team Selection & Auto Roster Loading
+
+You can now populate the Players tab directly from a scraped club team roster:
+
+1. Click `Load Team…` in the Players tab toolbar.
+2. Enter the full club overview URL (the page that lists all your club teams).
+3. (Optional) Provide a saved offline HTML snapshot via `Club HTML…` for deterministic offline parsing.
+4. Click `Fetch Teams` – a list of club teams appears.
+5. Select the desired team and press `Load Roster`.
+6. The Players table is replaced with parsed players; `LivePZ` values become `Q-TTR` (fallback 1200 if missing).
+
+Notes:
+
+- The dialog currently performs synchronous network requests (sufficient for small pages); future async/threaded loading can be added if needed.
+- Match report / division schedule integration is planned for a later enhancement.
+- To override a single team page with an offline file, extend the dialog (placeholder variable `_team_html_path`).
+
+Troubleshooting:
+
+- If no teams are parsed, confirm the URL is the club overview page containing "Zum Team" links.
+- Live site variability (dynamic content or auth) may require providing an offline snapshot until authenticated/XHR scraping is implemented.
+
 ## Setup Instructions
 
 This template automates the setup of a new Python project. Follow these steps to initialize a new project after cloning or using this template.
@@ -74,6 +105,8 @@ GUI preview features:
 - Theme switching (light/dark) via `config/app_settings.json`
 - Splash screen + window size persistence
 - Offscreen-friendly tests (`QT_QPA_PLATFORM=offscreen`)
+
+Important: Always run the GUI using the virtual environment interpreter. If you see an error like `ModuleNotFoundError: No module named 'PyQt6'` you likely launched with the system Python. Activate the venv (e.g. `.venv\\Scripts\\activate`) and retry `python -m src.main --gui`.
 
 ### Current Players Tab Features (Implemented)
 
@@ -253,6 +286,33 @@ Planned next for Optimization:
   - The `bootstrap.py` script creates a `.env` file with the project name and example variables.
   - Edit `.env` in VS Code to add project-specific environment variables (e.g., API keys, database URLs).
   - Do not commit sensitive data to `.env`. For production use, add `.env` to `.gitignore` after setup and use a `.env.example` file for templates.
+
+**GUI Launch Issues**:
+
+**Scraping Notes**:
+
+- Scraping utilities live under `scraping/` (high-level: `scrape_club`).
+- Provide a full club overview URL like:
+  `https://leipzig.tischtennislive.de/?L1=Public&L2=Verein&L2P=2294&Page=Spielbetrieb&Sportart=96&Saison=2025`.
+- Workflow:
+  1. Parse club teams + associated division links.
+  2. For each division, fetch both halves of the match plan (L3P=1,2).
+  3. Parse match results into structured scores when available.
+  4. Collect division team roster table (if present).
+  5. Optionally fetch each team detail page to extract player stats (LivePZ, balance).
+- Caching: `CachedFetcher` stores HTML (memory + disk) to minimize repeated hits.
+- Conversion: Use `scheduled_to_matches` to obtain `data.match.Match` instances.
+- Manual run:
+  ```powershell
+  python -m scripts.scrape_club "<club_overview_url>"
+  ```
+- Tests rely on minimal synthetic fixtures; they don't perform live network I/O.
+- Respect robots/traffic: default throttle 0.5s; avoid parallel flooding.
+
+- Missing PyQt6: Ensure you are in the virtual environment and run `pip install -r requirements.txt`.
+- Qt platform plugin error (e.g. `Could not load the Qt platform plugin "windows"`): This is often caused by mixing system and venv interpreters. Re-activate `.venv` and retry. On CI/headless, export `QT_QPA_PLATFORM=offscreen`.
+- Immediate exit: Confirm `run_gui.py` returns a non-zero exit only if there is an error; otherwise the window should appear. If running in a remote/headless environment without display, set `QT_QPA_PLATFORM=offscreen`.
+- Future regressions: A smoke test (`tests/test_gui_imports.py`) ensures GUI modules import cleanly—run `pytest -k gui_imports` to verify after changes.
 
 ### Documentation
 

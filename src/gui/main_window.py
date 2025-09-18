@@ -127,12 +127,14 @@ class MainWindow(QMainWindow):
         self._player_search = QLineEdit()
         self._player_search.setPlaceholderText("Search players…")
         btn_add = QPushButton("Add")
+        btn_load_team = QPushButton("Load Team…")
         btn_export = QPushButton("Export JSON")
         btn_import = QPushButton("Import JSON")
         btn_bulk_clear = QPushButton("Clear Avail")
         btn_bulk_team = QPushButton("Set Team…")
         toolbar.addWidget(self._player_search)
         toolbar.addWidget(btn_add)
+        toolbar.addWidget(btn_load_team)
         toolbar.addWidget(btn_export)
         toolbar.addWidget(btn_import)
         toolbar.addWidget(btn_bulk_clear)
@@ -156,13 +158,16 @@ class MainWindow(QMainWindow):
         splitter.setStretchFactor(0, 3)
         splitter.setStretchFactor(1, 2)
         layout.addWidget(splitter)
-        self._wire_player_tab(btn_add, btn_export, btn_import, btn_bulk_clear, btn_bulk_team)
+        self._wire_player_tab(
+            btn_add, btn_load_team, btn_export, btn_import, btn_bulk_clear, btn_bulk_team
+        )
         self._player_table.itemDoubleClicked.connect(self._on_player_double_click)
         return container
 
     def _wire_player_tab(
         self,
         btn_add: QPushButton,
+        btn_load_team: QPushButton,
         btn_export: QPushButton,
         btn_import: QPushButton,
         btn_bulk_clear: QPushButton,
@@ -170,6 +175,7 @@ class MainWindow(QMainWindow):
     ) -> None:
         self._player_search.textChanged.connect(self._player_table.filter)
         btn_add.clicked.connect(self._on_add_player)
+        btn_load_team.clicked.connect(self._on_load_team)
         btn_export.clicked.connect(self._on_export_players)
         btn_import.clicked.connect(self._on_import_players)
         btn_bulk_clear.clicked.connect(self._on_bulk_clear_availability)
@@ -267,6 +273,22 @@ class MainWindow(QMainWindow):
         if dlg.exec():
             self._player_table._refresh()
             self._refresh_calendar_and_stats()
+
+    def _on_load_team(self) -> None:  # pragma: no cover - dialog
+        try:
+            from gui.team_selection import TeamSelectionDialog
+        except Exception as exc:  # noqa: BLE001
+            QMessageBox.warning(self, "Load Team", f"Module load failed: {exc}")
+            return
+        dlg = TeamSelectionDialog(self)
+        if not dlg.exec():
+            return
+        players = dlg.players()
+        if not players:
+            QMessageBox.information(self, "Load Team", "No players returned.")
+            return
+        self._player_table.set_players(players)
+        self._refresh_calendar_and_stats()
 
     # ----- Introspection for tests ---------------------------------------
     def tab_names(self) -> list[str]:
