@@ -1,17 +1,16 @@
-feat(setup): initial foundation for Table Tennis Team Manager
+feat(gui-player): implement initial Player Management tab
 
-Added normalized requirements, updated pyproject metadata (Python 3.13, project identity), entry point with logging + configuration bootstrap, logging & settings modules, package skeletons, pytest config & fixture isolation, roadmap updates, README overhaul.
+Add foundational player management components:
+- Player data model with history + cloning (src/data/player.py)
+- Serialization helpers for JSON/CSV (src/data/serialization.py) – JSON wired, CSV pending UI integration
+- PlayerTable widget with inline editing & case-insensitive filtering (src/gui/player_table.py)
+- AddPlayerDialog with validation (src/gui/player_dialogs.py)
+- Integrated Players tab in MainWindow (search, add, import/export JSON)
+- Updated roadmap checkboxes and README (Players feature section)
 
-feat(gui): add initial PyQt6 GUI framework and theming
+Quality:
+- Added tests: player model, table add/filter logic
+- Ensured deterministic GUI testing (offscreen) and LOC constraints respected
+- Fixed filtering bug (rows not hiding) by disabling sorting for stable indices
 
-Implemented GUI core framework tasks:
-- QMainWindow architecture with tabbed interface (Players, Matches, Optimization)
-- Theme system (light/dark) via QSS stylesheets
-- Splash screen and launcher with optional CLI flag --gui
-- Window size persistence to config JSON
-- Resource directories (icons/, styles/) with placeholders
-- Basic GUI tests (tab presence, theme switching) using offscreen backend
-
-chore: update roadmap checkboxes & tests
-
-All tests pass (CLI + GUI). Sources compile successfully. Ready for next feature layer (Player management UI & data models).
+Next (planned): availability calendar, statistics chart, profile dialog, CSV UI wiring.

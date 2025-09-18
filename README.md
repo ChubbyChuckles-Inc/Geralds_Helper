@@ -75,6 +75,14 @@ GUI preview features:
 - Splash screen + window size persistence
 - Offscreen-friendly tests (`QT_QPA_PLATFORM=offscreen`)
 
+### Current Players Tab Features (Implemented)
+
+- Roster table with inline editable columns: `Name`, `Team`, `Q-TTR`
+- Add Player dialog with validation (name required, rating >= 0)
+- Case-insensitive live filtering by name or team
+- JSON import/export (CSV groundwork present; coming soon)
+- Deterministic, unit-tested model (`Player`) and table behaviors
+
 ### Setup Steps (Legacy Template Instructions)
 
 1. **Clone the Repository or Create a New Project**:
