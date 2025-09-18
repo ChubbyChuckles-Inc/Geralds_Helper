@@ -114,22 +114,25 @@ Planned next for Matches:
 - Persistent reminder storage & snooze/postpone actions
 - Extended statistics visualization (charts, per-team head-to-head)
 
-### Current Optimization Tab Features (Foundational)
+### Current Optimization Tab Features (Expanded Foundation)
 
 - Lineup size selector and objective dropdown ("qttr_max", "balance")
+- Availability date filter (players with empty availability = always available; otherwise must match date)
 - Instant brute-force optimization for small rosters (sum of Q-TTR or spread minimization)
-- Progress bar placeholder (sets to 100% after run)
 - Results table listing chosen lineup (Name, Team, Q-TTR)
 - Summary line with total, average, and spread metrics
-- Deterministic test coverage of core `optimize_lineup` behaviors
+- Scenario history table (ID, time, objective, size, totals, spread)
+- Markdown export of scenario history (`optimization_history.md`)
+- Preset save/load (size + objective) persisted to `config/optimization_presets.json`
+- Deterministic test coverage: optimizer objectives, scenario export, availability filtering
 
 Planned next for Optimization:
 
-- Multi-scenario comparison table (retain multiple runs)
-- Reasoning / rationale text for lineup choice
-- Availability-aware optimization (skip unavailable players by date)
+- Multi-scenario comparative analytics (side-by-side performance deltas)
+- Reasoning / rationale narrative for lineup selection
 - Genetic / heuristic algorithms for larger pools
-- What-if analysis tools and persistent scenario history
+- Multi-objective weighting (blend balance vs total strength)
+- Validation and reasonableness checks (flag extreme spreads)
 
 ### Setup Steps (Legacy Template Instructions)
 

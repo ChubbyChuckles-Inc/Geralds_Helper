@@ -1,7 +1,7 @@
 """Optimization tab UI providing basic lineup optimization interface."""
 
 from __future__ import annotations
-from typing import List
+from typing import List, Callable
 from PyQt6.QtWidgets import (
     QWidget,
     QVBoxLayout,
@@ -14,11 +14,17 @@ from PyQt6.QtWidgets import (
     QTableWidgetItem,
     QProgressBar,
     QMessageBox,
+    QDateEdit,
+    QFileDialog,
+    QLineEdit,
 )
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QDate
 
 from data.player import Player
 from optimization.optimizer import optimize_lineup
+from optimization.scenario import ScenarioResult, export_markdown
+from pathlib import Path
+import json
 
 
 class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
@@ -26,6 +32,8 @@ class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
         super().__init__(parent)
         # players_provider: callable returning current player list (optional)
         self._players_provider = players_provider or (lambda: [])
+        self._history: List[ScenarioResult] = []
+        self._next_id = 1
         layout = QVBoxLayout(self)
         controls = QHBoxLayout()
         controls.addWidget(QLabel("Lineup Size:"))
@@ -37,6 +45,11 @@ class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
         self._objective = QComboBox()
         self._objective.addItems(["qttr_max", "balance"])
         controls.addWidget(self._objective)
+        controls.addWidget(QLabel("Avail Date:"))
+        self._avail_date = QDateEdit()
+        self._avail_date.setCalendarPopup(True)
+        self._avail_date.setDate(QDate.currentDate())
+        controls.addWidget(self._avail_date)
         self._btn_run = QPushButton("Run Optimization")
         controls.addWidget(self._btn_run)
         controls.addStretch(1)
@@ -50,14 +63,42 @@ class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
         layout.addWidget(self._results)
         self._summary = QLabel("Ready")
         layout.addWidget(self._summary)
+        # History section
+        history_bar = QHBoxLayout()
+        self._btn_export_history = QPushButton("Export History")
+        self._btn_clear_history = QPushButton("Clear History")
+        self._btn_save_preset = QPushButton("Save Preset")
+        self._btn_load_preset = QPushButton("Load Preset")
+        history_bar.addWidget(self._btn_export_history)
+        history_bar.addWidget(self._btn_clear_history)
+        history_bar.addWidget(self._btn_save_preset)
+        history_bar.addWidget(self._btn_load_preset)
+        history_bar.addStretch(1)
+        layout.addLayout(history_bar)
+        self._history_table = QTableWidget(0, 7)
+        self._history_table.setHorizontalHeaderLabels(
+            ["ID", "Time", "Obj", "Size", "Total", "Avg", "Spread"]
+        )
+        layout.addWidget(self._history_table)
         self._btn_run.clicked.connect(self._on_run)
+        self._btn_export_history.clicked.connect(self._on_export_history)
+        self._btn_clear_history.clicked.connect(self._on_clear_history)
+        self._btn_save_preset.clicked.connect(self._on_save_preset)
+        self._btn_load_preset.clicked.connect(self._on_load_preset)
+        self._presets_path = Path("config/optimization_presets.json")
 
     def _current_players(self) -> List[Player]:
         try:
             players = self._players_provider() or []
         except Exception:
             players = []
-        return players
+        # Availability filter by date
+        d_iso = self._avail_date.date().toPyDate().isoformat()
+        filtered = []
+        for p in players:
+            if not p.availability or d_iso in p.availability:
+                filtered.append(p)
+        return filtered
 
     def _on_run(self):  # pragma: no cover - GUI interaction
         players = self._current_players()
@@ -81,6 +122,7 @@ class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
         self._summary.setText(
             f"Objective: {result.objective} | Total: {result.total_qttr} | Avg: {result.average_qttr:.1f} | Spread: {result.spread}"
         )
+        self._append_history(size=size, result=result)
 
     def _populate_results(self, players: List[Player]):
         self._results.setRowCount(0)
@@ -90,6 +132,66 @@ class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
             self._results.setItem(row, 0, QTableWidgetItem(p.name))
             self._results.setItem(row, 1, QTableWidgetItem(p.team or ""))
             self._results.setItem(row, 2, QTableWidgetItem(str(p.q_ttr)))
+
+    def _append_history(self, size: int, result):  # result is LineupResult
+        s = ScenarioResult.from_lineup(self._next_id, size=size, result=result)
+        self._next_id += 1
+        self._history.append(s)
+        self._history_table.insertRow(self._history_table.rowCount())
+        for col, val in enumerate(s.to_row()):
+            self._history_table.setItem(
+                self._history_table.rowCount() - 1, col, QTableWidgetItem(val)
+            )
+
+    def _on_export_history(self):  # pragma: no cover - GUI interaction
+        if not self._history:
+            QMessageBox.information(self, "Export", "No history to export.")
+            return
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Export Optimization History", "optimization_history.md", "Markdown (*.md)"
+        )
+        if not path:
+            return
+        content = export_markdown(self._history)
+        Path(path).write_text(content, encoding="utf-8")
+
+    def _on_clear_history(self):  # pragma: no cover
+        self._history.clear()
+        self._history_table.setRowCount(0)
+
+    def _on_save_preset(self):  # pragma: no cover
+        # simple preset structure: {"size": int, "objective": str}
+        preset = {"size": self._size.value(), "objective": self._objective.currentText()}
+        presets = []
+        if self._presets_path.exists():
+            try:
+                presets = json.loads(self._presets_path.read_text(encoding="utf-8"))
+            except Exception:
+                presets = []
+        presets.append(preset)
+        self._presets_path.parent.mkdir(parents=True, exist_ok=True)
+        self._presets_path.write_text(json.dumps(presets, indent=2), encoding="utf-8")
+        QMessageBox.information(self, "Preset", "Preset saved.")
+
+    def _on_load_preset(self):  # pragma: no cover
+        if not self._presets_path.exists():
+            QMessageBox.information(self, "Preset", "No presets file found.")
+            return
+        try:
+            presets = json.loads(self._presets_path.read_text(encoding="utf-8"))
+        except Exception as exc:  # noqa: BLE001
+            QMessageBox.warning(self, "Preset", f"Failed to load: {exc}")
+            return
+        if not presets:
+            QMessageBox.information(self, "Preset", "No presets stored.")
+            return
+        p = presets[-1]  # simplest: take last
+        self._size.setValue(int(p.get("size", self._size.value())))
+        obj = str(p.get("objective", self._objective.currentText()))
+        idx = self._objective.findText(obj)
+        if idx >= 0:
+            self._objective.setCurrentIndex(idx)
+        QMessageBox.information(self, "Preset", "Last preset loaded.")
 
 
 __all__ = ["OptimizationTab"]

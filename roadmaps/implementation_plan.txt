@@ -154,12 +154,15 @@ A comprehensive Python-based application for managing table tennis team rosters,
 
 ## Simulation Engine - Optimization Algorithms
 
-- [ ] Create optimizer.py with roster optimization algorithms
-- [ ] Implement Q-TTR maximization algorithm for team strength optimization
-- [ ] Add availability-based optimization considering player schedules
-- [ ] Create balance optimization for fair playing time distribution
+// Foundational optimizer with qttr_max and balance objectives (brute-force small roster)
+- [x] Create optimizer.py with roster optimization algorithms
+- [x] Implement Q-TTR maximization algorithm for team strength optimization
+// Availability-based filtering integrated via GUI date filter (players with empty availability set or matching date retained)
+- [x] Add availability-based optimization considering player schedules
+- [x] Create balance optimization for fair playing time distribution
 - [ ] Implement genetic algorithm for complex multi-constraint optimization
-- [ ] Add simulation scenarios for what-if analysis
+// Scenario history + markdown export implemented (what-if runs retained in table)
+- [x] Add simulation scenarios for what-if analysis
 - [ ] Create performance prediction models based on historical data
 - [ ] Implement Monte Carlo simulation for uncertainty analysis
 - [ ] Add multi-objective optimization with user-defined weights

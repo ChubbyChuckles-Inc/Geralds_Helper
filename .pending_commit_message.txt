@@ -34,3 +34,13 @@ feat(optimization): foundational optimization tab & algorithms
 - Roadmap updated marking initial optimization interface tasks complete
 - README updated with Optimization section (current + planned next)
 
+feat(optimization): scenario history, availability filtering, presets & export
+
+- Add ScenarioResult dataclass + markdown export (optimization/scenario.py)
+- Extend OptimizationTab with: availability date filter, scenario history table, export, clear, presets save/load
+- Implement availability-based filtering (date-based inclusion)
+- Persist presets to config/optimization_presets.json
+- Add tests: test_scenarios (markdown export content, availability filtering integration)
+- Roadmap updated (availability-based optimization, what-if scenarios marked complete)
+- README expanded Optimization section with new capabilities
+
