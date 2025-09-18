@@ -16,6 +16,9 @@ class Match:
     location: str = ""
     notes: str = ""
     lineup: List[str] = field(default_factory=list)  # list of player IDs or names (simple for now)
+    home_score: int | None = None
+    away_score: int | None = None
+    completed: bool = False
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -26,6 +29,9 @@ class Match:
             "location": self.location,
             "notes": self.notes,
             "lineup": list(self.lineup),
+            "home_score": self.home_score,
+            "away_score": self.away_score,
+            "completed": self.completed,
         }
 
     @classmethod
@@ -41,6 +47,9 @@ class Match:
         lineup = data.get("lineup", [])
         if isinstance(lineup, list):
             m.lineup.extend(str(x) for x in lineup)
+        m.home_score = data.get("home_score")
+        m.away_score = data.get("away_score")
+        m.completed = bool(data.get("completed", False))
         return m
 
     def clone(self) -> "Match":

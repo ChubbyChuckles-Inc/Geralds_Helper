@@ -19,6 +19,7 @@ from PyQt6.QtWidgets import (
     QFormLayout,
     QLineEdit,
     QDialogButtonBox,
+    QCheckBox,
 )
 
 from data.match import Match, detect_conflicts
@@ -35,10 +36,21 @@ class MatchDialog(QDialog):  # pragma: no cover - GUI interaction
         self._away = QLineEdit(self._match.away_team)
         self._location = QLineEdit(self._match.location)
         self._notes = QLineEdit(self._match.notes)
+        self._home_score = QLineEdit(
+            "" if self._match.home_score is None else str(self._match.home_score)
+        )
+        self._away_score = QLineEdit(
+            "" if self._match.away_score is None else str(self._match.away_score)
+        )
+        self._completed = QCheckBox()
+        self._completed.setChecked(self._match.completed)
         layout.addRow("Home Team", self._home)
         layout.addRow("Away Team", self._away)
         layout.addRow("Location", self._location)
         layout.addRow("Notes", self._notes)
+        layout.addRow("Home Score", self._home_score)
+        layout.addRow("Away Score", self._away_score)
+        layout.addRow("Completed", self._completed)
         buttons = QDialogButtonBox(
             QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel
         )
@@ -51,6 +63,16 @@ class MatchDialog(QDialog):  # pragma: no cover - GUI interaction
         self._match.away_team = self._away.text().strip()
         self._match.location = self._location.text().strip()
         self._match.notes = self._notes.text().strip()
+        # parse scores
+        try:
+            self._match.home_score = int(self._home_score.text().strip()) if self._home_score.text().strip() else None
+        except ValueError:
+            self._match.home_score = None
+        try:
+            self._match.away_score = int(self._away_score.text().strip()) if self._away_score.text().strip() else None
+        except ValueError:
+            self._match.away_score = None
+        self._match.completed = self._completed.isChecked()
         return self._match
 
 
@@ -60,6 +82,13 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
         self._matches: List[Match] = []
         layout = QVBoxLayout(self)
         toolbar = QHBoxLayout()
+        filter_bar = QHBoxLayout()
+        self._search = QLineEdit()
+        self._search.setPlaceholderText("Search team/location/notes…")
+        self._all_dates = QCheckBox("All Dates")
+        filter_bar.addWidget(self._search)
+        filter_bar.addWidget(self._all_dates)
+        layout.addLayout(filter_bar)
         btn_add = QPushButton("Add")
         btn_edit = QPushButton("Edit")
         btn_delete = QPushButton("Delete")
@@ -75,8 +104,10 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
         self._calendar = QCalendarWidget()
         self._calendar.selectionChanged.connect(self._on_date)
         body.addWidget(self._calendar, 1)
-        self._table = QTableWidget(0, 5)
-        self._table.setHorizontalHeaderLabels(["Date", "Home", "Away", "Location", "Notes"])
+        self._table = QTableWidget(0, 8)
+        self._table.setHorizontalHeaderLabels(
+            ["Date", "Home", "Away", "Loc", "Notes", "H", "A", "Done"]
+        )
         self._table.itemDoubleClicked.connect(self._on_edit)
         body.addWidget(self._table, 2)
         layout.addLayout(body)
@@ -86,13 +117,28 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
         btn_delete.clicked.connect(self._on_delete)
         btn_export.clicked.connect(self._on_export)
         btn_import.clicked.connect(self._on_import)
+        self._search.textChanged.connect(self._refresh)
+        self._all_dates.stateChanged.connect(self._refresh)
 
     # Data helpers
     def _refresh(self):
         self._table.setRowCount(0)
         # filter by selected date for brevity
         sel = self._calendar.selectedDate().toPyDate().isoformat()
-        day_matches = [m for m in self._matches if m.match_date.isoformat() == sel]
+        if self._all_dates.isChecked():
+            day_matches = list(self._matches)
+        else:
+            day_matches = [m for m in self._matches if m.match_date.isoformat() == sel]
+        q = self._search.text().lower().strip()
+        if q:
+            def match_filter(m: Match) -> bool:
+                return (
+                    q in m.home_team.lower()
+                    or q in m.away_team.lower()
+                    or q in m.location.lower()
+                    or q in m.notes.lower()
+                )
+            day_matches = [m for m in day_matches if match_filter(m)]
         for m in day_matches:
             row = self._table.rowCount()
             self._table.insertRow(row)
@@ -101,6 +147,9 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
             self._table.setItem(row, 2, QTableWidgetItem(m.away_team))
             self._table.setItem(row, 3, QTableWidgetItem(m.location))
             self._table.setItem(row, 4, QTableWidgetItem(m.notes))
+            self._table.setItem(row, 5, QTableWidgetItem("" if m.home_score is None else str(m.home_score)))
+            self._table.setItem(row, 6, QTableWidgetItem("" if m.away_score is None else str(m.away_score)))
+            self._table.setItem(row, 7, QTableWidgetItem("Y" if m.completed else ""))
         # highlight conflicts (simple: duplicate team on same date)
         conflicts = detect_conflicts(self._matches)
         conflict_ids = {cid for pair in conflicts for cid in pair}

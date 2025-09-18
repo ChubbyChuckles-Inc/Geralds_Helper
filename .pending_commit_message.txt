@@ -1,24 +1,9 @@
-feat(players): availability calendar, profile dialog, drag-drop, bulk ops, serialization
+feat(matches): scores & history filtering
 
-- Add availability set + photo_path to Player model (removed dataclass slots for Py3.8 test env)
-- Implement calendar-based availability toggle in Players tab with count column
-- Add PlayerProfileDialog (double-click row) including photo path editing
-- Add drag-and-drop row reordering with model synchronization
-- Implement bulk operations: multi-select, bulk team assignment, clear availability
-- Extend serialization (JSON/CSV) to include availability & photo_path
-- Add stats placeholder panel (charts to follow later)
-- Add tests: availability & serialization, bulk team assignment (guarded skips if PyQt6 missing)
-- Introduce GUI test skip strategy when PyQt6 unavailable; move PyQt imports inside tests
-- Update roadmap checkboxes and README with new Player features
-- Minor: enable ExtendedSelection behavior in PlayerTable
+- Extend Match model with home_score, away_score, completed
+- Enhance MatchDialog to capture scores + completion flag
+- Expand MatchesTab: search box, All Dates toggle, added columns (scores, completed)
+- Implement filtering across teams/location/notes, multi-day view
+- Add tests for result serialization
+- Update roadmap (result entry + history browser) and README (enhancements section)
 
-feat(matches): initial Matches tab with calendar, CRUD, conflict detection
-
-- Add Match dataclass (id, date, teams, location, notes, lineup placeholder)
-- Implement detect_conflicts for same-day team participation clashes
-- Create MatchesTab UI: calendar + day-filtered match table
-- Add MatchDialog for add/edit operations (simplified creation flow)
-- Support JSON import/export for matches
-- Integrate MatchesTab into MainWindow (replacing placeholder)
-- Add tests: match model serialization & conflict, matches tab conflict tooltip (GUI skipped if no PyQt6)
-- Update roadmap (Match Management partial items marked) & README (Matches section)

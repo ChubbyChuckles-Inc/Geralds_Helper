@@ -50,8 +50,8 @@ A comprehensive Python-based application for managing table tennis team rosters,
 - [x] Create match details dialog with team lineups and opponent information (basic MatchDialog without lineup editing yet)
 - [x] Implement match creation wizard with step-by-step guidance (simplified single dialog for now)
 - [x] Add match editing capabilities with conflict detection (basic same-day team conflict tooltip)
-- [ ] Create match result entry interface with score tracking
-- [ ] Implement match history browser with filtering and search
+- [x] Create match result entry interface with score tracking (basic scores + completed flag)
+- [x] Implement match history browser with filtering and search (All Dates toggle + search box)
 - [ ] Add match reminder system with notification support
 - [x] Create match export functionality (JSON import/export implemented; PDF/CSV pending)
 - [x] Implement match conflict resolution interface (initial detection + highlighting; resolution UI pending)
