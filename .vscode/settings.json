@@ -1,0 +1,6 @@
+{
+    // Use the project's .venv Python interpreter
+    "python.defaultInterpreterPath": ".venv\\Scripts\\python.exe",
+    // Make sure the Python extension auto-activates the venv in the integrated terminal
+    "python.terminal.activateEnvironment": true
+}
