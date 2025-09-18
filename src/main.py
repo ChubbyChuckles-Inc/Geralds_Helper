@@ -9,9 +9,20 @@ from __future__ import annotations
 
 import logging
 import argparse
+import sys
+from pathlib import Path
 
-from config.logging_config import configure_logging
-from config.app_settings import load_settings
+"""Ensure source directory on sys.path when running from repository root.
+
+This allows `python -m src.main --gui` without editable install.
+"""
+ROOT = Path(__file__).resolve().parents[1]
+SRC_DIR = ROOT / "src"
+if SRC_DIR.is_dir() and str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
+
+from config.logging_config import configure_logging  # type: ignore  # noqa: E402
+from config.app_settings import load_settings  # type: ignore  # noqa: E402
 
 try:  # Optional import so non-GUI environments still function
     from gui.launcher import run_gui  # type: ignore

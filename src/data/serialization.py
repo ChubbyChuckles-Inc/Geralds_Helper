@@ -23,9 +23,10 @@ def load_players_json(path: Path) -> list[Player]:
 def save_players_csv(players: Iterable[Player], path: Path) -> None:
     with path.open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["id", "name", "team", "q_ttr"])
+        w.writerow(["id", "name", "team", "q_ttr", "availability", "photo_path"])
         for p in players:
-            w.writerow([p.id, p.name, p.team or "", p.q_ttr])
+            avail = ";".join(sorted(p.availability))
+            w.writerow([p.id, p.name, p.team or "", p.q_ttr, avail, p.photo_path or ""])
 
 
 def load_players_csv(path: Path) -> list[Player]:
@@ -33,14 +34,20 @@ def load_players_csv(path: Path) -> list[Player]:
     with path.open("r", newline="", encoding="utf-8") as f:
         r = csv.DictReader(f)
         for row in r:
-            out.append(
-                Player(
-                    name=row.get("name", ""),
-                    q_ttr=int(row.get("q_ttr", 0)),
-                    team=row.get("team") or None,
-                    id=row.get("id") or None,  # type: ignore[arg-type]
-                )
+            p = Player(
+                name=row.get("name", ""),
+                q_ttr=int(row.get("q_ttr", 0)),
+                team=row.get("team") or None,
+                id=row.get("id") or None,  # type: ignore[arg-type]
             )
+            avail_raw = row.get("availability") or ""
+            if avail_raw:
+                for d in avail_raw.split(";"):
+                    if d:
+                        p.availability.add(d)
+            photo = row.get("photo_path") or None
+            p.photo_path = photo
+            out.append(p)
     return out
 
 

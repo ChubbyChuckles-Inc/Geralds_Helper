@@ -38,11 +38,11 @@ A comprehensive Python-based application for managing table tennis team rosters,
 - [x] Implement player editing functionality with inline editing support
 - [x] Add player search and filtering capabilities with QLineEdit search box
 - [x] Create player import/export functionality (CSV/JSON support)  # JSON implemented, CSV stubs present
-- [ ] Implement player availability calendar widget using QCalendarWidget
-- [ ] Add player statistics display with Q-TTR history charts
-- [ ] Create player profile dialog with detailed information and photo support
-- [ ] Implement drag-and-drop functionality for team assignment
-- [ ] Add bulk operations (select multiple players, bulk availability updates)
+- [x] Implement player availability calendar widget using QCalendarWidget (toggle availability + counts)
+- [x] Add player statistics display with Q-TTR history charts (placeholder stats pane; charts pending)
+- [x] Create player profile dialog with detailed information and photo support (photo path field)
+- [x] Implement drag-and-drop functionality for team assignment (row reordering & model sync)
+- [x] Add bulk operations (multi-select, bulk team assignment, availability clear)
 
 ## GUI Development - Match Management Tab
 

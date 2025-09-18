@@ -1,16 +1,13 @@
-feat(gui-player): implement initial Player Management tab
+feat(players): availability calendar, profile dialog, drag-drop, bulk ops, serialization
 
-Add foundational player management components:
-- Player data model with history + cloning (src/data/player.py)
-- Serialization helpers for JSON/CSV (src/data/serialization.py) – JSON wired, CSV pending UI integration
-- PlayerTable widget with inline editing & case-insensitive filtering (src/gui/player_table.py)
-- AddPlayerDialog with validation (src/gui/player_dialogs.py)
-- Integrated Players tab in MainWindow (search, add, import/export JSON)
-- Updated roadmap checkboxes and README (Players feature section)
-
-Quality:
-- Added tests: player model, table add/filter logic
-- Ensured deterministic GUI testing (offscreen) and LOC constraints respected
-- Fixed filtering bug (rows not hiding) by disabling sorting for stable indices
-
-Next (planned): availability calendar, statistics chart, profile dialog, CSV UI wiring.
+- Add availability set + photo_path to Player model (removed dataclass slots for Py3.8 test env)
+- Implement calendar-based availability toggle in Players tab with count column
+- Add PlayerProfileDialog (double-click row) including photo path editing
+- Add drag-and-drop row reordering with model synchronization
+- Implement bulk operations: multi-select, bulk team assignment, clear availability
+- Extend serialization (JSON/CSV) to include availability & photo_path
+- Add stats placeholder panel (charts to follow later)
+- Add tests: availability & serialization, bulk team assignment (guarded skips if PyQt6 missing)
+- Introduce GUI test skip strategy when PyQt6 unavailable; move PyQt imports inside tests
+- Update roadmap checkboxes and README with new Player features
+- Minor: enable ExtendedSelection behavior in PlayerTable

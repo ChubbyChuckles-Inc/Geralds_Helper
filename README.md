@@ -82,6 +82,13 @@ GUI preview features:
 - Case-insensitive live filtering by name or team
 - JSON import/export (CSV groundwork present; coming soon)
 - Deterministic, unit-tested model (`Player`) and table behaviors
+- Availability management: calendar toggling (counts shown in `Avail Days` column)
+- Player profile dialog (double-click row) with Q-TTR edit, team, and photo path field
+- Drag-and-drop row reordering (internal move) with underlying model sync
+- Bulk operations: multi-select rows, bulk team assignment, clear availability
+- Stats placeholder panel (future Q-TTR history charts will render here)
+
+Note: In environments without PyQt6 (e.g. minimal CI runners), GUI tests are gracefully skipped; non-GUI serialization and model tests still run.
 
 ### Setup Steps (Legacy Template Instructions)
 
