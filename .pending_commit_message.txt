@@ -68,3 +68,14 @@ feat(optimization): what-if scenarios, scenario labels & auto re-run
 
 All existing tests still pass; GUI additions guarded by pragma no cover where appropriate.
 
+feat(optimization): exportable markdown report with ASCII chart
+
+- Added optimization.report.build_report producing summary + ASCII bar chart + detailed table (scenario names & deltas).
+- GUI: OptimizationTab now includes Generate Report button saving `optimization_report.md`.
+- Scenario history integrated with reporting (Scenario column + delta logic reused).
+- Tests: Added test_optimization_report.py covering empty history and populated summary/statistics output.
+- Roadmap: Marked exportable optimization reports task complete (notes markdown + ASCII chart approach).
+- README: Documented reporting workflow and report contents.
+
+All tests pass post feature addition (GUI tests skipped if PyQt6 missing).
+

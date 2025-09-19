@@ -70,7 +70,7 @@ A comprehensive Python-based application for managing table tennis team rosters,
 - [x] Create lineup suggestion interface with reasoning explanations (summary stats only; reasoning pending)
 - [x] Implement what-if analysis tools for different player availability scenarios  # what_if dialog + batch scenarios
 - [x] Add optimization history tracking and comparison features  # Scenario table retains runs + BestDelta column
-- [ ] Create exportable optimization reports with charts and recommendations
+- [x] Create exportable optimization reports with charts and recommendations  # markdown report + ASCII bar chart + GUI button
 - [x] Implement real-time optimization updates as availability changes  # auto re-run checkbox + notify hook
 - [x] Add optimization preset saving and loading functionality  # save/load preset buttons implemented
 

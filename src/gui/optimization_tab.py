@@ -26,6 +26,7 @@ from PyQt6.QtCore import Qt, QDate
 from data.player import Player
 from optimization.optimizer import optimize_lineup
 from optimization.scenario import ScenarioResult, export_markdown
+from optimization.report import build_report
 from optimization.what_if import run_what_if_scenarios
 from pathlib import Path
 import json
@@ -69,14 +70,16 @@ class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
         layout.addWidget(self._results)
         self._summary = QLabel("Ready")
         layout.addWidget(self._summary)
-        # History section
+        # History / actions section
         history_bar = QHBoxLayout()
         self._btn_export_history = QPushButton("Export History")
+        self._btn_generate_report = QPushButton("Generate Report")
         self._btn_clear_history = QPushButton("Clear History")
         self._btn_save_preset = QPushButton("Save Preset")
         self._btn_load_preset = QPushButton("Load Preset")
         history_bar.addWidget(self._btn_export_history)
         history_bar.addWidget(self._btn_clear_history)
+        history_bar.addWidget(self._btn_generate_report)
         history_bar.addWidget(self._btn_save_preset)
         history_bar.addWidget(self._btn_load_preset)
         history_bar.addStretch(1)
@@ -105,6 +108,7 @@ class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
         self._btn_run.clicked.connect(self._on_run)
         self._btn_export_history.clicked.connect(self._on_export_history)
         self._btn_clear_history.clicked.connect(self._on_clear_history)
+        self._btn_generate_report.clicked.connect(self._on_generate_report)
         self._btn_save_preset.clicked.connect(self._on_save_preset)
         self._btn_load_preset.clicked.connect(self._on_load_preset)
         self._btn_what_if.clicked.connect(self._on_what_if)
@@ -193,6 +197,19 @@ class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
     def _on_clear_history(self):  # pragma: no cover
         self._history.clear()
         self._history_table.setRowCount(0)
+
+    def _on_generate_report(self):  # pragma: no cover - GUI interaction
+        if not self._history:
+            QMessageBox.information(self, "Report", "No scenarios to report.")
+            return
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Save Optimization Report", "optimization_report.md", "Markdown (*.md)"
+        )
+        if not path:
+            return
+        report = build_report(self._history)
+        Path(path).write_text(report, encoding="utf-8")
+        QMessageBox.information(self, "Report", "Report generated.")
 
     def _on_save_preset(self):  # pragma: no cover
         # simple preset structure: {"size": int, "objective": str}

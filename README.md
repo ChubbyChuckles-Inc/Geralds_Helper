@@ -184,6 +184,14 @@ New What-If & Automation Features:
 - Scenario column & scenario_name persisted in history and markdown export output for traceability.
 - Auto Re-run checkbox: automatically recomputes optimal lineup when the availability date changes or when external tabs signal player modifications.
 
+Reporting:
+
+- Generate Report button creates a consolidated `optimization_report.md` containing:
+  - Summary stats (best / worst / average totals, average spread)
+  - ASCII bar chart comparing total Q-TTR per scenario
+  - Detailed table including delta and scenario names with roster lineups
+    The report is pure markdown (no binary assets) for easy diffing and sharing.
+
 Planned next for Optimization:
 
 - Multi-scenario comparative analytics (side-by-side performance deltas)
