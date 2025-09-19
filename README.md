@@ -173,15 +173,21 @@ Planned next for Matches:
 - Instant brute-force optimization for small rosters (sum of Q-TTR or spread minimization)
 - Results table listing chosen lineup (Name, Team, Q-TTR)
 - Summary line with total, average, and spread metrics
-- Scenario history table (ID, time, objective, size, totals, spread, BestDelta)
+- Scenario history table (ID, time, objective, size, totals, spread, BestDelta, Scenario)
 - Markdown export of scenario history (`optimization_history.md`)
 - Preset save/load (size + objective) persisted to `config/optimization_presets.json`
-- Deterministic test coverage: optimizer objectives, scenario export, availability filtering
+- Deterministic test coverage: optimizer objectives, scenario export, availability filtering, what-if batch scenarios
+
+New What-If & Automation Features:
+
+- What-If dialog: Define multiple scenarios (one per line) with syntax `Name | exclude=Player1,Player2` to batch-run alternative lineups excluding certain players.
+- Scenario column & scenario_name persisted in history and markdown export output for traceability.
+- Auto Re-run checkbox: automatically recomputes optimal lineup when the availability date changes or when external tabs signal player modifications.
 
 Planned next for Optimization:
 
 - Multi-scenario comparative analytics (side-by-side performance deltas)
-  * (Foundational delta tracking in place via BestDelta column)
+  - (Foundational delta tracking in place via BestDelta column and Scenario comparisons)
 - Reasoning / rationale narrative for lineup selection
 - Genetic / heuristic algorithms for larger pools
 - Multi-objective weighting (blend balance vs total strength)

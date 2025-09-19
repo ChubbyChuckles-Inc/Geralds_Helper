@@ -17,6 +17,7 @@ class ScenarioResult:
     average_qttr: float
     spread: int
     players: list[dict]
+    scenario_name: str | None = None  # human label for what-if scenario
 
     @classmethod
     def from_lineup(cls, ident: int, size: int, result: LineupResult) -> "ScenarioResult":
@@ -42,17 +43,20 @@ class ScenarioResult:
             f"{self.average_qttr:.1f}",
             str(self.spread),
             delta,
+            self.scenario_name or "",
         ]
 
 
 def export_markdown(history: List[ScenarioResult]) -> str:
     lines = ["# Optimization Scenarios Report", ""]
-    lines.append("| ID | Time (UTC) | Objective | Size | Total | Avg | Spread | Lineup |")
-    lines.append("| --- | --- | --- | --- | --- | --- | --- | --- |")
+    lines.append(
+        "| ID | Time (UTC) | Objective | Size | Total | Avg | Spread | Scenario | Lineup |"
+    )
+    lines.append("| --- | --- | --- | --- | --- | --- | --- | --- | --- |")
     for s in history:
         lineup = ", ".join(p["name"] for p in s.players)
         lines.append(
-            f"| {s.id} | {s.timestamp} | {s.objective} | {s.size} | {s.total_qttr} | {s.average_qttr:.1f} | {s.spread} | {lineup} |"
+            f"| {s.id} | {s.timestamp} | {s.objective} | {s.size} | {s.total_qttr} | {s.average_qttr:.1f} | {s.spread} | {s.scenario_name or ''} | {lineup} |"
         )
     return "\n".join(lines) + "\n"
 

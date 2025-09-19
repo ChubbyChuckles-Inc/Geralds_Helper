@@ -56,3 +56,15 @@ feat: players CSV import/export, optimization BestDelta, and robust matchplan pa
 
 No functional changes outside described areas; all tests pass (non-GUI tests; GUI tests skipped if PyQt6 missing).
 
+feat(optimization): what-if scenarios, scenario labels & auto re-run
+
+- ScenarioResult extended with scenario_name and table/markdown export updated with Scenario column.
+- Added what_if.py helper providing run_what_if_scenarios to batch-run exclusion scenarios.
+- OptimizationTab: new Run What-If… dialog (multi-line input: `Name | exclude=Player1,Player2`) and Scenario column in history.
+- Added Auto Re-run checkbox triggering optimization when availability date changes or external notify hook invoked.
+- Added tests: test_what_if.py covering scenario_name row length and what-if exclusion logic.
+- Roadmap updated: marked what-if analysis, real-time updates, and preset save/load tasks complete.
+- README updated: optimization section reflects Scenario column, what-if dialog, and automation features.
+
+All existing tests still pass; GUI additions guarded by pragma no cover where appropriate.
+

@@ -45,9 +45,11 @@ def test_scenario_best_delta():
     r1 = _fake_lineup_result("qttr_max", 3100, 1550.0, 100, [p1, p2])
     s1 = ScenarioResult.from_lineup(1, size=2, result=r1)
     row1 = s1.to_row(best_total=3100)
-    assert row1[-1] == "0"  # delta vs best is zero
+    # Second to last column now holds BestDelta; last column is Scenario label (optional)
+    assert row1[-2] == "0"  # delta vs best is zero
+    assert row1[-1] == ""  # scenario label empty
     # worse scenario
     r2 = _fake_lineup_result("qttr_max", 3000, 1500.0, 200, [p1, p2])
     s2 = ScenarioResult.from_lineup(2, size=2, result=r2)
     row2 = s2.to_row(best_total=3100)
-    assert row2[-1] == "-100"  # 3000 - 3100
+    assert row2[-2] == "-100"  # 3000 - 3100

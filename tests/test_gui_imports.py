@@ -13,6 +13,7 @@ import pytest
 
 try:  # Determine if PyQt6 is available; if not, skip these tests.
     import PyQt6  # type: ignore  # noqa: F401
+
     HAS_PYQT = True
 except Exception:  # pragma: no cover
     HAS_PYQT = False

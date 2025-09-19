@@ -17,12 +17,16 @@ from PyQt6.QtWidgets import (
     QDateEdit,
     QFileDialog,
     QLineEdit,
+    QCheckBox,
+    QDialog,
+    QTextEdit,
 )
 from PyQt6.QtCore import Qt, QDate
 
 from data.player import Player
 from optimization.optimizer import optimize_lineup
 from optimization.scenario import ScenarioResult, export_markdown
+from optimization.what_if import run_what_if_scenarios
 from pathlib import Path
 import json
 
@@ -51,7 +55,9 @@ class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
         self._avail_date.setDate(QDate.currentDate())
         controls.addWidget(self._avail_date)
         self._btn_run = QPushButton("Run Optimization")
+        self._auto_rerun = QCheckBox("Auto Re-run")
         controls.addWidget(self._btn_run)
+        controls.addWidget(self._auto_rerun)
         controls.addStretch(1)
         layout.addLayout(controls)
         self._progress = QProgressBar()
@@ -75,16 +81,36 @@ class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
         history_bar.addWidget(self._btn_load_preset)
         history_bar.addStretch(1)
         layout.addLayout(history_bar)
-        self._history_table = QTableWidget(0, 8)
+        self._history_table = QTableWidget(0, 9)
         self._history_table.setHorizontalHeaderLabels(
-            ["ID", "Time", "Obj", "Size", "Total", "Avg", "Spread", "BestDelta"]
+            [
+                "ID",
+                "Time",
+                "Obj",
+                "Size",
+                "Total",
+                "Avg",
+                "Spread",
+                "BestDelta",
+                "Scenario",
+            ]
         )
         layout.addWidget(self._history_table)
+        # What-if scenarios
+        what_if_bar = QHBoxLayout()
+        self._btn_what_if = QPushButton("Run What-If…")
+        what_if_bar.addWidget(self._btn_what_if)
+        what_if_bar.addStretch(1)
+        layout.addLayout(what_if_bar)
         self._btn_run.clicked.connect(self._on_run)
         self._btn_export_history.clicked.connect(self._on_export_history)
         self._btn_clear_history.clicked.connect(self._on_clear_history)
         self._btn_save_preset.clicked.connect(self._on_save_preset)
         self._btn_load_preset.clicked.connect(self._on_load_preset)
+        self._btn_what_if.clicked.connect(self._on_what_if)
+        self._auto_rerun.stateChanged.connect(lambda _s: None)  # placeholder
+        # react to availability date change for auto re-run
+        self._avail_date.dateChanged.connect(self._maybe_auto_rerun)
         self._presets_path = Path("config/optimization_presets.json")
 
     def _current_players(self) -> List[Player]:
@@ -133,8 +159,12 @@ class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
             self._results.setItem(row, 1, QTableWidgetItem(p.team or ""))
             self._results.setItem(row, 2, QTableWidgetItem(str(p.q_ttr)))
 
-    def _append_history(self, size: int, result):  # result is LineupResult
+    def _append_history(
+        self, size: int, result, scenario_name: str | None = None
+    ):  # result is LineupResult
         s = ScenarioResult.from_lineup(self._next_id, size=size, result=result)
+        if scenario_name:
+            s.scenario_name = scenario_name
         self._next_id += 1
         self._history.append(s)
         self._history_table.insertRow(self._history_table.rowCount())
@@ -197,6 +227,78 @@ class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
         if idx >= 0:
             self._objective.setCurrentIndex(idx)
         QMessageBox.information(self, "Preset", "Last preset loaded.")
+
+    # --- What-if scenarios ---
+    def _on_what_if(self):  # pragma: no cover - GUI assembly
+        dlg = QDialog(self)
+        dlg.setWindowTitle("What-If Scenarios")
+        v = QVBoxLayout(dlg)
+        info = QLabel(
+            "Enter scenarios (one per line). Format: name | exclude=name1,name2 (names case-insensitive).\n"
+            "Example: No Top | exclude=Alice,Bob"
+        )
+        info.setWordWrap(True)
+        v.addWidget(info)
+        txt = QTextEdit()
+        v.addWidget(txt)
+        btns = QHBoxLayout()
+        run_btn = QPushButton("Run")
+        cancel_btn = QPushButton("Cancel")
+        btns.addWidget(run_btn)
+        btns.addWidget(cancel_btn)
+        btns.addStretch(1)
+        v.addLayout(btns)
+        run_btn.clicked.connect(lambda: (self._exec_what_if(txt.toPlainText()), dlg.accept()))
+        cancel_btn.clicked.connect(dlg.reject)
+        dlg.exec()
+
+    def _exec_what_if(self, text: str):  # pragma: no cover - uses GUI state
+        lines = [l.strip() for l in text.splitlines() if l.strip()]
+        if not lines:
+            return
+        scenarios = []
+        for line in lines:
+            name = line
+            excl = []
+            if "|" in line:
+                left, right = [s.strip() for s in line.split("|", 1)]
+                name = left or name
+                if right.lower().startswith("exclude="):
+                    excl_part = right.split("=", 1)[1]
+                    excl = [x.strip() for x in excl_part.split(",") if x.strip()]
+            scenarios.append({"name": name, "exclude_names": excl})
+        players = self._current_players()
+        avail_date = self._avail_date.date().toPyDate().isoformat()
+        base_next = self._next_id
+        results = run_what_if_scenarios(
+            players,
+            scenarios,
+            size=self._size.value(),
+            objective=self._objective.currentText(),
+            availability_date=avail_date,
+            start_id=base_next,
+        )
+        for r in results:
+            # compute best total contextually again inside append helper
+            # but we already assigned IDs sequentially.
+            self._history.append(r)
+            self._history_table.insertRow(self._history_table.rowCount())
+            best_total = min((h.total_qttr for h in self._history), default=None)
+            if r.objective == "qttr_max":
+                best_total = max((h.total_qttr for h in self._history), default=None)
+            for col, val in enumerate(r.to_row(best_total=best_total)):
+                self._history_table.setItem(
+                    self._history_table.rowCount() - 1, col, QTableWidgetItem(val)
+                )
+        self._next_id = max(self._next_id, (results[-1].id + 1) if results else self._next_id)
+
+    def _maybe_auto_rerun(self):  # pragma: no cover - GUI
+        if self._auto_rerun.isChecked():
+            self._on_run()
+
+    # Public helper so other tabs (e.g., PlayersTab) can notify changes
+    def notify_players_changed(self):  # pragma: no cover - GUI
+        self._maybe_auto_rerun()
 
 
 __all__ = ["OptimizationTab"]
