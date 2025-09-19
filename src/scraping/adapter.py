@@ -17,8 +17,10 @@ import requests
 
 from .parse_club import parse_club_overview  # type: ignore
 from .parse_team import parse_team_players
-from .models import ClubTeam
+from .parse_division import parse_matchplan
+from .models import ClubTeam, ScheduledMatch
 from data.player import Player
+from data.match import Match
 
 log = logging.getLogger(__name__)
 
@@ -86,4 +88,47 @@ def get_team_players(
     return players
 
 
-__all__ = ["get_club_teams", "get_team_players"]
+def _absolute_url(base_url: str, rel: str) -> str:
+    if rel.startswith("http"):
+        return rel
+    import urllib.parse
+
+    parsed = urllib.parse.urlparse(base_url)
+    domain_root = f"{parsed.scheme}://{parsed.netloc}"
+    return domain_root + rel
+
+
+def get_division_schedule(
+    base_url: str, team: ClubTeam, *, division_html_path: Path | None = None
+) -> List[Match]:
+    """Fetch division schedule and convert to Match objects.
+
+    Currently parses a single division page (both halves if present)."""
+    if not team.division_url:
+        raise ValueError("ClubTeam.division_url missing; cannot import schedule")
+    division_url = _absolute_url(base_url, team.division_url)
+    if division_html_path and division_html_path.exists():
+        html = division_html_path.read_text(encoding="utf-8")
+    else:
+        html = _fetch(division_url)
+    scheduled: List[ScheduledMatch] = parse_matchplan(html, half=None)
+    matches: List[Match] = []
+    for sm in scheduled:
+        m = Match(
+            match_date=sm.date,
+            home_team=sm.home,
+            away_team=sm.away,
+            notes=f"Half {sm.half}" + (f" | {sm.status_flag}" if sm.status_flag else ""),
+        )
+        if sm.match_report_url:
+            m.report_url = _absolute_url(base_url, sm.match_report_url)
+        if sm.home_score is not None and sm.away_score is not None:
+            m.home_score = sm.home_score
+            m.away_score = sm.away_score
+            m.completed = True
+        matches.append(m)
+    log.info("Converted %d scheduled matches", len(matches))
+    return matches
+
+
+__all__ = ["get_club_teams", "get_team_players", "get_division_schedule"]

@@ -122,11 +122,11 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
         self._calendar = QCalendarWidget()
         self._calendar.selectionChanged.connect(self._on_date)
         body.addWidget(self._calendar, 1)
-        self._table = QTableWidget(0, 8)
+        self._table = QTableWidget(0, 9)
         self._table.setHorizontalHeaderLabels(
-            ["Date", "Home", "Away", "Loc", "Notes", "H", "A", "Done"]
+            ["Date", "Home", "Away", "Loc", "Notes", "H", "A", "Done", "Report"]
         )
-        self._table.itemDoubleClicked.connect(self._on_edit)
+        self._table.itemDoubleClicked.connect(self._on_table_double_click)
         body.addWidget(self._table, 2)
         layout.addLayout(body)
         # stats panel
@@ -184,6 +184,10 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
                 row, 6, QTableWidgetItem("" if m.away_score is None else str(m.away_score))
             )
             self._table.setItem(row, 7, QTableWidgetItem("Y" if m.completed else ""))
+            link_cell = QTableWidgetItem("🔗" if getattr(m, "report_url", None) else "")
+            if getattr(m, "report_url", None):
+                link_cell.setToolTip(getattr(m, "report_url"))
+            self._table.setItem(row, 8, link_cell)
         # highlight conflicts (simple: duplicate team on same date)
         conflicts = detect_conflicts(self._matches)
         conflict_ids = {cid for pair in conflicts for cid in pair}
@@ -224,6 +228,30 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
             if m.match_date.isoformat() == date_str and m.home_team == home and m.away_team == away:
                 return m
         return None
+
+    def _on_table_double_click(self, item):  # pragma: no cover - GUI interaction
+        # If report column clicked and URL exists open in default browser, else edit
+        col = item.column()
+        if col == 8:  # Report column
+            row = item.row()
+            date_str = self._table.item(row, 0).text()
+            home = self._table.item(row, 1).text()
+            away = self._table.item(row, 2).text()
+            for m in self._matches:
+                if (
+                    m.match_date.isoformat() == date_str
+                    and m.home_team == home
+                    and m.away_team == away
+                ):
+                    url = getattr(m, "report_url", None)
+                    if url:
+                        import webbrowser
+
+                        webbrowser.open(url)
+                        return
+            return
+        # fallback to edit dialog
+        self._on_edit()
 
     # Slots
     def _on_date(self):
@@ -304,6 +332,11 @@ class MatchesTab(QWidget):  # pragma: no cover - heavy GUI
 
     def matches(self) -> List[Match]:
         return [m.clone() for m in self._matches]
+
+    def add_matches(self, matches: List[Match]):  # pragma: no cover - bulk
+        for m in matches:
+            self._matches.append(m.clone())
+        self._refresh()
 
 
 __all__ = ["MatchesTab", "MatchDialog"]

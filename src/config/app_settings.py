@@ -11,6 +11,7 @@ DEFAULT_CONFIG = {
     "theme": "system",  # dark | light | system
     "window": {"width": 1200, "height": 800},
     "scraping": {"rate_limit_seconds": 2.0, "cache_ttl_minutes": 60},
+    "recent": {},  # last used scraping context
 }
 
 CONFIG_DIR = Path("config")
@@ -46,6 +47,23 @@ class AppSettings:
     @property
     def cache_ttl_minutes(self) -> int:
         return int(self.raw.get("scraping", {}).get("cache_ttl_minutes", 60))
+
+    # Recent convenience accessors
+    @property
+    def last_club_url(self) -> str | None:
+        return self.raw.get("recent", {}).get("last_club_url")
+
+    @property
+    def last_team_name(self) -> str | None:
+        return self.raw.get("recent", {}).get("last_team_name")
+
+    @property
+    def last_team_id(self) -> str | None:
+        return self.raw.get("recent", {}).get("last_team_id")
+
+    @property
+    def last_division_url(self) -> str | None:
+        return self.raw.get("recent", {}).get("last_division_url")
 
 
 def load_settings() -> AppSettings:

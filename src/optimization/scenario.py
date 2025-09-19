@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from dataclasses import dataclass, field
-from typing import List, Dict, Any
+from typing import List
 from datetime import datetime
 from optimization.optimizer import LineupResult
 
@@ -31,7 +31,8 @@ class ScenarioResult:
             players=[p.to_dict() for p in result.players],
         )
 
-    def to_row(self) -> list[str]:  # for table display
+    def to_row(self, best_total: int | None = None) -> list[str]:  # for table display
+        delta = "" if best_total is None else str(self.total_qttr - best_total)
         return [
             str(self.id),
             self.timestamp.split("T")[-1],
@@ -40,6 +41,7 @@ class ScenarioResult:
             str(self.total_qttr),
             f"{self.average_qttr:.1f}",
             str(self.spread),
+            delta,
         ]
 
 

@@ -75,9 +75,9 @@ class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
         history_bar.addWidget(self._btn_load_preset)
         history_bar.addStretch(1)
         layout.addLayout(history_bar)
-        self._history_table = QTableWidget(0, 7)
+        self._history_table = QTableWidget(0, 8)
         self._history_table.setHorizontalHeaderLabels(
-            ["ID", "Time", "Obj", "Size", "Total", "Avg", "Spread"]
+            ["ID", "Time", "Obj", "Size", "Total", "Avg", "Spread", "BestDelta"]
         )
         layout.addWidget(self._history_table)
         self._btn_run.clicked.connect(self._on_run)
@@ -138,7 +138,12 @@ class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
         self._next_id += 1
         self._history.append(s)
         self._history_table.insertRow(self._history_table.rowCount())
-        for col, val in enumerate(s.to_row()):
+        # Determine current best total to compute delta display
+        best_total = min((h.total_qttr for h in self._history), default=None)
+        # For objective qttr_max we want highest total (so delta vs max); adjust logic
+        if s.objective == "qttr_max":
+            best_total = max((h.total_qttr for h in self._history), default=None)
+        for col, val in enumerate(s.to_row(best_total=best_total)):
             self._history_table.setItem(
                 self._history_table.rowCount() - 1, col, QTableWidgetItem(val)
             )

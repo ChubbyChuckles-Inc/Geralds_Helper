@@ -12,7 +12,7 @@ from typing import List, Optional
 import re
 
 
-@dataclass(slots=True)
+@dataclass
 class ClubTeam:
     """Represents a team row from the club overview page."""
 
@@ -32,7 +32,7 @@ class ClubTeam:
             )
 
 
-@dataclass(slots=True)
+@dataclass
 class DivisionTeam:
     name: str
     team_url: Optional[str] = None
@@ -45,7 +45,7 @@ class DivisionTeam:
             )
 
 
-@dataclass(slots=True)
+@dataclass
 class ScheduledMatch:
     """Represents a single scheduled (or completed) match from a Spielplan table."""
 
@@ -78,7 +78,7 @@ class ScheduledMatch:
             self.away_score = int(m.group(2))
 
 
-@dataclass(slots=True)
+@dataclass
 class Division:
     name: str
     division_id: str

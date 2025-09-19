@@ -76,3 +76,29 @@ def test_parse_team_players():
     assert len(players) == 2
     assert players[0].name.startswith("Patrick")
     assert players[0].live_pz == 1812
+
+
+ALT_TEAM_PAGE_FIXTURE = """
+<html><body>
+ <table>
+  <tbody>
+  <tr class="ui-widget-header"><td></td><td align="right">Pos</td><td></td><td>Spieler</td><td>Kennz</td><td align="right">ST</td><td align="center">PK1</td><td align="center">PK2</td><td align="center">PK3</td><td align="center">Gesamt</td><td align="right">LivePZ</td><td></td></tr>
+  <tr id="Spieler_129868_1"><td></td><td align="right">1.</td><td></td><td><a href="?L1=E&L2=TT&L3=Spieler&L3P=114277">Patrick Stein</a></td><td></td><td align="right">1</td><td align="center">0:2</td><td></td><td></td><td align="center">0:2</td><td align="right">1812</td><td></td></tr>
+  <tr id="Spieler_129868_2"><td></td><td align="right">2.</td><td></td><td><a href="?L1=E&L2=TT&L3=Spieler&L3P=121975">Sinh Loc Ngo</a></td><td></td><td></td><td></td><td></td><td></td><td></td><td align="right">1756</td><td></td></tr>
+  <tr id="Spieler_129868_3"><td></td><td align="right">3.</td><td></td><td><a href="?L1=E&L2=TT&L3=Spieler&L3P=134146">Sarah Uecker</a></td><td></td><td align="right">1</td><td align="center">1:1</td><td></td><td></td><td align="center">1:1</td><td align="right">1760</td><td></td></tr>
+  <tr class="ui-widget-header"><td></td><td></td><td></td><td colspan="3">Gesamt</td><td align="center">1:3</td><td align="center">0:4</td><td align="center">1:3</td><td align="center">2:10</td><td></td><td></td></tr>
+  </tbody>
+ </table>
+</body></html>
+"""
+
+
+def test_parse_team_players_alternate_layout():
+    players = parse_team_players(ALT_TEAM_PAGE_FIXTURE)
+    # Should parse at least 3 players before the summary row
+    assert len(players) >= 3
+    names = [p.name for p in players]
+    assert any("Patrick" in n for n in names)
+    # Ratings should include 1812 and 1756
+    ratings = {p.live_pz for p in players if p.live_pz}
+    assert 1812 in ratings and 1756 in ratings

@@ -130,6 +130,8 @@ class MainWindow(QMainWindow):
         btn_load_team = QPushButton("Load Team…")
         btn_export = QPushButton("Export JSON")
         btn_import = QPushButton("Import JSON")
+        btn_export_csv = QPushButton("Export CSV")
+        btn_import_csv = QPushButton("Import CSV")
         btn_bulk_clear = QPushButton("Clear Avail")
         btn_bulk_team = QPushButton("Set Team…")
         toolbar.addWidget(self._player_search)
@@ -137,6 +139,8 @@ class MainWindow(QMainWindow):
         toolbar.addWidget(btn_load_team)
         toolbar.addWidget(btn_export)
         toolbar.addWidget(btn_import)
+        toolbar.addWidget(btn_export_csv)
+        toolbar.addWidget(btn_import_csv)
         toolbar.addWidget(btn_bulk_clear)
         toolbar.addWidget(btn_bulk_team)
         layout.addLayout(toolbar)
@@ -159,7 +163,14 @@ class MainWindow(QMainWindow):
         splitter.setStretchFactor(1, 2)
         layout.addWidget(splitter)
         self._wire_player_tab(
-            btn_add, btn_load_team, btn_export, btn_import, btn_bulk_clear, btn_bulk_team
+            btn_add,
+            btn_load_team,
+            btn_export,
+            btn_import,
+            btn_export_csv,
+            btn_import_csv,
+            btn_bulk_clear,
+            btn_bulk_team,
         )
         self._player_table.itemDoubleClicked.connect(self._on_player_double_click)
         return container
@@ -170,6 +181,8 @@ class MainWindow(QMainWindow):
         btn_load_team: QPushButton,
         btn_export: QPushButton,
         btn_import: QPushButton,
+        btn_export_csv: QPushButton,
+        btn_import_csv: QPushButton,
         btn_bulk_clear: QPushButton,
         btn_bulk_team: QPushButton,
     ) -> None:
@@ -178,6 +191,8 @@ class MainWindow(QMainWindow):
         btn_load_team.clicked.connect(self._on_load_team)
         btn_export.clicked.connect(self._on_export_players)
         btn_import.clicked.connect(self._on_import_players)
+        btn_export_csv.clicked.connect(self._on_export_players_csv)
+        btn_import_csv.clicked.connect(self._on_import_players_csv)
         btn_bulk_clear.clicked.connect(self._on_bulk_clear_availability)
         btn_bulk_team.clicked.connect(self._on_bulk_set_team)
         self._player_table.itemSelectionChanged.connect(self._on_player_selection)
@@ -209,6 +224,31 @@ class MainWindow(QMainWindow):
                 players = load_players_json(Path(path))
             except Exception as exc:  # noqa: BLE001
                 QMessageBox.warning(self, "Import", f"Failed to import players: {exc}")
+                return
+            self._player_table.set_players(players)
+            self._refresh_calendar_and_stats()
+
+    def _on_export_players_csv(self) -> None:  # pragma: no cover - dialog
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Export Players (CSV)", "players.csv", "CSV (*.csv)"
+        )
+        if path:
+            from data.serialization import save_players_csv
+
+            try:
+                save_players_csv(self._player_table.players(), Path(path))
+            except Exception as exc:  # noqa: BLE001
+                QMessageBox.warning(self, "Export CSV", f"Failed: {exc}")
+
+    def _on_import_players_csv(self) -> None:  # pragma: no cover - dialog
+        path, _ = QFileDialog.getOpenFileName(self, "Import Players (CSV)", "", "CSV (*.csv)")
+        if path:
+            from data.serialization import load_players_csv
+
+            try:
+                players = load_players_csv(Path(path))
+            except Exception as exc:  # noqa: BLE001
+                QMessageBox.warning(self, "Import CSV", f"Failed: {exc}")
                 return
             self._player_table.set_players(players)
             self._refresh_calendar_and_stats()
@@ -288,6 +328,18 @@ class MainWindow(QMainWindow):
             QMessageBox.information(self, "Load Team", "No players returned.")
             return
         self._player_table.set_players(players)
+        # integrate schedule if available
+        try:
+            matches = dlg.matches()
+            if matches:
+                for i in range(self._tabs.count()):
+                    if self._tabs.tabText(i) == "Matches":
+                        tab = self._tabs.widget(i)
+                        if hasattr(tab, "add_matches"):
+                            tab.add_matches(matches)
+                        break
+        except Exception:
+            pass
         self._refresh_calendar_and_stats()
 
     # ----- Introspection for tests ---------------------------------------

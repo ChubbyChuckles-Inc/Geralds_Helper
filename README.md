@@ -19,8 +19,9 @@ Recent notable additions:
 - Defensive GUI launcher with clearer diagnostics for PyQt6/platform plugin issues
 - Initial league scraping framework (club teams, divisions, match schedules)
   - Extended: score parsing, player roster extraction (LivePZ), caching, Match model conversion (`scripts/scrape_club.py`).
+  - NEW: Robust roster parser now supports alternate team page layout where the header row uses only <td> cells (no <th>) containing tokens like `Spieler`, `Gesamt`, `LivePZ`. This improves compatibility with the live `tischtennislive.de` structure for some divisions.
 
-### NEW: GUI Team Selection & Auto Roster Loading
+### NEW: GUI Team Selection, Async Loading & Schedule Import
 
 You can now populate the Players tab directly from a scraped club team roster:
 
@@ -31,11 +32,27 @@ You can now populate the Players tab directly from a scraped club team roster:
 5. Select the desired team and press `Load Roster`.
 6. The Players table is replaced with parsed players; `LivePZ` values become `Q-TTR` (fallback 1200 if missing).
 
+Async Enhancements (latest):
+
+- Team fetching and roster loading now run in background threads (non-blocking UI).
+- Optional "Import Schedule" checkbox (enabled by default) converts the division Spielplan into Matches automatically.
+- Status messages appear in the main window status bar (e.g. "Fetching club teams…", "Importing schedule…").
+- On success, imported matches populate the Matches tab (including played results where available).
+- Cancellation & Retry: Long-running fetch tasks can be cancelled mid-flight; transient HTTP failures are retried with exponential backoff (jitter to be added in future iteration).
+
+Persistence:
+
+- The app stores recent scraping context in `config/app_settings.json` under `recent` (last club URL, team name/id, division URL) so future UX can preload values (read accessors already exposed in `AppSettings`).
+
 Notes:
 
-- The dialog currently performs synchronous network requests (sufficient for small pages); future async/threaded loading can be added if needed.
-- Match report / division schedule integration is planned for a later enhancement.
-- To override a single team page with an offline file, extend the dialog (placeholder variable `_team_html_path`).
+- For deterministic/offline operation, provide saved HTML snapshots via the dialog. Currently supported overrides:
+  - Club Overview HTML
+  - Team Page HTML (roster)
+  - Division Matchplan HTML
+    Paths are optional; when specified they fully bypass network I/O for that artifact.
+- Schedule import is best-effort; a failure logs a warning but doesn't cancel roster loading.
+- Result scores are marked as completed matches; future matches remain open with notes indicating half and status flag.
 
 Troubleshooting:
 
@@ -146,6 +163,7 @@ Planned next for Matches:
 - Enhanced lineup selection integrating Players tab metadata
 - Persistent reminder storage & snooze/postpone actions
 - Extended statistics visualization (charts, per-team head-to-head)
+- Direct navigation from schedule entries to online match report when URLs captured
 
 ### Current Optimization Tab Features (Expanded Foundation)
 

@@ -19,6 +19,7 @@ class Match:
     home_score: int | None = None
     away_score: int | None = None
     completed: bool = False
+    report_url: str | None = None  # optional link to online match report / preview
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -32,6 +33,7 @@ class Match:
             "home_score": self.home_score,
             "away_score": self.away_score,
             "completed": self.completed,
+            "report_url": self.report_url,
         }
 
     @classmethod
@@ -50,6 +52,7 @@ class Match:
         m.home_score = data.get("home_score")
         m.away_score = data.get("away_score")
         m.completed = bool(data.get("completed", False))
+        m.report_url = data.get("report_url")
         return m
 
     def clone(self) -> "Match":
