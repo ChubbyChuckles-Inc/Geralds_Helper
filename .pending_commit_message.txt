@@ -79,3 +79,15 @@ feat(optimization): exportable markdown report with ASCII chart
 
 All tests pass post feature addition (GUI tests skipped if PyQt6 missing).
 
+feat(optimization): weighted objective, GA fallback, reasoning & warnings
+
+- Added new 'weighted' objective (score = total_qttr - weight_spread * spread) to balance overall strength vs fairness; GUI objective dropdown updated.
+- Implemented genetic algorithm heuristic fallback (population, crossover, mutation) automatically invoked when combination count exceeds configurable threshold (ga_threshold).
+- Added reasoning string (objective, parameters, players, totals, spread) and warnings list to LineupResult; warnings include 'high_spread' and 'heuristic_ga'.
+- Introduced combination counter helper (_nCr) and GA parameters (generations, population, random seed) with deterministic defaults.
+- Added advanced tests (test_optimizer_advanced.py) covering weighted spread preference, GA path invocation, reasoning & warnings.
+- Roadmap updated: genetic algorithm, multi-objective weighting, validation & reasonableness checks marked complete (with inline notes).
+- README updated: Optimization section now documents weighted objective, GA fallback, reasoning/warnings, and refined future plans.
+
+All existing and new tests pass (GUI tests skipped when PyQt6 unavailable).
+

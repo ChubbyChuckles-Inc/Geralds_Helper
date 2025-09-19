@@ -160,13 +160,16 @@ A comprehensive Python-based application for managing table tennis team rosters,
 // Availability-based filtering integrated via GUI date filter (players with empty availability set or matching date retained)
 - [x] Add availability-based optimization considering player schedules
 - [x] Create balance optimization for fair playing time distribution
-- [ ] Implement genetic algorithm for complex multi-constraint optimization
+// Genetic algorithm heuristic fallback added (population-based) for large combination counts (> threshold)
+- [x] Implement genetic algorithm for complex multi-constraint optimization
 // Scenario history + markdown export implemented (what-if runs retained in table)
 - [x] Add simulation scenarios for what-if analysis
 - [ ] Create performance prediction models based on historical data
 - [ ] Implement Monte Carlo simulation for uncertainty analysis
-- [ ] Add multi-objective optimization with user-defined weights
-- [ ] Create optimization result validation and reasonableness checks
+// Weighted objective implemented: total_qttr - weight_spread * spread (configurable factor)
+- [x] Add multi-objective optimization with user-defined weights
+// Basic validation: warnings for high spread & GA heuristic usage; reasoning string recorded
+- [x] Create optimization result validation and reasonableness checks
 
 ## Simulation Engine - Advanced Analytics
 

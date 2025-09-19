@@ -48,7 +48,7 @@ class OptimizationTab(QWidget):  # pragma: no cover - GUI heavy
         controls.addWidget(self._size)
         controls.addWidget(QLabel("Objective:"))
         self._objective = QComboBox()
-        self._objective.addItems(["qttr_max", "balance"])
+        self._objective.addItems(["qttr_max", "balance", "weighted"])
         controls.addWidget(self._objective)
         controls.addWidget(QLabel("Avail Date:"))
         self._avail_date = QDateEdit()

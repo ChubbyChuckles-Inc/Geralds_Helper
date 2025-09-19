@@ -166,11 +166,14 @@ Planned next for Matches:
 - Extended statistics visualization (charts, per-team head-to-head)
 - Direct navigation from schedule entries to online match report when URLs captured
 
-### Current Optimization Tab Features (Expanded Foundation)
+### Current Optimization Tab Features (Expanded Foundation + Advanced Heuristics)
 
-- Lineup size selector and objective dropdown ("qttr_max", "balance")
+- Lineup size selector and objective dropdown ("qttr_max", "balance", "weighted")
 - Availability date filter (players with empty availability = always available; otherwise must match date)
 - Instant brute-force optimization for small rosters (sum of Q-TTR or spread minimization)
+- Automatic heuristic (genetic algorithm) fallback when raw combination count exceeds a configurable threshold (population-based search with crossover & mutation)
+- New weighted objective: maximize `total_qttr - weight_spread * spread` (tunable `weight_spread` factor, default 0.3) balancing strength vs fairness
+- Result reasoning string recorded (objective, parameters, players, totals, spread) + warnings list (e.g., `high_spread`, `heuristic_ga`)
 - Results table listing chosen lineup (Name, Team, Q-TTR)
 - Summary line with total, average, and spread metrics
 - Scenario history table (ID, time, objective, size, totals, spread, BestDelta, Scenario)
@@ -195,11 +198,11 @@ Reporting:
 Planned next for Optimization:
 
 - Multi-scenario comparative analytics (side-by-side performance deltas)
-  - (Foundational delta tracking in place via BestDelta column and Scenario comparisons)
-- Reasoning / rationale narrative for lineup selection
-- Genetic / heuristic algorithms for larger pools
-- Multi-objective weighting (blend balance vs total strength)
-- Validation and reasonableness checks (flag extreme spreads)
+  - (BestDelta + scenario history already available; next is richer delta matrix)
+- User-exposed tuning controls for GA parameters & weight_spread in GUI
+- Narrative markdown generation leveraging reasoning metadata (human readable paragraphs)
+- Additional validation heuristics (e.g., per-player fatigue/rotation fairness, duplicate team representation rules)
+- Monte Carlo and predictive modeling layers (probabilistic outcome analysis)
 
 ### Setup Steps (Legacy Template Instructions)
 
