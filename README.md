@@ -16,6 +16,7 @@ Recent notable additions:
 - Match reminders with timer-driven popup notifications (in-memory)
 - Aggregate match statistics panel (wins / draws / losses + goals)
 - Scenario history for optimization runs with markdown export & preset save/load
+- Added BestDelta column in optimization history indicating relative improvement vs. best total so far (negative = regression, 0 = new best)
 - Defensive GUI launcher with clearer diagnostics for PyQt6/platform plugin issues
 - Initial league scraping framework (club teams, divisions, match schedules)
   - Extended: score parsing, player roster extraction (LivePZ), caching, Match model conversion (`scripts/scrape_club.py`).
@@ -130,7 +131,7 @@ Important: Always run the GUI using the virtual environment interpreter. If you 
 - Roster table with inline editable columns: `Name`, `Team`, `Q-TTR`
 - Add Player dialog with validation (name required, rating >= 0)
 - Case-insensitive live filtering by name or team
-- JSON import/export (CSV groundwork present; coming soon)
+- JSON import/export (CSV import/export now implemented via toolbar buttons; round-trip unit test validates correctness)
 - Deterministic, unit-tested model (`Player`) and table behaviors
 - Availability management: calendar toggling (counts shown in `Avail Days` column)
 - Player profile dialog (double-click row) with Q-TTR edit, team, and photo path field
@@ -172,7 +173,7 @@ Planned next for Matches:
 - Instant brute-force optimization for small rosters (sum of Q-TTR or spread minimization)
 - Results table listing chosen lineup (Name, Team, Q-TTR)
 - Summary line with total, average, and spread metrics
-- Scenario history table (ID, time, objective, size, totals, spread)
+- Scenario history table (ID, time, objective, size, totals, spread, BestDelta)
 - Markdown export of scenario history (`optimization_history.md`)
 - Preset save/load (size + objective) persisted to `config/optimization_presets.json`
 - Deterministic test coverage: optimizer objectives, scenario export, availability filtering
@@ -180,6 +181,7 @@ Planned next for Matches:
 Planned next for Optimization:
 
 - Multi-scenario comparative analytics (side-by-side performance deltas)
+  * (Foundational delta tracking in place via BestDelta column)
 - Reasoning / rationale narrative for lineup selection
 - Genetic / heuristic algorithms for larger pools
 - Multi-objective weighting (blend balance vs total strength)
@@ -324,7 +326,7 @@ Planned next for Optimization:
   ```powershell
   python -m scripts.scrape_club "<club_overview_url>"
   ```
-- Tests rely on minimal synthetic fixtures; they don't perform live network I/O.
+- Tests rely on minimal synthetic fixtures; they don't perform live network I/O. Parser heuristics now handle compact 7-column match plan tables (Nr/Tag/Datum/Zeit/Home/Away/Result) in addition to richer layouts with status/hall columns.
 - Respect robots/traffic: default throttle 0.5s; avoid parallel flooding.
 
 - Missing PyQt6: Ensure you are in the virtual environment and run `pip install -r requirements.txt`.

@@ -49,27 +49,35 @@ def parse_matchplan(html: str, half: int | None = None) -> list[ScheduledMatch]:
     match_rows = soup.select("tr[id^=Spiel]")
 
     if not match_rows:
-        # Fallback: previous generic approach (may still work for old markup)
+        # Fallback: locate first table whose header mentions both home/away columns
         candidate = None
         for tbl in soup.find_all("table"):
-            header_cells = [c.get_text(strip=True) for c in tbl.find_all(["th", "td"])[:12]]
-            header_text = "|".join(header_cells)
-            if "Heimmannschaft" in header_text and "Gastmannschaft" in header_text:
+            header_cells = [c.get_text(strip=True) for c in tbl.find_all(["th", "td"])[:15]]
+            header_text = "|".join(header_cells).lower()
+            if "heimmannschaft" in header_text and "gastmannschaft" in header_text:
                 candidate = tbl
                 break
-        if not candidate:
+        if candidate is None:
             return out
-        match_rows = candidate.find_all("tr")
+        # Accept all body rows except the header.
+        all_rows = candidate.find_all("tr")
+        if len(all_rows) <= 1:
+            return out
+        # Mark these as match rows even if they lack id attributes.
+        match_rows = [r for r in all_rows[1:] if r.find_all("td")]  # non-empty data rows
 
     SCORE_RE = re.compile(r"^(\d+):(\d+)")
     TIME_RE = re.compile(r"^\d{1,2}:\d{2}$")
 
     for tr in match_rows:
-        if not tr.get("id", "").startswith("Spiel"):
-            # skip non-match rows that may be inside candidate table
-            continue
+        if tr.get("id") and not tr.get("id", "").startswith("Spiel"):
+            continue  # explicit id but not a Spiel row
         tds = tr.find_all("td")
-        if len(tds) < 8:  # need at least up to away team
+        # Some simple match plan layouts have exactly 7 columns:
+        # Nr | Tag | Datum | Zeit | Heimmannschaft | Gastmannschaft | Ergebnis
+        # Older / richer layouts may insert extra status or hall columns. Our
+        # earlier threshold of 8 skipped the minimal 7-col variant used in tests.
+        if len(tds) < 7:
             continue
 
         # Extract match number (second cell usually). If that fails, look for first purely numeric cell.

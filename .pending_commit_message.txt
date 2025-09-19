@@ -44,3 +44,15 @@ feat(optimization): scenario history, availability filtering, presets & export
 - Roadmap updated (availability-based optimization, what-if scenarios marked complete)
 - README expanded Optimization section with new capabilities
 
+feat: players CSV import/export, optimization BestDelta, and robust matchplan parsing
+
+- Players Tab: Added CSV Import and Export toolbar buttons with validation; implemented round-trip unit test (tests/test_csv_and_optimization.py) covering model persistence.
+- Optimization: Extended Scenario history with BestDelta column showing delta vs best total so far; updated ScenarioResult.to_row() and GUI table to include the new column; added test coverage.
+- Scraping: Improved parse_matchplan to accept minimal 7-column match plan tables (Nr/Tag/Datum/Zeit/Home/Away/Result) fixing failing test fixture; added explanatory comments.
+- Compatibility: Removed dataclass slots usage for Python 3.8 environment support (scraping/models.py, parse_team.py).
+- Testing: GUI import smoke tests now gracefully skip when PyQt6 is not installed (tests/test_gui_imports.py).
+- Documentation: Updated README with CSV feature, BestDelta explanation, and parser robustness note.
+- Roadmap: Marked CSV import/export and optimization history tracking tasks as completed; clarified implemented scope.
+
+No functional changes outside described areas; all tests pass (non-GUI tests; GUI tests skipped if PyQt6 missing).
+

@@ -37,7 +37,7 @@ A comprehensive Python-based application for managing table tennis team rosters,
 - [x] Create player addition dialog with form validation (QLineEdit, QComboBox)
 - [x] Implement player editing functionality with inline editing support
 - [x] Add player search and filtering capabilities with QLineEdit search box
-- [x] Create player import/export functionality (CSV/JSON support)  # JSON implemented, CSV stubs present
+- [x] Create player import/export functionality (CSV/JSON support)  # JSON + CSV export/import buttons implemented (round-trip tested)
 - [x] Implement player availability calendar widget using QCalendarWidget (toggle availability + counts)
 - [x] Add player statistics display with Q-TTR history charts (placeholder stats pane; charts pending)
 - [x] Create player profile dialog with detailed information and photo support (photo path field)
@@ -69,7 +69,7 @@ A comprehensive Python-based application for managing table tennis team rosters,
 - [x] Add results comparison table with different optimization scenarios (single table baseline)
 - [x] Create lineup suggestion interface with reasoning explanations (summary stats only; reasoning pending)
 - [ ] Implement what-if analysis tools for different player availability scenarios
-- [ ] Add optimization history tracking and comparison features
+- [x] Add optimization history tracking and comparison features  # Scenario table retains runs + BestDelta column
 - [ ] Create exportable optimization reports with charts and recommendations
 - [ ] Implement real-time optimization updates as availability changes
 - [ ] Add optimization preset saving and loading functionality
@@ -141,7 +141,7 @@ A comprehensive Python-based application for managing table tennis team rosters,
 
 ## Data Management - Import/Export
 
-- [ ] Implement CSV import/export for player rosters with validation
+- [x] Implement CSV import/export for player rosters with validation  # Implemented with GUI buttons + tests
 - [ ] Create JSON data format support for complete application state
 - [ ] Add Excel import/export functionality for compatibility
 - [ ] Implement PDF report generation for match schedules and analysis
