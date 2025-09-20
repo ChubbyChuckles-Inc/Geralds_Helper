@@ -3,6 +3,7 @@
 Provides helper to evaluate multiple candidate lineups against an opponent
 roster using existing prediction facilities.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass

@@ -19,7 +19,11 @@ def test_opponent_analysis():
     pool = _players()
     lineup1 = pool[:3]
     lineup2 = pool[1:4]
-    opponent = [Player(name="X", q_ttr=1550, team="O"), Player(name="Y", q_ttr=1500, team="O"), Player(name="Z", q_ttr=1490, team="O")]
+    opponent = [
+        Player(name="X", q_ttr=1550, team="O"),
+        Player(name="Y", q_ttr=1500, team="O"),
+        Player(name="Z", q_ttr=1490, team="O"),
+    ]
     evals = evaluate_lineups_against_opponent([lineup1, lineup2], opponent)
     assert len(evals) == 2
     rec = best_lineup_recommendation([lineup1, lineup2], opponent)

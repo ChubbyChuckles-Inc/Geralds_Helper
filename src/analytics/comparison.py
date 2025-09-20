@@ -2,6 +2,7 @@
 
 Generates pairwise delta matrices for a numeric metric across scenarios.
 """
+
 from __future__ import annotations
 
 from typing import Sequence, Dict, List, Callable

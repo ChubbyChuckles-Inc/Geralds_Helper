@@ -1,4 +1,5 @@
 """Sensitivity analysis utilities for optimization parameters."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
