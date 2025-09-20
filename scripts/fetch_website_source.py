@@ -172,6 +172,30 @@ def fetch_team_roster_sources(team_roster_links: list[str], experiment_dir: str 
     return saved_files
 
 
+def extract_team_names_and_divisions(html_content: str) -> dict:
+    """
+    Extract team names and divisions from the HTML table.
+
+    Args:
+        html_content: The HTML content containing the team overview table
+
+    Returns:
+        Dictionary mapping team IDs (L2P values) to (team_name, division_name) tuples
+    """
+    teams_info = {}
+
+    # Find all team rows in the table
+    team_rows = re.findall(r'<tr class="(?:ContentText|CONTENTTABLETEXT2ndLine)">.*?<td[^>]*>.*?</td>.*?<td[^>]*>([^<]+)</td>.*?<td[^>]*>([^<]+)</td>.*?<a href="[^"]*L2P=([^&"]+)', html_content, re.DOTALL | re.IGNORECASE)
+
+    for team_name, division_name, team_id in team_rows:
+        clean_team_name = team_name.strip()
+        clean_division_name = division_name.strip()
+        if clean_team_name and clean_division_name and team_id:
+            teams_info[team_id] = (clean_team_name, clean_division_name)
+
+    return teams_info
+
+
 def extract_player_data_from_rosters(experiment_dir: str = "experiment") -> dict:
     """
     Extract player names and LivePZ values from all team roster HTML files.
@@ -365,6 +389,9 @@ def main():
         print(f"\nFiles saved to: {experiment_dir}/")
         print(f"{'='*60}")
 
+        # Extract team names and divisions from the main content
+        teams_info = extract_team_names_and_divisions(content)
+
         # Extract player data from all roster files
         print(f"\n{'='*60}")
         print("EXTRACTING PLAYER DATA:")
@@ -372,15 +399,23 @@ def main():
 
         players_data = extract_player_data_from_rosters(experiment_dir)
 
-        # Display extracted player data
+        # Display extracted player data with actual team names
         total_players = 0
         for team_id in sorted(players_data.keys()):
             players = players_data[team_id]
             total_players += len(players)
-            print(f"\nTeam {team_id} ({len(players)} players):")
-            print("-" * 40)
+
+            # Get team name and division
+            if team_id in teams_info:
+                team_name, division_name = teams_info[team_id]
+                team_display = f"{team_name} / {division_name}"
+            else:
+                team_display = f"Team {team_id}"
+
+            print(f"\n{team_display} ({len(players)} players):")
+            print("-" * 60)
             for i, (player_name, live_pz) in enumerate(players, 1):
-                print(f"  {i:2d}. {player_name:<30} LivePZ: {live_pz}")
+                print(f"  {i:2d}. {player_name:<35} LivePZ: {live_pz}")
 
         print(f"\n{'='*60}")
         print("PLAYER DATA SUMMARY:")
