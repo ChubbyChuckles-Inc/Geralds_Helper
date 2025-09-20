@@ -175,6 +175,9 @@ Planned next for Matches:
 - New weighted objective: maximize `total_qttr - weight_spread * spread` (tunable `weight_spread` factor, default 0.3) balancing strength vs fairness
 - Result reasoning string recorded (objective, parameters, players, totals, spread) + warnings list (e.g., `high_spread`, `heuristic_ga`)
 - Performance prediction utilities: logistic win probability model + Monte Carlo simulation (empirical vs theoretical calibration)
+- Opponent analysis & recommendations: evaluate candidate lineups vs opponent roster using predicted win probabilities.
+- Weight sensitivity: evaluate multiple `weight_spread` factors to choose balanced strength/fairness trade-off.
+- Comparative delta matrix: pairwise scenario metric differences (e.g., total Q-TTR) rendered as signed table for quick diagnostics.
 - Results table listing chosen lineup (Name, Team, Q-TTR)
 - Summary line with total, average, and spread metrics
 - Scenario history table (ID, time, objective, size, totals, spread, BestDelta, Scenario)
@@ -207,8 +210,7 @@ These utilities are currently CLI/test-facing; future GUI integration will expos
 
 Planned next for Optimization:
 
-- Multi-scenario comparative analytics (side-by-side performance deltas)
-  - (BestDelta + scenario history already available; next is richer delta matrix)
+- Multi-scenario comparative analytics (extended visualization beyond current delta matrix export)
 - User-exposed tuning controls for GA parameters & weight_spread in GUI
 - Narrative markdown generation leveraging reasoning metadata (human readable paragraphs)
 - Additional validation heuristics (e.g., per-player fatigue/rotation fairness, duplicate team representation rules)

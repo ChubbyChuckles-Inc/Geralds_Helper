@@ -177,14 +177,16 @@ A comprehensive Python-based application for managing table tennis team rosters,
 - [x] Implement statistical analysis of team performance trends
 // Outcome prediction wrapper (binary win probability) implemented in prediction.predict_match_outcome
 - [x] Create predictive modeling for match outcomes
-- [ ] Add opponent analysis and strategic recommendations
+// Opponent analysis + lineup recommendation implemented (analytics/opponent.py)
+- [x] Add opponent analysis and strategic recommendations
 - [ ] Implement season planning and long-term optimization
 - [ ] Create performance benchmarking against league standards
 - [ ] Add risk analysis for injury/availability impacts
 - [ ] Implement machine learning models for pattern recognition
 - [ ] Create automated insights and recommendation engine
-- [ ] Add comparative analysis tools for different strategies
-- [ ] Implement sensitivity analysis for key parameters
+// Delta matrix & weight_spread sensitivity implemented (analytics/comparison.py, analytics/sensitivity.py)
+- [x] Add comparative analysis tools for different strategies
+- [x] Implement sensitivity analysis for key parameters
 
 ## Testing & Quality Assurance
 

@@ -111,3 +111,14 @@ feat(analytics): rating trends & match outcome prediction wrapper
 
 All tests (new + existing) pass in isolation; no existing APIs changed.
 
+feat(analytics): opponent analysis, weight sensitivity & comparative delta matrix
+
+- Added opponent lineup evaluation (`analytics/opponent.py`) providing probability-ranked lineup recommendations via existing prediction engine.
+- Implemented weight spread sensitivity sweep (`analytics/sensitivity.py`) to explore weighted objective performance vs spread penalty parameter.
+- Introduced comparative delta matrix utilities (`analytics/comparison.py`) for pairwise metric differences + markdown export.
+- Added tests (`tests/test_advanced_analysis.py`) covering opponent evaluation ordering, sensitivity result set, and delta matrix correctness.
+- Updated roadmap marking opponent analysis, comparative tools, and sensitivity analysis tasks complete (with inline rationale notes).
+- README Analytics section expanded with usage and examples for new analysis capabilities.
+
+All existing tests plus new advanced analysis tests pass (GUI tests still conditionally skipped if PyQt6 absent). No optimizer core changes.
+
