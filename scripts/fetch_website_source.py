@@ -88,9 +88,8 @@ def extract_team_links(html_content: str) -> tuple[list[str], list[str], list[st
     # Clean up the links by removing duplicates
     team_roster_links = list(set(team_roster_links))
 
-    # Generate match plan links for both halves from team roster links
-    first_half_match_plan_links = []
-    second_half_match_plan_links = []
+    # Generate ranking table links from team roster links
+    ranking_table_links = []
     root_url = "https://leipzig.tischtennislive.de/"
 
     for roster_link in team_roster_links:
@@ -98,14 +97,12 @@ def extract_team_links(html_content: str) -> tuple[list[str], list[str], list[st
         division_part = re.match(r'(\?[^&]*&L2=TTStaffeln&L2P=[^&]*)', roster_link)
         if division_part:
             division_url = division_part.group(1)
-            # Build the match plan links for both halves
-            first_half_link = f"{root_url}{division_url}&L3=Spielplan&L3P=1"
-            second_half_link = f"{root_url}{division_url}&L3=Spielplan&L3P=2"
+            # Build the ranking table link
+            ranking_link = f"{root_url}{division_url}&L3=Tabelle"
 
-            first_half_match_plan_links.append(first_half_link)
-            second_half_match_plan_links.append(second_half_link)
+            ranking_table_links.append(ranking_link)
 
-    return team_roster_links, first_half_match_plan_links, second_half_match_plan_links
+    return team_roster_links, ranking_table_links
 
 
 def fetch_team_roster_sources(team_roster_links: list[str], experiment_dir: str = "experiment") -> list[str]:
@@ -207,6 +204,250 @@ def extract_team_names_and_divisions(html_content: str) -> dict:
                 teams_info[team_id] = (clean_team_name, clean_division_name)
 
     return teams_info
+
+
+def fetch_ranking_table_sources(ranking_table_links: list[str], teams_info: dict, experiment_dir: str = "experiment") -> list[str]:
+    """
+    Fetch the source code of each ranking table page and save to experiment directory.
+
+    Args:
+        ranking_table_links: List of ranking table URLs to fetch
+        teams_info: Dictionary mapping team IDs to (team_name, division_name) tuples
+        experiment_dir: Directory to save the files
+
+    Returns:
+        List of file paths where ranking table sources were saved
+    """
+    saved_files = []
+    root_url = "https://leipzig.tischtennislive.de/"
+
+    for i, ranking_link in enumerate(ranking_table_links, 1):
+        try:
+            # Add root URL if not present
+            if not ranking_link.startswith('http'):
+                full_url = f"{root_url}{ranking_link}"
+            else:
+                full_url = ranking_link
+
+            print(f"Fetching ranking table {i}/{len(ranking_table_links)}: {full_url}")
+
+            # Create request with headers to mimic a browser
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+
+            req = urllib.request.Request(full_url, headers=headers)
+            with urllib.request.urlopen(req) as response:
+                content = response.read().decode('utf-8')
+
+            # Generate filename based on division name
+            # Extract L2P (division ID) from the URL
+            division_id = re.search(r'L2P=([^&]+)', ranking_link)
+            if division_id:
+                div_id = division_id.group(1)
+                # Get division name from teams_info
+                if div_id in teams_info:
+                    team_name, division_name = teams_info[div_id]
+                    # Clean division name for filename (remove special characters)
+                    clean_division_name = re.sub(r'[^\w\s-]', '', division_name).strip()
+                    clean_division_name = re.sub(r'[-\s]+', '_', clean_division_name)
+                    filename = f"ranking_table_{clean_division_name}.html"
+                else:
+                    filename = f"ranking_table_division_{div_id}.html"
+            else:
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                filename = f"ranking_table_{i}_{timestamp}.html"
+
+            # Ensure experiment directory exists
+            os.makedirs(experiment_dir, exist_ok=True)
+
+            # Full path for output file
+            output_path = os.path.join(experiment_dir, filename)
+
+            # Save content to file
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(content)
+
+            saved_files.append(output_path)
+            print(f"  Saved to: {output_path}")
+
+        except urllib.error.HTTPError as e:
+            print(f"  HTTP Error {e.code}: {e.reason} for {full_url}")
+        except urllib.error.URLError as e:
+            print(f"  URL Error: {e.reason} for {full_url}")
+        except Exception as e:
+            print(f"  Unexpected error: {e} for {full_url}")
+
+    return saved_files
+
+
+def extract_ranking_data_from_pages(experiment_dir: str = "experiment", teams_info: dict = None) -> dict:
+    """
+    Extract team names and roster links from all ranking table HTML files.
+
+    Args:
+        experiment_dir: Directory containing the ranking table HTML files
+        teams_info: Dictionary mapping team IDs to (team_name, division_name) tuples
+
+    Returns:
+        Dictionary with division information and team roster links
+    """
+    import glob
+
+    # Find all ranking table files
+    ranking_files = glob.glob(os.path.join(experiment_dir, "ranking_table_*.html"))
+
+    all_ranking_data = {}
+
+    for ranking_file in ranking_files:
+        try:
+            # Extract division name from filename
+            filename = os.path.basename(ranking_file)
+            # Remove the .html extension and ranking_table_ prefix
+            division_name = filename.replace('ranking_table_', '').replace('.html', '')
+            # Clean up the division name
+            division_name = re.sub(r'_+', ' ', division_name).strip()
+
+            # Read the HTML content
+            with open(ranking_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+
+            # Extract team data from the "Mannschaften" section
+            teams = []
+
+            # Look for the Mannschaften section and extract team names and links
+            # Pattern to find the Mannschaften ul/li structure
+            mannschaften_pattern = r'<li[^>]*>.*?href="[^"]*"[^>]*>Mannschaften</a>.*?<ul[^>]*>(.*?)</ul>'
+            mannschaften_match = re.search(mannschaften_pattern, content, re.DOTALL | re.IGNORECASE)
+
+            if mannschaften_match:
+                mannschaften_content = mannschaften_match.group(1)
+
+                # Extract individual team entries
+                team_pattern = r'<li[^>]*>.*?href="([^"]*)"[^>]*>.*?span[^>]*>([^<]+)</span>'
+                team_matches = re.findall(team_pattern, mannschaften_content, re.DOTALL | re.IGNORECASE)
+
+                for roster_link, team_name in team_matches:
+                    clean_team_name = team_name.strip()
+
+                    if clean_team_name and roster_link:
+                        teams.append({
+                            'team_name': clean_team_name,
+                            'roster_link': roster_link
+                        })
+
+            if teams:
+                # Get division ID from teams_info if available
+                division_id = None
+                for team_id, (team_name, div_name) in teams_info.items():
+                    if div_name == division_name:
+                        division_id = team_id
+                        break
+
+                all_ranking_data[division_name] = {
+                    'division_id': division_id,
+                    'teams': teams,
+                    'total_teams': len(teams)
+                }
+                print(f"  Extracted {len(teams)} teams from {division_name}")
+
+        except Exception as e:
+            print(f"  Error processing {ranking_file}: {e}")
+
+    return all_ranking_data
+
+
+def fetch_all_team_rosters(ranking_data: dict, experiment_dir: str = "experiment") -> dict:
+    """
+    Fetch all team rosters from all divisions based on ranking data.
+
+    Args:
+        ranking_data: Dictionary with division information and team roster links
+        experiment_dir: Directory to save the team roster files
+
+    Returns:
+        Dictionary with all team roster information
+    """
+    root_url = "https://leipzig.tischtennislive.de/"
+    all_team_rosters = {}
+
+    total_teams = 0
+    for division_name, division_info in ranking_data.items():
+        teams = division_info['teams']
+        total_teams += len(teams)
+
+    print(f"  Preparing to fetch {total_teams} team rosters from {len(ranking_data)} divisions...")
+
+    for division_name, division_info in ranking_data.items():
+        teams = division_info['teams']
+
+        for i, team in enumerate(teams, 1):
+            try:
+                roster_link = team['roster_link']
+
+                # Add root URL if not present
+                if not roster_link.startswith('http'):
+                    full_url = f"{root_url}{roster_link}"
+                else:
+                    full_url = roster_link
+
+                print(f"  Fetching team roster {i}/{len(teams)} in {division_name}: {team['team_name']}")
+
+                # Create request with headers to mimic a browser
+                headers = {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                }
+
+                req = urllib.request.Request(full_url, headers=headers)
+                with urllib.request.urlopen(req) as response:
+                    content = response.read().decode('utf-8')
+
+                # Generate filename based on team name and division
+                clean_team_name = re.sub(r'[^\w\s-]', '', team['team_name']).strip()
+                clean_team_name = re.sub(r'[-\s]+', '_', clean_team_name)
+                clean_division_name = re.sub(r'[^\w\s-]', '', division_name).strip()
+                clean_division_name = re.sub(r'[-\s]+', '_', clean_division_name)
+
+                # Extract team ID from roster link for unique identification
+                team_id_match = re.search(r'L3P=(\d+)', roster_link)
+                if team_id_match:
+                    team_id = team_id_match.group(1)
+                    filename = f"team_roster_{clean_division_name}_{clean_team_name}_{team_id}.html"
+                else:
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    filename = f"team_roster_{clean_division_name}_{clean_team_name}_{timestamp}.html"
+
+                # Ensure experiment directory exists
+                os.makedirs(experiment_dir, exist_ok=True)
+
+                # Full path for output file
+                output_path = os.path.join(experiment_dir, filename)
+
+                # Save content to file
+                with open(output_path, 'w', encoding='utf-8') as f:
+                    f.write(content)
+
+                # Store team information
+                if division_name not in all_team_rosters:
+                    all_team_rosters[division_name] = []
+
+                all_team_rosters[division_name].append({
+                    'team_name': team['team_name'],
+                    'team_id': team_id if team_id_match else None,
+                    'roster_link': roster_link,
+                    'file_path': output_path
+                })
+
+                print(f"    Saved to: {output_path}")
+
+            except urllib.error.HTTPError as e:
+                print(f"    HTTP Error {e.code}: {e.reason} for {full_url}")
+            except urllib.error.URLError as e:
+                print(f"    URL Error: {e.reason} for {full_url}")
+            except Exception as e:
+                print(f"    Unexpected error: {e} for {full_url}")
+
+    return all_team_rosters
 
 
 def extract_player_data_from_rosters(experiment_dir: str = "experiment") -> dict:
@@ -360,7 +601,7 @@ def main():
         with open(saved_file, 'r', encoding='utf-8') as f:
             content = f.read()
 
-        team_roster_links, first_half_match_plan_links, second_half_match_plan_links = extract_team_links(content)
+        team_roster_links, ranking_table_links = extract_team_links(content)
 
         print(f"\n{'='*60}")
         print("EXTRACTED LINKS:")
@@ -377,12 +618,8 @@ def main():
         for i, link in enumerate(full_team_roster_links, 1):
             print(f"  {i}. {link}")
 
-        print(f"\nFirst Half Match Plan Links ({len(first_half_match_plan_links)} found):")
-        for i, link in enumerate(first_half_match_plan_links, 1):
-            print(f"  {i}. {link}")
-
-        print(f"\nSecond Half Match Plan Links ({len(second_half_match_plan_links)} found):")
-        for i, link in enumerate(second_half_match_plan_links, 1):
+        print(f"\nRanking Table Links ({len(ranking_table_links)} found):")
+        for i, link in enumerate(ranking_table_links, 1):
             print(f"  {i}. {link}")
 
         print(f"\n{'='*60}")
@@ -396,14 +633,85 @@ def main():
         print("SUMMARY:")
         print(f"{'='*60}")
         print(f"Team Roster Links Found: {len(full_team_roster_links)}")
-        print(f"First Half Match Plan Links Generated: {len(first_half_match_plan_links)}")
-        print(f"Second Half Match Plan Links Generated: {len(second_half_match_plan_links)}")
+        print(f"Ranking Table Links Generated: {len(ranking_table_links)}")
         print(f"Team Roster Source Files Downloaded: {len(saved_roster_files)}")
         print(f"\nFiles saved to: {experiment_dir}/")
         print(f"{'='*60}")
 
         # Extract team names and divisions from the main content
         teams_info = extract_team_names_and_divisions(content)
+
+        # Fetch ranking table pages
+        print(f"\n{'='*60}")
+        print("FETCHING RANKING TABLE SOURCES:")
+        print(f"{'='*60}")
+
+        saved_ranking_files = fetch_ranking_table_sources(ranking_table_links, teams_info, experiment_dir)
+
+        print(f"\n{'='*60}")
+        print("SUMMARY:")
+        print(f"{'='*60}")
+        print(f"Team Roster Links Found: {len(full_team_roster_links)}")
+        print(f"Ranking Table Links Generated: {len(ranking_table_links)}")
+        print(f"Team Roster Source Files Downloaded: {len(saved_roster_files)}")
+        print(f"Ranking Table Source Files Downloaded: {len(saved_ranking_files)}")
+        print(f"\nFiles saved to: {experiment_dir}/")
+        print(f"{'='*60}")
+
+        # Extract ranking data from ranking table files
+        print(f"\n{'='*60}")
+        print("EXTRACTING RANKING DATA:")
+        print(f"{'='*60}")
+
+        ranking_data = extract_ranking_data_from_pages(experiment_dir, teams_info)
+
+        # Display extracted ranking data
+        total_teams = 0
+        for division_name in sorted(ranking_data.keys()):
+            division_info = ranking_data[division_name]
+            teams = division_info['teams']
+            total_teams += len(teams)
+
+            print(f"\n{division_name}:")
+            print("-" * 60)
+            print(f"  Total teams: {len(teams)}")
+
+            for i, team in enumerate(teams, 1):
+                print(f"    {i:2d}. {team['team_name']:<30} -> {team['roster_link']}")
+
+        print(f"\n{'='*60}")
+        print("RANKING DATA SUMMARY:")
+        print(f"{'='*60}")
+        print(f"Divisions processed: {len(ranking_data)}")
+        print(f"Total teams found: {total_teams}")
+        print(f"{'='*60}")
+
+        # Fetch all team rosters from all divisions
+        print(f"\n{'='*60}")
+        print("FETCHING ALL TEAM ROSTERS:")
+        print(f"{'='*60}")
+
+        all_team_rosters = fetch_all_team_rosters(ranking_data, experiment_dir)
+
+        # Display summary of fetched team rosters
+        total_fetched_teams = 0
+        for division_name in sorted(all_team_rosters.keys()):
+            teams = all_team_rosters[division_name]
+            total_fetched_teams += len(teams)
+
+            print(f"\n{division_name}:")
+            print("-" * 60)
+            print(f"  Fetched teams: {len(teams)}")
+
+            for i, team in enumerate(teams, 1):
+                print(f"    {i:2d}. {team['team_name']:<30} -> {team['file_path']}")
+
+        print(f"\n{'='*60}")
+        print("TEAM ROSTER FETCHING SUMMARY:")
+        print(f"{'='*60}")
+        print(f"Divisions processed: {len(all_team_rosters)}")
+        print(f"Total team rosters fetched: {total_fetched_teams}")
+        print(f"{'='*60}")
 
         # Extract player data from all roster files
         print(f"\n{'='*60}")
