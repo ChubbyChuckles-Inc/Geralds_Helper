@@ -196,6 +196,15 @@ Reporting:
   - Detailed table including delta and scenario names with roster lineups
     The report is pure markdown (no binary assets) for easy diffing and sharing.
 
+Analytics & Prediction:
+
+- Rating trend analysis: computes per-player recent delta and average slope from stored history (see `analytics/performance.py`).
+- Team strength snapshot: quick aggregate metrics (count, avg, min, max Q-TTR).
+- Win probability & simulation: logistic model + Monte Carlo (`optimization/prediction.py`) with empirical vs theoretical calibration statistics.
+- Outcome prediction wrapper: `predict_match_outcome` returns probability distribution (A win / B win) and raw rating differential.
+
+These utilities are currently CLI/test-facing; future GUI integration will expose comparative trend tables and opponent matchup forecasting.
+
 Planned next for Optimization:
 
 - Multi-scenario comparative analytics (side-by-side performance deltas)

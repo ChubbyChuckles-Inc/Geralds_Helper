@@ -162,9 +162,8 @@ A comprehensive Python-based application for managing table tennis team rosters,
 - [x] Create balance optimization for fair playing time distribution
 // Genetic algorithm heuristic fallback added (population-based) for large combination counts (> threshold)
 - [x] Implement genetic algorithm for complex multi-constraint optimization
-// Scenario history + markdown export implemented (what-if runs retained in table)
 - [x] Add simulation scenarios for what-if analysis
-// Logistic rating differential model + Monte Carlo simulation implemented (prediction.py)
+// Logistic rating differential model + Monte Carlo simulation + outcome distribution implemented (prediction.py)
 - [x] Create performance prediction models based on historical data
 - [x] Implement Monte Carlo simulation for uncertainty analysis
 // Weighted objective implemented: total_qttr - weight_spread * spread (configurable factor)
@@ -174,8 +173,10 @@ A comprehensive Python-based application for managing table tennis team rosters,
 
 ## Simulation Engine - Advanced Analytics
 
-- [ ] Implement statistical analysis of team performance trends
-- [ ] Create predictive modeling for match outcomes
+// Basic rating trend slope & recent delta implemented (analytics/performance.py)
+- [x] Implement statistical analysis of team performance trends
+// Outcome prediction wrapper (binary win probability) implemented in prediction.predict_match_outcome
+- [x] Create predictive modeling for match outcomes
 - [ ] Add opponent analysis and strategic recommendations
 - [ ] Implement season planning and long-term optimization
 - [ ] Create performance benchmarking against league standards

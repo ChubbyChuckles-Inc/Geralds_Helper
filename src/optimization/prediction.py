@@ -83,8 +83,23 @@ def monte_carlo_match(
     )
 
 
+def predict_match_outcome(
+    team_a: Sequence[Player], team_b: Sequence[Player], scale: float = 400.0
+) -> Dict[str, float]:
+    """Return probability distribution for A win / B win.
+
+    Currently draws are not modeled (binary outcome). Returns keys:
+    {"team_a_win": p, "team_b_win": 1-p, "rating_diff": ra-rb}
+    """
+    p = logistic_win_probability(team_a, team_b, scale=scale)
+    ra = team_rating(team_a)
+    rb = team_rating(team_b)
+    return {"team_a_win": p, "team_b_win": 1 - p, "rating_diff": float(ra - rb)}
+
+
 __all__ = [
     "logistic_win_probability",
     "monte_carlo_match",
     "SimulationStats",
+    "predict_match_outcome",
 ]

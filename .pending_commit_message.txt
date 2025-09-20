@@ -101,3 +101,13 @@ feat(optimization): performance prediction & Monte Carlo simulation
 
 All tests pass; new functionality is self-contained and does not alter existing optimizer APIs.
 
+feat(analytics): rating trends & match outcome prediction wrapper
+
+- Added analytics module (`analytics/performance.py`) providing `compute_rating_trend` (per-player slope & recent delta) and `team_strength_snapshot` aggregate stats.
+- Extended prediction with `predict_match_outcome` returning binary win probability distribution and rating differential.
+- Added tests (`tests/test_performance_analytics.py`) covering trend slope/delta logic and outcome probability normalization.
+- Roadmap updated: performance trends & predictive modeling tasks marked complete (advanced analytics section).
+- README updated: new Analytics & Prediction section documenting trend, snapshot, Monte Carlo, and outcome distribution features.
+
+All tests (new + existing) pass in isolation; no existing APIs changed.
+
