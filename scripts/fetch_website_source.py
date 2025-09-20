@@ -450,6 +450,106 @@ def fetch_all_team_rosters(ranking_data: dict, experiment_dir: str = "experiment
     return all_team_rosters
 
 
+def extract_match_data_from_rosters(experiment_dir: str = "experiment") -> dict:
+    """
+    Extract match data from all team roster HTML files.
+
+    Args:
+        experiment_dir: Directory containing the team roster HTML files
+
+    Returns:
+        Dictionary with team IDs as keys and list of match dictionaries as values
+    """
+    import glob
+
+    # Find all team roster files
+    roster_files = glob.glob(os.path.join(experiment_dir, "team_roster_*.html"))
+
+    all_matches_data = {}
+
+    for roster_file in roster_files:
+        try:
+            # Extract team ID from filename
+            team_id = re.search(r'team_roster_L2P_(\d+)\.html', os.path.basename(roster_file))
+            if not team_id:
+                continue
+
+            team_id = team_id.group(1)
+
+            # Read the HTML content
+            with open(roster_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+
+            # Extract match data from the match table
+            matches = []
+
+            # Pattern to find match rows - both completed and upcoming matches
+            # Look for <tr ID="Spiel..." patterns
+            match_rows = re.findall(r'<tr[^>]*ID="Spiel\d+"[^>]*>.*?</tr>', content, re.DOTALL | re.IGNORECASE)
+
+            for match_row in match_rows:
+                match_info = {}
+
+                # Extract match number
+                match_number_match = re.search(r'ID="Spiel(\d+)"', match_row)
+                if match_number_match:
+                    match_info['match_number'] = match_number_match.group(1)
+
+                # Extract match details using a more targeted approach
+                # The structure is: <td>Match Number</td><td>Weekday</td><td>Date</td><td>Time</td><td>Home Team</td><td>Guest Team</td><td>Score/Status</td>
+
+                # Extract all td content in order
+                td_contents = re.findall(r'<td[^>]*>(.*?)</td>', match_row, re.DOTALL | re.IGNORECASE)
+
+                if len(td_contents) >= 8:
+                    # Clean up the td contents
+                    clean_contents = []
+                    for td_content in td_contents:
+                        # Remove HTML tags and extra whitespace
+                        clean_content = re.sub(r'<[^>]+>', '', td_content)
+                        clean_content = re.sub(r'&nbsp;', '', clean_content)
+                        clean_content = clean_content.strip()
+                        clean_contents.append(clean_content)
+
+                    # Extract match details based on position
+                    if len(clean_contents) >= 8:
+                        match_info['match_number'] = clean_contents[1] if len(clean_contents) > 1 else ''
+                        match_info['weekday'] = clean_contents[3] if len(clean_contents) > 3 else ''
+                        match_info['date'] = clean_contents[4] if len(clean_contents) > 4 else ''
+                        match_info['time'] = clean_contents[6] if len(clean_contents) > 6 else ''
+                        match_info['home_team'] = clean_contents[7] if len(clean_contents) > 7 else ''
+                        match_info['guest_team'] = clean_contents[8] if len(clean_contents) > 8 else ''
+
+                        # Check if it's a completed match (has score) or upcoming match
+                        if len(clean_contents) > 9 and clean_contents[9]:
+                            # Look for score in the format "X:Y"
+                            score_match = re.search(r'(\d+):(\d+)', clean_contents[9])
+                            if score_match:
+                                match_info['home_score'] = score_match.group(1)
+                                match_info['guest_score'] = score_match.group(2)
+                                match_info['status'] = 'completed'
+                            else:
+                                match_info['status'] = 'completed'
+                                match_info['home_score'] = ''
+                                match_info['guest_score'] = ''
+                        else:
+                            match_info['status'] = 'upcoming'
+                            match_info['home_score'] = ''
+                            match_info['guest_score'] = ''
+
+                if match_info:
+                    matches.append(match_info)
+
+            if matches:
+                all_matches_data[team_id] = matches
+                print(f"  Extracted {len(matches)} matches from team {team_id}")
+
+        except Exception as e:
+            print(f"  Error processing {roster_file}: {e}")
+
+    return all_matches_data
+
+
 def extract_player_data_from_rosters(experiment_dir: str = "experiment") -> dict:
     """
     Extract player names and LivePZ values from all team roster HTML files.
@@ -711,6 +811,63 @@ def main():
         print(f"{'='*60}")
         print(f"Divisions processed: {len(all_team_rosters)}")
         print(f"Total team rosters fetched: {total_fetched_teams}")
+        print(f"{'='*60}")
+
+        # Extract match data from all roster files
+        print(f"\n{'='*60}")
+        print("EXTRACTING MATCH DATA:")
+        print(f"{'='*60}")
+
+        matches_data = extract_match_data_from_rosters(experiment_dir)
+
+        # Display extracted match data with actual team names
+        total_matches = 0
+        completed_matches = 0
+        upcoming_matches = 0
+
+        for team_id in sorted(matches_data.keys()):
+            matches = matches_data[team_id]
+            total_matches += len(matches)
+
+            # Count completed and upcoming matches
+            for match in matches:
+                if match.get('status') == 'completed':
+                    completed_matches += 1
+                else:
+                    upcoming_matches += 1
+
+            # Get team name and division
+            if team_id in teams_info:
+                team_name, division_name = teams_info[team_id]
+                team_display = f"{team_name} / {division_name}"
+            else:
+                team_display = f"Team {team_id}"
+
+            print(f"\n{team_display} ({len(matches)} matches):")
+            print("-" * 60)
+
+            # Separate completed and upcoming matches
+            completed = [m for m in matches if m.get('status') == 'completed']
+            upcoming = [m for m in matches if m.get('status') == 'upcoming']
+
+            if completed:
+                print("  Completed matches:")
+                for i, match in enumerate(completed, 1):
+                    score = f"{match.get('home_score', '')}:{match.get('guest_score', '')}" if match.get('home_score') and match.get('guest_score') else 'N/A'
+                    print(f"    {i:2d}. {match.get('date', '')} {match.get('time', '')} - {match.get('home_team', '')} vs {match.get('guest_team', '')} ({score})")
+
+            if upcoming:
+                print("  Upcoming matches:")
+                for i, match in enumerate(upcoming, 1):
+                    print(f"    {i:2d}. {match.get('date', '')} {match.get('time', '')} - {match.get('home_team', '')} vs {match.get('guest_team', '')}")
+
+        print(f"\n{'='*60}")
+        print("MATCH DATA SUMMARY:")
+        print(f"{'='*60}")
+        print(f"Teams with matches: {len(matches_data)}")
+        print(f"Total matches found: {total_matches}")
+        print(f"Completed matches: {completed_matches}")
+        print(f"Upcoming matches: {upcoming_matches}")
         print(f"{'='*60}")
 
         # Extract player data from all roster files
