@@ -164,8 +164,9 @@ A comprehensive Python-based application for managing table tennis team rosters,
 - [x] Implement genetic algorithm for complex multi-constraint optimization
 // Scenario history + markdown export implemented (what-if runs retained in table)
 - [x] Add simulation scenarios for what-if analysis
-- [ ] Create performance prediction models based on historical data
-- [ ] Implement Monte Carlo simulation for uncertainty analysis
+// Logistic rating differential model + Monte Carlo simulation implemented (prediction.py)
+- [x] Create performance prediction models based on historical data
+- [x] Implement Monte Carlo simulation for uncertainty analysis
 // Weighted objective implemented: total_qttr - weight_spread * spread (configurable factor)
 - [x] Add multi-objective optimization with user-defined weights
 // Basic validation: warnings for high spread & GA heuristic usage; reasoning string recorded

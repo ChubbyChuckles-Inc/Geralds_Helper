@@ -174,6 +174,7 @@ Planned next for Matches:
 - Automatic heuristic (genetic algorithm) fallback when raw combination count exceeds a configurable threshold (population-based search with crossover & mutation)
 - New weighted objective: maximize `total_qttr - weight_spread * spread` (tunable `weight_spread` factor, default 0.3) balancing strength vs fairness
 - Result reasoning string recorded (objective, parameters, players, totals, spread) + warnings list (e.g., `high_spread`, `heuristic_ga`)
+- Performance prediction utilities: logistic win probability model + Monte Carlo simulation (empirical vs theoretical calibration)
 - Results table listing chosen lineup (Name, Team, Q-TTR)
 - Summary line with total, average, and spread metrics
 - Scenario history table (ID, time, objective, size, totals, spread, BestDelta, Scenario)
@@ -202,7 +203,7 @@ Planned next for Optimization:
 - User-exposed tuning controls for GA parameters & weight_spread in GUI
 - Narrative markdown generation leveraging reasoning metadata (human readable paragraphs)
 - Additional validation heuristics (e.g., per-player fatigue/rotation fairness, duplicate team representation rules)
-- Monte Carlo and predictive modeling layers (probabilistic outcome analysis)
+- Extended predictive modeling: opponent-specific adjustments, season progression decay factors
 
 ### Setup Steps (Legacy Template Instructions)
 

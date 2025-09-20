@@ -91,3 +91,13 @@ feat(optimization): weighted objective, GA fallback, reasoning & warnings
 
 All existing and new tests pass (GUI tests skipped when PyQt6 unavailable).
 
+feat(optimization): performance prediction & Monte Carlo simulation
+
+- Added prediction module (`optimization/prediction.py`) with logistic win probability model (Elo-like) based on summed team Q-TTR.
+- Implemented Monte Carlo simulation (`monte_carlo_match`) producing empirical vs theoretical win probability stats (SimulationStats dataclass).
+- Added tests (`tests/test_prediction.py`) validating symmetry (P(A,B) ≈ 1 - P(B,A)) and empirical convergence within tolerance for 500 trials.
+- Updated roadmap: performance prediction and Monte Carlo simulation tasks marked complete with inline note.
+- README Optimization section now documents prediction utilities and moves extended modeling to future plans.
+
+All tests pass; new functionality is self-contained and does not alter existing optimizer APIs.
+
