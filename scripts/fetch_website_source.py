@@ -184,14 +184,27 @@ def extract_team_names_and_divisions(html_content: str) -> dict:
     """
     teams_info = {}
 
-    # Find all team rows in the table
-    team_rows = re.findall(r'<tr class="(?:ContentText|CONTENTTABLETEXT2ndLine)">.*?<td[^>]*>.*?</td>.*?<td[^>]*>([^<]+)</td>.*?<td[^>]*>([^<]+)</td>.*?<a href="[^"]*L2P=([^&"]+)', html_content, re.DOTALL | re.IGNORECASE)
+    # Find all team rows in the table - improved regex to handle the HTML structure better
+    # Look for the pattern: <tr class="..."><td>...</td><td>TEAM_NAME</td><td>DIVISION_NAME</td><td><a href="...L2P=TEAM_ID...">...</td>
+    team_rows = re.findall(r'<tr class="(?:ContentText|CONTENTTABLETEXT2ndLine)">[^<]*<td[^>]*>[^<]*</td>[^<]*<td[^>]*>([^<]+)</td>[^<]*<td[^>]*>([^<]+)</td>[^<]*<td[^>]*>[^<]*<a href="[^"]*L2P=([^&"]+)', html_content, re.DOTALL | re.IGNORECASE)
 
     for team_name, division_name, team_id in team_rows:
         clean_team_name = team_name.strip()
         clean_division_name = division_name.strip()
         if clean_team_name and clean_division_name and team_id:
             teams_info[team_id] = (clean_team_name, clean_division_name)
+
+    # If no teams found with the first pattern, try a more flexible approach
+    if not teams_info:
+        # Alternative pattern that looks for the team name and division in the table structure
+        alt_pattern = r'<tr class="(?:ContentText|CONTENTTABLETEXT2ndLine)">[^<]*<td[^>]*>[^<]*</td>[^<]*<td[^>]*>([^<]+)</td>[^<]*<td[^>]*>([^<]+)</td>[^<]*<td[^>]*>[^<]*<a href="[^"]*L2P=([^&"]+)[^"]*"[^>]*>[^<]*</a>[^<]*</td>'
+        alt_team_rows = re.findall(alt_pattern, html_content, re.DOTALL | re.IGNORECASE)
+
+        for team_name, division_name, team_id in alt_team_rows:
+            clean_team_name = team_name.strip()
+            clean_division_name = division_name.strip()
+            if clean_team_name and clean_division_name and team_id:
+                teams_info[team_id] = (clean_team_name, clean_division_name)
 
     return teams_info
 
